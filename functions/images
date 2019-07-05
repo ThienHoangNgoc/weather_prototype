@@ -1,0 +1,6 @@
+const narutoImageUrl = 'https://upload.wikimedia.org/wikipedia/de/thumb/9/90/Naruto_Logo_Deutsch.svg/1200px-Naruto_Logo_Deutsch.svg.png';
+const bleachImageUrl = 'https://upload.wikimedia.org/wikipedia/de/thumb/e/e9/Bleach_Logo.svg/2000px-Bleach_Logo.svg.png'
+const onePieceImageUrl = 'https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/One_Piece_Logo.svg/1200px-One_Piece_Logo.svg.png'
+module.exports.image2 = bleachImageUrl;
+module.exports.image3 = onePieceImageUrl;
+module.exports.narutoImageUrl = narutoImageUrl;

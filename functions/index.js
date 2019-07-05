@@ -1,12 +1,12 @@
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
-
-const imageUrlNaruto = 'https://upload.wikimedia.org/wikipedia/de/thumb/9/90/Naruto_Logo_Deutsch.svg/1200px-Naruto_Logo_Deutsch.svg.png';
+const images = require('./images');
+const imageUrlNaruto = images.narutoImageUrl;
 const buttonUrlNaruto = 'https://naruto.fandom.com/de/wiki/Narutopedia';
-const imageUrlBleach = 'https://upload.wikimedia.org/wikipedia/de/thumb/e/e9/Bleach_Logo.svg/2000px-Bleach_Logo.svg.png';
+const imageUrlBleach = images.image2
 const buttonUrlBleach = 'https://bleach.fandom.com/de/wiki/BleachWiki';
-const imageUrlOP = 'https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/One_Piece_Logo.svg/1200px-One_Piece_Logo.svg.png';
+const imageUrlOP = images.image3
 const buttonUrlOP = 'http://opwiki.org/';
 const imageUrlAoT = 'https://vignette.wikia.nocookie.net/shingekinokyojin/images/a/a7/Survey_Corps_Logo.png/revision/latest?cb=20140307090257';
 const buttonUrlAoT = 'https://attackontitan.fandom.com/de/wiki/Attack_on_Titan_Wiki';
