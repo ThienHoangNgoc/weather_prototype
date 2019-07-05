@@ -17,6 +17,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     }
 
     function fallback(agent) {
+        //save den input nochmal confirmen?
         agent.add(`Es tut mir leid, aber ich kann deine Spracheingabe nicht verarbeiten`);
     }
 
