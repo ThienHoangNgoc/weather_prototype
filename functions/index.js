@@ -13,7 +13,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     const agent = new WebhookClient({ request, response });
 
     function welcome(agent) {
-        agent.add(`Willkommen zum Wetter Spracheingaben Prototypen.`);
+        agent.add(`Willkommen! Gib bitte eine Spracheingabe bezüglich des Themas Wetter ein.`);
     }
 
     function fallback(agent) {
