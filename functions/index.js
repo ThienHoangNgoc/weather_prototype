@@ -21,9 +21,23 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         agent.add(`Es tut mir leid, aber ich kann deine Spracheingabe nicht verarbeiten`);
     }
 
+    function weatherForecastDatePeriod(agent) {
+        const timePeriod = agent.request_.body.queryResult.outputContexts[0].parameters['date-period.original'];
+        const timeNumber  = agent.request_.body.queryResult.outputContexts[0].parameters['number'];
+        if(timePeriod.contains("nächste")){
+
+        }
+
+        agent.add('askldjaölkdjsöalkds' + timePeriod);
+
+
+    }
+
     function confirmCorrectInput(agent){
         agent.add('Alles klar, deine Eingabe wurde gespeichert')
     }
+
+
 
 
 
@@ -31,5 +45,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     intentMap.set('Default Welcome Intent', welcome);
     intentMap.set('Default Fallback Intent', fallback);
     intentMap.set('tell_me_the_weather_state - yes', confirmCorrectInput)
+    intentMap.set('weather_date_period_forecast', weatherForecastDatePeriod)
     agent.handleRequest(intentMap);
 });
+
