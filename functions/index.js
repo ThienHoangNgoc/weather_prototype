@@ -10,7 +10,7 @@ const db = admin.firestore();
 
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
-    const agent = new WebhookClient({ request, response });
+    const agent = new WebhookClient({request, response});
 
     function welcome(agent) {
         agent.add(`Willkommen! Gib bitte eine Spracheingabe bezüglich des Themas Wetter ein.`);
@@ -22,23 +22,32 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     }
 
     function weatherForecastDatePeriod(agent) {
-        const timePeriod = agent.request_.body.queryResult.outputContexts[0].parameters['date-period.original'];
-        const timeNumber  = agent.request_.body.queryResult.outputContexts[0].parameters['number'];
-        if(timePeriod.contains("nächste")){
+        const timePeriodOriginal = agent.request_.body.queryResult.outputContexts[0].parameters['date-period.original'];
+        const timePeriod = agent.request_.body.queryResult.outputContexts[0].parameters['date-period'];
 
+
+        // wenn in String integriert sein solll --> ${hier def. var}
+        if (timePeriod.toString().includes('nächst')) {
+            agent.add(` hahahaah LOLOLOL`)
+        } else {
+            agent.add("random message")
         }
 
-        agent.add('askldjaölkdjsöalkds' + timePeriod);
+        agent.add("this is the start day: " + timePeriod);
+
 
 
     }
 
-    function confirmCorrectInput(agent){
+    function confirmCorrectInput(agent) {
         agent.add('Alles klar, deine Eingabe wurde gespeichert')
     }
 
+  /*  function getDay(date){
+        let dateDay = date.toString().substring(8,10);
 
-
+        return dateDay;
+    }*/
 
 
     let intentMap = new Map();
