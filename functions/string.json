@@ -1,7 +1,7 @@
 {
-
-
-
-
-
+  "standard": {
+    "welcome": "Willkommen! Gib bitte eine Spracheingabe bezüglich des Themas Wetter ein."
+  },
+  "other": {
+  }
 }
