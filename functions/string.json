@@ -5,8 +5,8 @@
   },
   "last_fallback": [
     "Es kann sein, dass dein Anliegen zum Wetter noch nicht in der App implementiert wurde.",
-    "Test String 1",
-    "Test String 2"
+    "Es tut mir leid. Wahrscheinlich wurde dein Anliegen noch nicht implementiert.",
+    "Ich kann dein Anliegen leider nicht bearbeiten."
   ],
   "intent_suggestions": [
     "Wetter",
