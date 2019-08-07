@@ -3,9 +3,9 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const strings = require('./string');
 const admin = require('firebase-admin');
-const stringCreator = require('./test');
-const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation} = require('actions-on-google');
+const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse} = require('actions-on-google');
 const SELECTION_KEY_1 = "selection_key_1";
+const randomNG = require('./Utils');
 
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
@@ -13,20 +13,15 @@ admin.initializeApp(functions.config().firebase);
 const db = admin.firestore();
 
 
-
-
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     const agent = new WebhookClient({request, response});
     agent.requestSource = agent.ACTIONS_ON_GOOGLE;
 
+
     function welcome(agent) {
-        agent.add(strings.standard.welcome);
+        agent.add(strings.general.welcome);
     }
 
-
-    function fallback(agent) {
-        agent.add(`Es tut mir leid, aber ich kann deine Spracheingabe nicht verarbeiten`);
-    }
 
     function weatherForecastDatePeriod(agent) {
         /* const testStartDate = agent.request_.body.queryResult.parameters['date-period'][0]['startDate'];
@@ -39,7 +34,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         const suggestionsList = [
             'xd',
             'hi',
-            'lol'
+            'lol234'
         ]
         let conv = agent.conv();
         conv.ask('Suche ein Item aus');
@@ -70,20 +65,27 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             ]
         }));
         conv.ask(new Suggestions(suggestionsList));
-        agent.add("test xd");
         agent.add(conv);
 
     }
 
-
-
-
+    function incorrectTopicLastTimeIntent(agent) {
+        let conv = agent.conv();
+        conv.ask(strings.last_fallback[getRandomInt(strings.last_fallback.length)]);
+        conv.ask(strings.general.available_topics);
+        conv.ask(new Suggestions(strings.intent_suggestions));
+        agent.add(conv);
+    }
 
 
     let intentMap = new Map();
-    intentMap.set('Default Welcome Intent', welcome);
-    intentMap.set('Default Fallback Intent', fallback);
+    intentMap.set(strings.intents.last_time_incorrect, incorrectTopicLastTimeIntent);
+    intentMap.set(strings.intents.welcome, welcome);
     intentMap.set('weather_date_period_forecast', weatherForecastDatePeriod)
     agent.handleRequest(intentMap);
 });
 
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
