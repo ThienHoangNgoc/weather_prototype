@@ -1,0 +1,20 @@
+{
+  "general": {
+    "welcome": "Willkommen zum Wetter Prototypen.  Was willst du über das Wetter wissen?",
+    "available_topics": "Versuche es mal mit einem dieser 3 Themen:"
+  },
+  "last_fallback": [
+    "Es kann sein, dass dein Anliegen zum Wetter noch nicht in der App implementiert wurde."
+  ],
+  "intent_suggestions": [
+    "Wetter",
+    "Regen",
+    "Unwetter"
+  ],
+  "intents": {
+    "welcome": "Default Welcome Intent",
+    "last_time_incorrect": "incorrect_topic_last_time_intent"
+  },
+  "other": {
+  }
+}
