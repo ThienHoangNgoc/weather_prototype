@@ -1,16 +1,13 @@
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
-const {Card, Suggestion} = require('dialogflow-fulfillment');
-const strings = require('./string');
-const admin = require('firebase-admin');
-const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse} = require('actions-on-google');
-const SELECTION_KEY_1 = "selection_key_1";
-const randomNG = require('./Utils');
 
+const strings = require('./string');
+const utils = require('./Utils');
+
+const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse} = require('actions-on-google');
+const {Card, Suggestion} = require('dialogflow-fulfillment');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
-admin.initializeApp(functions.config().firebase);
-const db = admin.firestore();
 
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
@@ -31,11 +28,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         const locationCity = agent.request_.body.queryResult.parameters['geo-city.original'];
         const timePeriod = agent.request_.body.queryResult.parameters['date-period'];
         const timePeriodOriginal = agent.request_.body.queryResult.parameters['date-period.original'];
-        const suggestionsList = [
-            'xd',
-            'hi',
-            'lol234'
-        ]
         let conv = agent.conv();
         conv.ask('Suche ein Item aus');
         conv.ask(new BrowseCarousel({
@@ -64,14 +56,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
             ]
         }));
-        conv.ask(new Suggestions(suggestionsList));
+        conv.ask(new Suggestions(strings.intent_suggestions));
         agent.add(conv);
 
     }
 
     function incorrectTopicLastTimeIntent(agent) {
         let conv = agent.conv();
-        conv.ask(strings.last_fallback[getRandomInt(strings.last_fallback.length)]);
+        conv.ask(strings.last_fallback[utils.getRandomInt(strings.last_fallback.length)]);
         conv.ask(strings.general.available_topics);
         conv.ask(new Suggestions(strings.intent_suggestions));
         agent.add(conv);
@@ -85,7 +77,3 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     agent.handleRequest(intentMap);
 });
 
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}

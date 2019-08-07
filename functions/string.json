@@ -4,7 +4,9 @@
     "available_topics": "Versuche es mal mit einem dieser 3 Themen:"
   },
   "last_fallback": [
-    "Es kann sein, dass dein Anliegen zum Wetter noch nicht in der App implementiert wurde."
+    "Es kann sein, dass dein Anliegen zum Wetter noch nicht in der App implementiert wurde.",
+    "Test String 1",
+    "Test String 2"
   ],
   "intent_suggestions": [
     "Wetter",

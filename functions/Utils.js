@@ -1,7 +1,10 @@
 "use strict";
-
-const rNG = (max)=>{
+const getRandomInt = (max)=>{
     return Math.floor(Math.random() * Math.floor(max));
+};
+
+const fillerFunction = (filler)=>{
+    return filler;
 }
 
-exports.randomNG = rNG;
+module.exports = {getRandomInt, fillerFunction};
