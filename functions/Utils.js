@@ -1,10 +1,17 @@
 "use strict";
+//get random Number within the Range of max
 const getRandomInt = (max)=>{
     return Math.floor(Math.random() * Math.floor(max));
 };
 
-const fillerFunction = (filler)=>{
-    return filler;
+
+//compare 2 Strings
+const compareString = (firstString, secondString)=>{
+    return firstString.toString().trim() === secondString;
+};
+
+const checkTypeOf = (object, typeAsString) => {
+    return (typeof object === typeAsString);
 }
 
-module.exports = {getRandomInt, fillerFunction};
+module.exports = {getRandomInt, compareString, checkTypeOf};

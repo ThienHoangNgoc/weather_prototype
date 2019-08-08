@@ -19,6 +19,23 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         agent.add(strings.general.welcome);
     }
 
+    function weather(agent) {
+        const weather = agent.request_.body.queryResult.parameters['weather'];
+        const date = agent.request_.body.queryResult.parameters['date'];
+        const temperature = agent.request_.body.queryResult.parameters['temperature'];
+        let weather_text;
+
+        if (utils.checkTypeOf(weather, 'string')) {
+            if (utils.compareString(weather, "")) {
+                weather_text = 'Wetter'
+            } else {
+                weather_text = weather;
+            }
+        }
+
+
+    }
+
 
     function weatherForecastDatePeriod(agent) {
         /* const testStartDate = agent.request_.body.queryResult.parameters['date-period'][0]['startDate'];
@@ -61,7 +78,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     }
 
-    function incorrectTopicLastTimeIntent(agent) {
+    function incorrectTopicLastTime(agent) {
         let conv = agent.conv();
         conv.ask(strings.last_fallback[utils.getRandomInt(strings.last_fallback.length)]);
         conv.ask(strings.general.available_topics);
@@ -71,9 +88,12 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
 
     let intentMap = new Map();
-    intentMap.set(strings.intents.last_time_incorrect, incorrectTopicLastTimeIntent);
+    intentMap.set(strings.intents.last_time_incorrect, incorrectTopicLastTime);
     intentMap.set(strings.intents.welcome, welcome);
-    intentMap.set('weather_date_period_forecast', weatherForecastDatePeriod)
     agent.handleRequest(intentMap);
 });
 
+
+function xd(xd, xd2) {
+    return xd.request_.body.queryResult.parameters[xd2];
+}
