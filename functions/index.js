@@ -1,7 +1,8 @@
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-const strings = require('./string');
+const strings = require('./strings');
+const responses = require("./response_strings");
 const utils = require('./Utils');
 
 const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse} = require('actions-on-google');
@@ -16,7 +17,38 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
 
     function welcome(agent) {
-        agent.add(strings.general.welcome);
+        agent.add(responses.welcome);
+    }
+
+    function weather(agent) {
+        const weather = agent.request_.body.queryResult.parameters['weather'];
+        const date = agent.request_.body.queryResult.parameters['date.original'];
+        const location = agent.request_.body.queryResult.parameters['geo-city'];
+        let weather_text;
+        let date_text;
+
+
+        if (utils.compareString(weather.toLowerCase(), strings.weather_type.short.weather) || utils.compareString(weather.toLowerCase(), "")) {
+            weather_text = strings.weather_type.response.weather;
+        } else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.forecast)) {
+            weather_text = strings.weather_type.response.forecast;
+        } else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.report)) {
+            weather_text = strings.weather_type.response.report;
+        }
+
+
+        if (utils.containsString(date, "heut")) {
+            date_text = "heute";
+        }
+
+        agent.add(`Das ${weather_text} für ${date} in ${location} sieht wie folgt aus:`);
+        agent.add(`In ${location} werden es ${date_text} tagsüber bis zu 30 Grad und. `);
+        agent.add(`${date_text} ist es in ${location} stark bewöklt. Ab und zu scheint auch die Sonne.`);
+        agent.add(`Die ${weather_text} für ${location} sieht ${date} sieht folgendermaßen aus:`);
+
+
+
+
     }
 
 
@@ -56,24 +88,23 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
             ]
         }));
-        conv.ask(new Suggestions(strings.intent_suggestions));
+        conv.ask(new Suggestions(strings.topic_suggestions));
         agent.add(conv);
 
     }
 
-    function incorrectTopicLastTimeIntent(agent) {
+    function incorrectTopicLastTime(agent) {
         let conv = agent.conv();
-        conv.ask(strings.last_fallback[utils.getRandomInt(strings.last_fallback.length)]);
-        conv.ask(strings.general.available_topics);
-        conv.ask(new Suggestions(strings.intent_suggestions));
+        conv.ask(responses.last_fallback.responses[utils.getRandomInt(responses.last_fallback.responses.length)]);
+        conv.ask(responses.last_fallback.hint_for_available_topics);
+        conv.ask(new Suggestions(strings.topic_suggestions));
         agent.add(conv);
     }
 
 
     let intentMap = new Map();
-    intentMap.set(strings.intents.last_time_incorrect, incorrectTopicLastTimeIntent);
+    intentMap.set(strings.intents.last_time_incorrect, incorrectTopicLastTime);
     intentMap.set(strings.intents.welcome, welcome);
-    intentMap.set('weather_date_period_forecast', weatherForecastDatePeriod)
+    intentMap.set(strings.intents.weather, weather);
     agent.handleRequest(intentMap);
 });
-
