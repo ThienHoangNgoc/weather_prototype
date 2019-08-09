@@ -40,13 +40,17 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         if (utils.containsString(date, "heut")) {
             date_text = "heute";
         }
+        //response for weather
+        if(utils.compareString(weather_text, strings.weather_type.response.weather)){
 
+        }
         agent.add(`Das ${weather_text} für ${date} in ${location} sieht wie folgt aus:`);
         agent.add(`In ${location} werden es ${date_text} tagsüber bis zu 30 Grad und. `);
         agent.add(`${date_text} ist es in ${location} stark bewöklt. Ab und zu scheint auch die Sonne.`);
-        agent.add(`Die ${weather_text} für ${location} sieht ${date} sieht folgendermaßen aus:`);
-
-
+        //response for weather report and weather forecast
+        if (utils.compareString(weather_text, strings.weather_type.response.forecast) || utils.compareString(weather_text, strings.weather_type.response.report)) {
+            agent.add(`Die ${weather_text} für ${location} sieht ${date} folgendermaßen aus:`);
+        }
 
 
     }
