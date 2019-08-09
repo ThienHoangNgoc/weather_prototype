@@ -1,0 +1,15 @@
+{
+  "general": {
+  },
+  "welcome": {
+    "welcome": "Willkommen zum Wetter Prototypen.  Was willst du über das Wetter wissen?"
+  },
+  "last_fallback": {
+    "responses": [
+      "Es kann sein, dass dein Anliegen zum Wetter noch nicht in der App implementiert wurde.",
+      "Es tut mir leid. Wahrscheinlich wurde dein Anliegen noch nicht implementiert.",
+      "Ich kann dein Anliegen leider nicht bearbeiten."
+    ],
+    "hint_for_available_topics": "Versuche es mal mit einem dieser 3 Themen:"
+  }
+}
