@@ -9,6 +9,15 @@
     "Regen",
     "Unwetter"
   ],
+  "date_type": {
+    "today": "heute"
+  },
+  "type_of_today": [
+    "heute",
+    "heut",
+    "heutige",
+    "heutiges"
+  ],
   "weather_type": {
     "short": {
       "weather": "wetter",

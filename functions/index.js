@@ -4,6 +4,7 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const strings = require('./strings');
 const responses = require("./response_strings");
 const utils = require('./Utils');
+const weather_response_builder = require('./weather_response_builder');
 
 const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse} = require('actions-on-google');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
@@ -26,30 +27,29 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         const location = agent.request_.body.queryResult.parameters['geo-city'];
         let weather_text;
         let date_text;
+        let responseList;
 
 
-        if (utils.compareString(weather.toLowerCase(), strings.weather_type.short.weather) || utils.compareString(weather.toLowerCase(), "")) {
-            weather_text = strings.weather_type.response.weather;
-        } else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.forecast)) {
-            weather_text = strings.weather_type.response.forecast;
-        } else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.report)) {
-            weather_text = strings.weather_type.response.report;
-        }
+        if (utils.isStringArray([weather, date, location])) {
+            weather_text = weather_response_builder.getTypeOfWeather(weather);
+            date_text = weather_response_builder.getDateText(date);
 
+            //response when weather_text equals "weather"
+            if (utils.compareString(weather_text, strings.weather_type.response.weather)) {
+                responseList = weather_response_builder.getWeatherResponse(weather_text, date_text, location);
+                //get random message from list
+                agent.add(responseList[utils.getRandomInt(responseList.length)]);
+            }
 
-        if (utils.containsString(date, "heut")) {
-            date_text = "heute";
-        }
-        //response for weather
-        if(utils.compareString(weather_text, strings.weather_type.response.weather)){
+            //response when weather_text equals "weather report" and "weather forecast"
+            if (utils.compareString(weather_text, strings.weather_type.response.forecast) || utils.compareString(weather_text, strings.weather_type.response.report)) {
+                responseList = weather_response_builder.getWeatherForecastAndReportResponse(weather_text, date_text, location);
+                //get random message from list
+                agent.add(responseList[utils.getRandomInt(responseList.length)]);
+            }
 
-        }
-        agent.add(`Das ${weather_text} für ${date} in ${location} sieht wie folgt aus:`);
-        agent.add(`In ${location} werden es ${date_text} tagsüber bis zu 30 Grad und. `);
-        agent.add(`${date_text} ist es in ${location} stark bewöklt. Ab und zu scheint auch die Sonne.`);
-        //response for weather report and weather forecast
-        if (utils.compareString(weather_text, strings.weather_type.response.forecast) || utils.compareString(weather_text, strings.weather_type.response.report)) {
-            agent.add(`Die ${weather_text} für ${location} sieht ${date} folgendermaßen aus:`);
+        } else {
+            agent.add(responses.general.error_message);
         }
 
 

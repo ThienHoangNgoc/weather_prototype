@@ -17,6 +17,24 @@ const checkTypeOf = (object, typeAsString) => {
     return (typeof object === typeAsString);
 };
 
+const isStringArray = (...stringList) => {
+    for (let index = 0; index < stringList.length; ++index) {
+        if (!checkTypeOf(stringList[index], 'string')) {
+            return false;
+        }
+    }
+    return true;
+};
+
+const compareStringWithArray = (string, ...stringList) => {
+    for (let index = 0; index < stringList.length; ++index) {
+        if (!compareString(stringList[index], string)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 const containsString = (firstString, secondString) => {
     if (checkTypeOf(firstString, 'string') && checkTypeOf(secondString, 'string')) {
         return firstString.includes(secondString);
@@ -25,4 +43,4 @@ const containsString = (firstString, secondString) => {
 
 };
 
-module.exports = {getRandomInt, compareString, checkTypeOf, containsString};
+module.exports = {getRandomInt, compareString, checkTypeOf, containsString, isStringArray,compareStringWithArray};

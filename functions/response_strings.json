@@ -1,5 +1,6 @@
 {
   "general": {
+    "error_message": "Es ist etwas schief gelaufen. Versuche es später noch einmal"
   },
   "welcome": {
     "welcome": "Willkommen zum Wetter Prototypen.  Was willst du über das Wetter wissen?"
