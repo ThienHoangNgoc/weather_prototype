@@ -1,15 +1,27 @@
 "use strict";
 const dateFormat = require('dateformat');
 
-//get random Number within the Range of max
+//get random Number within the Range of max (excluded max)
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
 };
 
+//included min, included min
+const getRandomIntInRange = (min, max) =>{
+    return Math.floor( Math.random() * (max - min + 1)) + min;
+};
+
+const getRandomArrayEntry = (array) =>{
+    return getRandomInt(array.length);
+}
+
+const isEmpty = (string) => {
+    return equalsString(string, "");
+}
 
 //compare 2 Strings
-const compareString = (firstString, secondString) => {
-    if (checkTypeOf(firstString, 'string') && checkTypeOf(secondString, 'string')) {
+const equalsString = (firstString, secondString) => {
+    if (isString(firstString) && isString(secondString)) {
         return firstString.toString().trim() === secondString;
     }
     return false;
@@ -19,9 +31,13 @@ const checkTypeOf = (object, typeAsString) => {
     return (typeof object === typeAsString);
 };
 
+const isString = (object) => {
+    return checkTypeOf(object, 'string');
+};
+
 const isStringArray = (stringList) => {
     for (let index = 0; index < stringList.length; index++) {
-        if (!checkTypeOf(stringList[index], 'string')) {
+        if (!isString(stringList[index])) {
             return false;
         }
     }
@@ -30,7 +46,7 @@ const isStringArray = (stringList) => {
 
 const compareStringWithArray = (string, stringList) => {
     for (let index = 0; index < stringList.length; ++index) {
-        if (!compareString(stringList[index], string)) {
+        if (!equalsString(stringList[index], string)) {
             return false;
         }
     }
@@ -44,14 +60,14 @@ const getDateFormatted = (date_string) => {
 };
 
 const firstLetterUpperCase = (string) =>{
-    if(checkTypeOf(string,'string')){
+    if(isString(string)){
         return string.toString().charAt(0).toUpperCase() + string.toString().slice(1);
 
     }
 }
 
 const containsString = (firstString, secondString) => {
-    if (checkTypeOf(firstString, 'string') && checkTypeOf(secondString, 'string')) {
+    if (isString(firstString) && isString(secondString)) {
         return firstString.includes(secondString);
     }
     return false;
@@ -60,7 +76,11 @@ const containsString = (firstString, secondString) => {
 
 module.exports = {
     getRandomInt,
-    compareString,
+    getRandomIntInRange,
+    getRandomArrayEntry,
+    equalsString,
+    isEmpty,
+    isString,
     checkTypeOf,
     containsString,
     isStringArray,

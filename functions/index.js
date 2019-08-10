@@ -35,24 +35,36 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         const location = agent.request_.body.queryResult.parameters['geo-city'];
         let weather_text;
         let date_original_text;
+        let location_text;
         let responseList;
         let date_text = utils.getDateFormatted(date);
 
-
+        //check if request parameters are strings
         if (utils.isStringArray([weather,dateOriginal, location])) {
             weather_text = weather_response_builder.getTypeOfWeather(weather);
             date_original_text = weather_response_builder.getDateText(dateOriginal);
-
+            //If the User does not input a location take default city
+            if(utils.isEmpty(location)){
+                location_text = strings.default_city_names.Berlin;
+            }else{
+                location_text = location;
+            }
             //response when weather_text equals "weather"
-            if (utils.compareString(weather_text, strings.weather_type.response.weather)) {
-                responseList = weather_response_builder.getWeatherResponse(weather_text, date_original_text, location);
+            if (utils.equalsString(weather_text, strings.weather_type.response.weather)) {
+                responseList = weather_response_builder.getWeatherResponse(weather_text, date_original_text, location_text);
                 //get random message from list
                 agent.add(responseList[utils.getRandomInt(responseList.length)]);
             }
 
-            //response when weather_text equals "weather report" and "weather forecast"
-            if (utils.compareString(weather_text, strings.weather_type.response.forecast) || utils.compareString(weather_text, strings.weather_type.response.report)) {
-                responseList = weather_response_builder.getWeatherForecastAndReportResponse(weather_text, date_original_text, location);
+            //response when weather_text equals "weather outlook" and "weather forecast"
+            if (utils.equalsString(weather_text, strings.weather_type.response.forecast) || utils.equalsString(weather_text, strings.weather_type.response.outlook)) {
+                responseList = weather_response_builder.getWeatherForecastAndOutlookResponse(weather_text, date_original_text, location_text);
+                //get random message from list
+                agent.add(responseList[utils.getRandomInt(responseList.length)]);
+            }
+
+            if (utils.equalsString(weather_text, strings.weather_type.response.report)) {
+                responseList = weather_response_builder.getWeatherReportResponse(weather_text, date_original_text, location_text);
                 //get random message from list
                 agent.add(responseList[utils.getRandomInt(responseList.length)]);
             }

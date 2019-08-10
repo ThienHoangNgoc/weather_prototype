@@ -12,6 +12,9 @@
   "date_type": {
     "today": "heute"
   },
+  "default_city_names": {
+    "Berlin": "Berlin"
+  },
   "type_of_today": [
     "heute",
     "heut",
@@ -22,12 +25,14 @@
     "short": {
       "weather": "wetter",
       "report": "bericht",
-      "forecast": "prognose"
+      "outlook": "prognose",
+      "forecast": "vorhersage"
     },
     "response": {
       "weather": "Wetter",
       "report": "Wetterbericht",
-      "forecast": "Wetterprognose"
+      "outlook": "Wetterprognose",
+      "forecast": "Wettervorhersage"
     }
   }
 }
