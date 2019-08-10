@@ -43,6 +43,13 @@ const getDateFormatted = (date_string) => {
     return dateFormat(date, dateFormat.masks.ownDateformat);
 };
 
+const firstLetterUpperCase = (string) =>{
+    if(checkTypeOf(string,'string')){
+        return string.toString().charAt(0).toUpperCase() + string.toString().slice(1);
+
+    }
+}
+
 const containsString = (firstString, secondString) => {
     if (checkTypeOf(firstString, 'string') && checkTypeOf(secondString, 'string')) {
         return firstString.includes(secondString);
@@ -58,5 +65,6 @@ module.exports = {
     containsString,
     isStringArray,
     compareStringWithArray,
-    getDateFormatted
+    getDateFormatted,
+    firstLetterUpperCase
 };

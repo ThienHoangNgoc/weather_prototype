@@ -15,7 +15,12 @@ process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     const agent = new WebhookClient({request, response});
+
+/**
+ * add only for function from google
+ *
     agent.requestSource = agent.ACTIONS_ON_GOOGLE;
+*/
 
 
     function welcome(agent) {

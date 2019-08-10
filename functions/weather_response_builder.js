@@ -30,7 +30,7 @@ const getWeatherResponse = (weather, date, location) => {
     let responseList = [];
     responseList.push(`Das ${weather} für ${date} in ${location} sieht wie folgt aus:`);
     responseList.push(`In ${location} werden es ${date} tagsüber bis zu 30 Grad und. `);
-    responseList.push(`${date} ist es in ${location} stark bewölkt. Ab und zu scheint auch die Sonne.`);
+    responseList.push(`${utils.firstLetterUpperCase(date)} ist es in ${location} stark bewölkt. Ab und zu scheint auch die Sonne.`);
     return responseList;
 };
 
