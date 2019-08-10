@@ -14,7 +14,7 @@ const getTypeOfWeather = (weather) => {
         weather_type = strings.weather_type.response.report;
     }
     return weather_type;
-}
+};
 
 const getDateText = (text) => {
     let date_text;
@@ -24,13 +24,13 @@ const getDateText = (text) => {
         date_text = text;
     }
     return date_text;
-}
+};
 
 const getWeatherResponse = (weather, date, location) => {
     let responseList = [];
     responseList.push(`Das ${weather} für ${date} in ${location} sieht wie folgt aus:`);
     responseList.push(`In ${location} werden es ${date} tagsüber bis zu 30 Grad und. `);
-    responseList.push(`${date} ist es in ${location} stark bewöklt. Ab und zu scheint auch die Sonne.`);
+    responseList.push(`${date} ist es in ${location} stark bewölkt. Ab und zu scheint auch die Sonne.`);
     return responseList;
 };
 
@@ -39,6 +39,12 @@ const getWeatherForecastAndReportResponse = (weather, date, location) => {
     responseList.push(`Die ${weather} für ${location} sieht ${date} folgendermaßen aus:`);
     return responseList;
 
-}
+};
+
+const genericWeatherResponseBuilder = () =>{
+    let genericResponse;
+
+    return genericResponse;
+};
 
 module.exports = {getWeatherResponse, getWeatherForecastAndReportResponse, getTypeOfWeather, getDateText};

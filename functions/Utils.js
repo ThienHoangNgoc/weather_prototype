@@ -1,4 +1,6 @@
 "use strict";
+const dateFormat = require('dateformat');
+
 //get random Number within the Range of max
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
@@ -17,8 +19,8 @@ const checkTypeOf = (object, typeAsString) => {
     return (typeof object === typeAsString);
 };
 
-const isStringArray = (...stringList) => {
-    for (let index = 0; index < stringList.length; ++index) {
+const isStringArray = (stringList) => {
+    for (let index = 0; index < stringList.length; index++) {
         if (!checkTypeOf(stringList[index], 'string')) {
             return false;
         }
@@ -26,7 +28,7 @@ const isStringArray = (...stringList) => {
     return true;
 };
 
-const compareStringWithArray = (string, ...stringList) => {
+const compareStringWithArray = (string, stringList) => {
     for (let index = 0; index < stringList.length; ++index) {
         if (!compareString(stringList[index], string)) {
             return false;
@@ -34,6 +36,12 @@ const compareStringWithArray = (string, ...stringList) => {
     }
     return true;
 }
+//2019-08-10T12:00:00+02:00
+const getDateFormatted = (date_string) => {
+    let date = new Date(date_string);
+    dateFormat.masks.ownDateformat = 'dd.mmmm yyyy';
+    return dateFormat(date, dateFormat.masks.ownDateformat);
+};
 
 const containsString = (firstString, secondString) => {
     if (checkTypeOf(firstString, 'string') && checkTypeOf(secondString, 'string')) {
@@ -43,4 +51,12 @@ const containsString = (firstString, secondString) => {
 
 };
 
-module.exports = {getRandomInt, compareString, checkTypeOf, containsString, isStringArray,compareStringWithArray};
+module.exports = {
+    getRandomInt,
+    compareString,
+    checkTypeOf,
+    containsString,
+    isStringArray,
+    compareStringWithArray,
+    getDateFormatted
+};

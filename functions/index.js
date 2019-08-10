@@ -5,6 +5,7 @@ const strings = require('./strings');
 const responses = require("./response_strings");
 const utils = require('./Utils');
 const weather_response_builder = require('./weather_response_builder');
+const image_url = require('./image_url');
 
 const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse} = require('actions-on-google');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
@@ -18,35 +19,48 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
 
     function welcome(agent) {
-        agent.add(responses.welcome);
+        agent.add(responses.welcome.welcome);
     }
 
     function weather(agent) {
         const weather = agent.request_.body.queryResult.parameters['weather'];
-        const date = agent.request_.body.queryResult.parameters['date.original'];
+        // original parameter can only be accessed through the output Context - set Output Context in dialogflow
+        const dateOriginal = agent.request_.body.queryResult.outputContexts[0].parameters['date.original'];
+        const date = agent.request_.body.queryResult.parameters['date'];
         const location = agent.request_.body.queryResult.parameters['geo-city'];
         let weather_text;
-        let date_text;
+        let date_original_text;
         let responseList;
+        let date_text = utils.getDateFormatted(date);
 
 
-        if (utils.isStringArray([weather, date, location])) {
+        if (utils.isStringArray([weather,dateOriginal, location])) {
             weather_text = weather_response_builder.getTypeOfWeather(weather);
-            date_text = weather_response_builder.getDateText(date);
+            date_original_text = weather_response_builder.getDateText(dateOriginal);
 
             //response when weather_text equals "weather"
             if (utils.compareString(weather_text, strings.weather_type.response.weather)) {
-                responseList = weather_response_builder.getWeatherResponse(weather_text, date_text, location);
+                responseList = weather_response_builder.getWeatherResponse(weather_text, date_original_text, location);
                 //get random message from list
                 agent.add(responseList[utils.getRandomInt(responseList.length)]);
             }
 
             //response when weather_text equals "weather report" and "weather forecast"
             if (utils.compareString(weather_text, strings.weather_type.response.forecast) || utils.compareString(weather_text, strings.weather_type.response.report)) {
-                responseList = weather_response_builder.getWeatherForecastAndReportResponse(weather_text, date_text, location);
+                responseList = weather_response_builder.getWeatherForecastAndReportResponse(weather_text, date_original_text, location);
                 //get random message from list
                 agent.add(responseList[utils.getRandomInt(responseList.length)]);
             }
+
+            agent.add(responses.weather_responses.more_info);
+            agent.add(new Card({
+                title: `Wetterbericht (${date_text})`,
+                imageUrl: image_url.filler_image,
+                text: '',
+                buttonText: 'mehr Info',
+                buttonUrl: image_url.filler_url
+            }))
+
 
         } else {
             agent.add(responses.general.error_message);

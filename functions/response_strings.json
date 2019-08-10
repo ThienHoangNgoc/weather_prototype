@@ -3,7 +3,10 @@
     "error_message": "Es ist etwas schief gelaufen. Versuche es später noch einmal"
   },
   "welcome": {
-    "welcome": "Willkommen zum Wetter Prototypen.  Was willst du über das Wetter wissen?"
+    "welcome": "Willkommen zum Wetter Prototypen. Was willst du über das Wetter wissen?"
+  },
+  "weather_responses": {
+    "more_info": "Für mehr Informationen klicke die Info-Karte"
   },
   "last_fallback": {
     "responses": [
