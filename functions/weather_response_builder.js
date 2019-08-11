@@ -31,17 +31,26 @@ const getTypeOfWeather = (weather) => {
 //Wetter
 const getWeatherResponse = (weather, date, location) => {
     let responseList = [];
-    responseList.push(`Das ${weather} für ${date} in ${location} sieht wie folgt aus: ` + genericWeatherResponseBuilder());
-    responseList.push(`In ${location} werden es ${date} tagsüber bis zu 30 Grad und. `);
-    responseList.push(`${utils.firstLetterUpperCase(date)} erreichen tagsüber in ${location} die maximalen Werte bis zu 40 Grad`);
-    responseList.push(`${utils.firstLetterUpperCase(date)} ist es in ${location} stark bewölkt. Ab und zu scheint auch die Sonne.`);
+
+    responseList.push(`Das ${weather} für ${date} in ${location} sieht wie folgt aus: `
+        + genericWeatherResponseBuilder(true, true, true, true));
+
+    responseList.push(setRandomDegreeValues(`In ${location} wird es ${date} tagsüber nochmal sommerlich warm mit dayMIN bis dayMAX Grad.`
+        + genericWeatherResponseBuilder(false, true, true, true)));
+
+    responseList.push(setRandomDegreeValues(`${utils.firstLetterUpperCase(date)} erreichen tagsüber in ${location} die maximalen Werte bis zu 40 Grad`
+        + genericWeatherResponseBuilder(false, true, true, true)));
+
+    responseList.push(setRandomDegreeValues(`${utils.firstLetterUpperCase(date)} werden tagsüber in ${location} Werte zwischen dayMIN und dayMAX Grad erreicht.`
+        + genericWeatherResponseBuilder(false, true, true, true)));
+
     return responseList;
 };
 
 //Wettervorhersage und Wetterprognose
 const getWeatherForecastAndOutlookResponse = (weather, date, location) => {
     let responseList = [];
-    responseList.push(`Die ${weather} für ${location} sieht ${date} folgendermaßen aus: `);
+    responseList.push(`Die ${weather} für ${location} sieht ${date} folgendermaßen aus: ` + genericWeatherResponseBuilder());
     return responseList;
 };
 
@@ -52,13 +61,13 @@ const getWeatherReportResponse = (weather, date, location) => {
     responseList.push(`Für ${location} sieht der ${weather} ${date} so aus: ` + genericWeatherResponseBuilder());
     responseList.push(`Hier der ${weather} für ${date}: ` + genericWeatherResponseBuilder());
     return responseList;
-}
+};
 
 const replaceString = (string, oldString, newString) => {
     if (utils.isString(string)) {
         return string.replace(oldString, newString);
     }
-    return false;
+    return "";
 };
 
 const setRandomDegreeValues = (string) => {
@@ -67,31 +76,67 @@ const setRandomDegreeValues = (string) => {
     let nightMAX = utils.getRandomIntInRange(10, 18);
     let nightMIN = nightMAX - 3;
     if (utils.containsString(string, "dayMAX") || utils.containsString(string, "nightMAX")) {
-        string = string.replace("dayMAX", dayMAX)
-        string = string.replace("dayMIN", dayMIN);
-        string = string.replace("nightMAX", nightMAX)
-        string = string.replace("nightMIN", nightMIN)
+        string = replaceString(string, "dayMAX", dayMAX);
+        string = replaceString(string, "dayMIN", dayMIN);
+        string = replaceString(string, "nightMAX", nightMAX);
+        string = replaceString(string, "nightMIN", nightMIN)
     }
     return string;
 };
 
-const genericWeatherResponseBuilder = () => {
-
-    let day_time_list = respons_strings.generic_weather_responses.day_time;
-    let night_time_list = respons_strings.generic_weather_responses.night_time;
-    let general_list = respons_strings.generic_weather_responses.general;
-    let rain_list = respons_strings.generic_weather_responses.rain;
-
-    return setRandomDegreeValues(day_time_list[utils.getRandomArrayEntry(day_time_list)]) + " " +
-        setRandomDegreeValues(night_time_list[utils.getRandomArrayEntry(night_time_list)]) + " " +
-        general_list[utils.getRandomArrayEntry(general_list)] + " " +
-        rain_list[utils.getRandomArrayEntry(day_time_list)];
+const genericWeatherResponseBuilder = (day, night, general, rain) => {
+    let final_response = "";
+    if (day) {
+        final_response += getGenericWeatherResponseByType("day");
+    }
+    if (night) {
+        final_response += getGenericWeatherResponseByType("night");
+    }
+    if (general) {
+        final_response += getGenericWeatherResponseByType("general");
+    }
+    if (rain) {
+        final_response += getGenericWeatherResponseByType("rain");
+    }
+    return final_response;
 };
 
+const getGenericWeatherResponseByType = (type) => {
+    let genericResponseList;
+    let response;
+    if (utils.isString(type)) {
+        switch (type) {
+            case "day":
+                genericResponseList = respons_strings.generic_weather_responses.day_time;
+                response = setRandomDegreeValues(genericResponseList[utils.getRandomArrayEntry(genericResponseList)]);
+                break;
+            case "night":
+                genericResponseList = respons_strings.generic_weather_responses.night_time;
+                response = setRandomDegreeValues(genericResponseList[utils.getRandomArrayEntry(genericResponseList)]);
+                break;
+            case "general":
+                genericResponseList = respons_strings.generic_weather_responses.general;
+                response = genericResponseList[utils.getRandomArrayEntry(genericResponseList)];
+                break;
+            case "rain":
+                genericResponseList = respons_strings.generic_weather_responses.rain;
+                response = genericResponseList[utils.getRandomArrayEntry(genericResponseList)];
+                break;
+            default:
+                response = "type not defined.";
+                break;
+        }
+    } else {
+        response = respons_strings.default_error.error_1 + "getGenericWeatherResponseByType - type is not a string."
+    }
+    return response;
+
+};
 module.exports = {
     getWeatherResponse,
     getWeatherForecastAndOutlookResponse,
     getWeatherReportResponse,
     getTypeOfWeather,
-    getDateText
+    getDateText,
+    getGenericWeatherResponseByType
 };
