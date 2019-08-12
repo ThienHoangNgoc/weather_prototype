@@ -7,7 +7,7 @@ const utils = require('./Utils');
 const weather_response_builder = require('./weather_response_builder');
 const urls = require('./urls');
 
-const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse} = require('actions-on-google');
+const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse, BasicCard, Button} = require('actions-on-google');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
@@ -67,35 +67,21 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 let conv = agent.conv();
                 conv.ask(responseList[utils.getRandomInt(responseList.length)]);
                 conv.ask(responses.weather_responses.more_info);
-                conv.ask(new BrowseCarousel({
-                    items: [
-                        new BrowseCarouselItem({
-                            title: date_text,
-                            url: urls.website.filler,
-                            description: strings.default.value,
-                            image: new Image({
-                                url: urls.image.filler,
-                                alt: strings.default.value
-                            }),
-                            footer: strings.default.value
-                        }),
-                        new BrowseCarouselItem({
-                            title: date_text,
-                            url: urls.website.filler,
-                            description: strings.default.value,
-                            image: new Image({
-                                url: urls.image.filler,
-                                alt: strings.default.value
-                            }),
-                            footer: strings.default.value
-                        })
-                    ],
+                conv.ask(new BasicCard({
+                    text: strings.default.value,
+                    subtitle:"subtitle",
+                    title:"title",
+                    buttons: new Button({
+                        title: "Button",
+                        url: urls.website.filler
+                    }),
+                    image : new Image({
+                        url: urls.image.filler,
+                        alt: "something"
+                    })
+
                 }));
                 conv.ask(new Suggestions(strings.topic_suggestions));
-                conv.ask(new SimpleResponse({
-                    speech: "hää?",
-                    text: "123"
-                }));
                 agent.add(conv);
             } else {
                 //get random message from list
