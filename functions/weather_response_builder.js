@@ -2,11 +2,11 @@
 
 const strings = require('./strings');
 const utils = require('./Utils');
-const respons_strings = require('./response_strings')
+const response_strings = require('./response_strings');
 
 const getDateText = (text) => {
     let date_text;
-    if (utils.compareStringWithArray(text, [strings.type_of_today])) {
+    if (utils.stringIsInArray(text, strings.type_of_today)) {
         date_text = strings.date_type.today;
     } else {
         date_text = text;
@@ -38,7 +38,7 @@ const getWeatherResponse = (weather, date, location) => {
     responseList.push(setRandomDegreeValues(`In ${location} wird es ${date} tagsüber nochmal sommerlich warm mit dayMIN bis dayMAX Grad.`
         + genericWeatherResponseBuilder(false, true, true, true)));
 
-    responseList.push(setRandomDegreeValues(`${utils.firstLetterUpperCase(date)} erreichen tagsüber in ${location} die maximalen Werte bis zu 40 Grad`
+    responseList.push(setRandomDegreeValues(`${utils.firstLetterUpperCase(date)} erreichen tagsüber in ${location} die maximalen Werte bis zu 40 Grad.`
         + genericWeatherResponseBuilder(false, true, true, true)));
 
     responseList.push(setRandomDegreeValues(`${utils.firstLetterUpperCase(date)} werden tagsüber in ${location} Werte zwischen dayMIN und dayMAX Grad erreicht.`
@@ -50,16 +50,16 @@ const getWeatherResponse = (weather, date, location) => {
 //Wettervorhersage und Wetterprognose
 const getWeatherForecastAndOutlookResponse = (weather, date, location) => {
     let responseList = [];
-    responseList.push(`Die ${weather} für ${location} sieht ${date} folgendermaßen aus: ` + genericWeatherResponseBuilder());
+    responseList.push(`Die ${weather} für ${location} sieht ${date} folgendermaßen aus: ` + genericWeatherResponseBuilder(true, true, true, true));
     return responseList;
 };
 
 //Wetterbericht
 const getWeatherReportResponse = (weather, date, location) => {
     let responseList = [];
-    responseList.push(`Der ${weather} für ${location} sieht ${date} folgendermaßen aus: ` + genericWeatherResponseBuilder());
-    responseList.push(`Für ${location} sieht der ${weather} ${date} so aus: ` + genericWeatherResponseBuilder());
-    responseList.push(`Hier der ${weather} für ${date}: ` + genericWeatherResponseBuilder());
+    responseList.push(`Der ${weather} für ${location} sieht ${date} folgendermaßen aus: ` + genericWeatherResponseBuilder(true, true, true, true));
+    responseList.push(`Für ${location} sieht der ${weather} ${date} so aus: ` + genericWeatherResponseBuilder(true, true, true, true));
+    responseList.push(`Hier der ${weather} für ${date}: ` + genericWeatherResponseBuilder(true, true, true, true));
     return responseList;
 };
 
@@ -73,7 +73,7 @@ const replaceString = (string, oldString, newString) => {
 const setRandomDegreeValues = (string) => {
     let dayMAX = utils.getRandomIntInRange(23, 40);
     let dayMIN = dayMAX - 5;
-    let nightMAX = utils.getRandomIntInRange(10, 18);
+    let nightMAX = utils.getRandomIntInRange(18, 20);
     let nightMIN = nightMAX - 3;
     if (utils.containsString(string, "dayMAX") || utils.containsString(string, "nightMAX")) {
         string = replaceString(string, "dayMAX", dayMAX);
@@ -107,19 +107,19 @@ const getGenericWeatherResponseByType = (type) => {
     if (utils.isString(type)) {
         switch (type) {
             case "day":
-                genericResponseList = respons_strings.generic_weather_responses.day_time;
+                genericResponseList = response_strings.generic_weather_responses.day_time;
                 response = setRandomDegreeValues(genericResponseList[utils.getRandomArrayEntry(genericResponseList)]);
                 break;
             case "night":
-                genericResponseList = respons_strings.generic_weather_responses.night_time;
+                genericResponseList = response_strings.generic_weather_responses.night_time;
                 response = setRandomDegreeValues(genericResponseList[utils.getRandomArrayEntry(genericResponseList)]);
                 break;
             case "general":
-                genericResponseList = respons_strings.generic_weather_responses.general;
+                genericResponseList = response_strings.generic_weather_responses.general;
                 response = genericResponseList[utils.getRandomArrayEntry(genericResponseList)];
                 break;
             case "rain":
-                genericResponseList = respons_strings.generic_weather_responses.rain;
+                genericResponseList = response_strings.generic_weather_responses.rain;
                 response = genericResponseList[utils.getRandomArrayEntry(genericResponseList)];
                 break;
             default:
@@ -127,7 +127,7 @@ const getGenericWeatherResponseByType = (type) => {
                 break;
         }
     } else {
-        response = respons_strings.default_error.error_1 + "getGenericWeatherResponseByType - type is not a string."
+        response = response_strings.debug_error.error_1 + "getGenericWeatherResponseByType - type is not a string."
     }
     return response;
 

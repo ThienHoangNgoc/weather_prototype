@@ -7,11 +7,11 @@ const getRandomInt = (max) => {
 };
 
 //included min, included min
-const getRandomIntInRange = (min, max) =>{
-    return Math.floor( Math.random() * (max - min + 1)) + min;
+const getRandomIntInRange = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const getRandomArrayEntry = (array) =>{
+const getRandomArrayEntry = (array) => {
     return getRandomInt(array.length);
 }
 
@@ -44,23 +44,24 @@ const isStringArray = (stringList) => {
     return true;
 };
 
-const compareStringWithArray = (string, stringList) => {
+const stringIsInArray = (string, stringList) => {
     for (let index = 0; index < stringList.length; ++index) {
-        if (!equalsString(stringList[index], string)) {
-            return false;
+        console.log(" in list: " + stringList[index])
+        if (equalsString(stringList[index], string)) {
+            return true;
         }
     }
-    return true;
+    return false;
 }
-//2019-08-10T12:00:00+02:00
-const getDateFormatted = (date_string) => {
+//dialog example input: 2019-08-10T12:00:00+02:00
+const getDateFormatted = (date_string, dateFormatxd) => {
     let date = new Date(date_string);
-    dateFormat.masks.ownDateformat = 'dd.mmmm yyyy';
+    dateFormat.masks.ownDateformat = dateFormatxd;
     return dateFormat(date, dateFormat.masks.ownDateformat);
 };
 
-const firstLetterUpperCase = (string) =>{
-    if(isString(string)){
+const firstLetterUpperCase = (string) => {
+    if (isString(string)) {
         return string.toString().charAt(0).toUpperCase() + string.toString().slice(1);
 
     }
@@ -74,6 +75,21 @@ const containsString = (firstString, secondString) => {
 
 };
 
+//Translate dayNames into German
+dateFormat.i18n = {
+    dayNames: [
+        'SO', 'MO', 'DI', 'MI', 'DO', 'FRI', 'SA',
+        'Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'
+    ],
+    monthNames: [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ],
+    timeNames: [
+        'a', 'p', 'am', 'pm', 'A', 'P', 'AM', 'PM'
+    ]
+};
+
 module.exports = {
     getRandomInt,
     getRandomIntInRange,
@@ -84,7 +100,7 @@ module.exports = {
     checkTypeOf,
     containsString,
     isStringArray,
-    compareStringWithArray,
+    stringIsInArray,
     getDateFormatted,
     firstLetterUpperCase
 };

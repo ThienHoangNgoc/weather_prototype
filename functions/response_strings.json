@@ -10,35 +10,35 @@
   },
   "last_fallback": {
     "responses": [
-      "Es kann sein, dass dein Anliegen zum Wetter noch nicht in der App implementiert wurde.",
-      "Es tut mir leid. Wahrscheinlich wurde dein Anliegen noch nicht implementiert.",
-      "Ich kann dein Anliegen leider nicht bearbeiten."
+      "Es kann sein, dass dein Anliegen zum Wetter noch nicht in der App implementiert wurde. ",
+      "Es tut mir leid. Wahrscheinlich wurde dein Anliegen noch nicht implementiert. ",
+      "Ich kann dein Anliegen leider nicht bearbeiten. "
     ],
-    "hint_for_available_topics": "Versuche es mal mit einem dieser 3 Themen:"
+    "hint_for_available_topics": "Versuche es mal mit einem dieser 3 Themen: "
   },
   "generic_weather_responses": {
     "general": [
-      "Im Laufe des Tages wird es einen Mix aus Sonne und Wolken geben",
-      "Im Laufe des Tages ist mit viel Sonne zu rechnen und vereinzelnt mit Wolken zu rechnen.",
-      "Es ist mit vielen Wolken zu rechnen. Ab und zu scheint auch die Sonne."
+      "Im Laufe des Tages wird es einen Mix aus Sonne und Wolken geben. ",
+      "Im Laufe des Tages ist mit viel Sonne und vereinzelnt mit Wolken zu rechnen. ",
+      "Es ist mit vielen Wolken zu rechnen. Ab und zu scheint auch die Sonne. "
     ],
     "rain": [
-      "Abends treten vereinzelnt kleine Regenschauer auf.",
-      "Abends kann es vereinzelnt zu leichten Regenschauer kommen",
-      "Mit Regen ist heute nicht zu rechnen"
+      "Abends treten vereinzelnt kleine Regenschauer auf. ",
+      "Abends kann es vereinzelnt zu leichten Regenschauer kommen. ",
+      "Mit Regen ist heute nicht zu rechnen. "
     ],
     "day_time": [
-      "Es wird tagsüber nochmal sommerlich warm mit dayMIN bis dayMAX Grad.",
-      "Tagsüber muss man mit Temperaturen zwischen dayMIN und dayMAX Grad rechnen.",
-      "Es werden während des Tages dayMIN bis dayMAX Grad erreicht."
+      "Es wird tagsüber nochmal sommerlich warm mit dayMIN bis dayMAX Grad. ",
+      "Tagsüber muss man mit Temperaturen zwischen dayMIN und dayMAX Grad rechnen. ",
+      "Es werden während des Tages dayMIN bis dayMAX Grad erreicht. "
     ],
     "night_time": [
-      "Nachts kühlt es dann auf nightMAX bis nightMIN Grad ab.",
-      "In der Nacht belaufen sich die Werte zwischen nightMAX und nightMIN Grad.",
-      "Nachts gehen die Werte dann auf nightMAX bis nightMIN Grad zurück."
+      "Nachts kühlt es dann auf nightMAX bis nightMIN Grad ab. ",
+      "In der Nacht belaufen sich die Werte zwischen nightMAX und nightMIN Grad. ",
+      "Nachts gehen die Werte dann auf nightMAX bis nightMIN Grad zurück. "
     ]
   },
-  "default_error": {
+  "debug_error": {
     "error_1": "Something went wrong in: "
   }
 }

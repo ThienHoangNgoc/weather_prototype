@@ -12,8 +12,12 @@
   "date_type": {
     "today": "heute"
   },
-  "default_city_names": {
-    "Berlin": "Berlin"
+  "default": {
+    "city_names": {
+      "Berlin": "Berlin",
+      "Hamburg": "Hamburg"
+    },
+    "value": "this is a default value."
   },
   "type_of_today": [
     "heute",

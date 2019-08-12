@@ -5,7 +5,7 @@ const strings = require('./strings');
 const responses = require("./response_strings");
 const utils = require('./Utils');
 const weather_response_builder = require('./weather_response_builder');
-const image_url = require('./image_url');
+const urls = require('./urls');
 
 const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse} = require('actions-on-google');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
@@ -15,13 +15,6 @@ process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     const agent = new WebhookClient({request, response});
-
-/**
- * add only for function from google
- *
-    agent.requestSource = agent.ACTIONS_ON_GOOGLE;
-*/
-
 
     function welcome(agent) {
         agent.add(responses.welcome.welcome);
@@ -37,47 +30,85 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         let date_original_text;
         let location_text;
         let responseList;
-        let date_text = utils.getDateFormatted(date);
+        let date_text = utils.getDateFormatted(date, '(ddd) dd.mm');
 
         //check if request parameters are strings
-        if (utils.isStringArray([weather,dateOriginal, location])) {
+        if (utils.isStringArray([weather, dateOriginal, location])) {
             weather_text = weather_response_builder.getTypeOfWeather(weather);
             date_original_text = weather_response_builder.getDateText(dateOriginal);
+
             //If the User does not input a location take default city
-            if(utils.isEmpty(location)){
-                location_text = strings.default_city_names.Berlin;
-            }else{
+            if (utils.isEmpty(location)) {
+                location_text = strings.default.city_names.Berlin;
+            } else {
                 location_text = location;
             }
-            //response when weather_text equals "weather"
-            if (utils.equalsString(weather_text, strings.weather_type.response.weather)) {
-                responseList = weather_response_builder.getWeatherResponse(weather_text, date_original_text, location_text);
-                //get random message from list
-                agent.add(responseList[utils.getRandomInt(responseList.length)]);
+
+            switch (weather_text) {
+                case strings.weather_type.response.weather:
+                    //response when weather_text equals "weather"
+                    responseList = weather_response_builder.getWeatherResponse(weather_text, date_original_text, location_text);
+                    break;
+                case strings.weather_type.response.forecast || strings.weather_type.response.outlook:
+                    //response when weather_text equals "weather outlook" and "weather forecast"
+                    responseList = weather_response_builder.getWeatherForecastAndOutlookResponse(weather_text, date_original_text, location_text);
+                    break;
+                case strings.weather_type.response.report:
+                    //response when weather_text equals "weather report"
+                    responseList = weather_response_builder.getWeatherReportResponse(weather_text, date_original_text, location_text);
+                    break;
+                default:
+                    responseList = responses.general.error_message;
+                    break;
             }
 
-            //response when weather_text equals "weather outlook" and "weather forecast"
-            if (utils.equalsString(weather_text, strings.weather_type.response.forecast) || utils.equalsString(weather_text, strings.weather_type.response.outlook)) {
-                responseList = weather_response_builder.getWeatherForecastAndOutlookResponse(weather_text, date_original_text, location_text);
+            //check if device has Google Assistant
+            if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {
+                let conv = agent.conv();
+                conv.ask(responseList[utils.getRandomInt(responseList.length)]);
+                conv.ask(responses.weather_responses.more_info);
+                conv.ask(new BrowseCarousel({
+                    items: [
+                        new BrowseCarouselItem({
+                            title: date_text,
+                            url: urls.website.filler,
+                            description: strings.default.value,
+                            image: new Image({
+                                url: urls.image.filler,
+                                alt: strings.default.value
+                            }),
+                            footer: strings.default.value
+                        }),
+                        new BrowseCarouselItem({
+                            title: date_text,
+                            url: urls.website.filler,
+                            description: strings.default.value,
+                            image: new Image({
+                                url: urls.image.filler,
+                                alt: strings.default.value
+                            }),
+                            footer: strings.default.value
+                        })
+                    ],
+                }));
+                conv.ask(new Suggestions(strings.topic_suggestions));
+                conv.ask(new SimpleResponse({
+                    speech: "hää?",
+                    text: "123"
+                }));
+                agent.add(conv);
+            } else {
                 //get random message from list
                 agent.add(responseList[utils.getRandomInt(responseList.length)]);
+                agent.add(responses.weather_responses.more_info);
+                agent.add(new Card({
+                    title: date_text,
+                    imageUrl: urls.image.filler,
+                    text: strings.default.value,
+                    buttonText: 'mehr Info',
+                    buttonUrl: urls.website.filler
+                }))
             }
-
-            if (utils.equalsString(weather_text, strings.weather_type.response.report)) {
-                responseList = weather_response_builder.getWeatherReportResponse(weather_text, date_original_text, location_text);
-                //get random message from list
-                agent.add(responseList[utils.getRandomInt(responseList.length)]);
-            }
-
-            agent.add(responses.weather_responses.more_info);
-            agent.add(new Card({
-                title: `Wetterbericht (${date_text})`,
-                imageUrl: image_url.filler_image,
-                text: '',
-                buttonText: 'mehr Info',
-                buttonUrl: image_url.filler_url
-            }))
-
 
         } else {
             agent.add(responses.general.error_message);
@@ -142,4 +173,5 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     intentMap.set(strings.intents.welcome, welcome);
     intentMap.set(strings.intents.weather, weather);
     agent.handleRequest(intentMap);
-});
+})
+;
