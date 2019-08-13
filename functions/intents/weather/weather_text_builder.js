@@ -1,8 +1,8 @@
 "use strict";
 
-const strings = require('./strings');
-const utils = require('./Utils');
-const response_strings = require('./response_strings');
+const strings = require('../../jsons/strings');
+const utils = require('../../utils/Utils');
+const response_strings = require('../../jsons/response_strings');
 
 const getDateText = (text) => {
     let date_text;

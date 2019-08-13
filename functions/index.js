@@ -1,14 +1,17 @@
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-const strings = require('./strings');
-const responses = require("./response_strings");
-const utils = require('./Utils');
-const weather_text_builder = require('./weather_text_builder');
-const urls = require('./urls');
-
 const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse, BasicCard, Button} = require('actions-on-google');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
+
+const strings = require('./jsons/strings');
+const responses = require("./jsons/response_strings");
+const utils = require('./utils/Utils');
+const weather_text_builder = require('./intents/weather/weather_text_builder');
+const urls = require('./jsons/urls');
+
+//intent functions
+const weather_function = require('./intents/weather/weather_intent');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
@@ -20,7 +23,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         agent.add(responses.welcome.welcome);
     }
 
-    function weather(agent) {
+
+    /*function weather(agent) {
         const weather = agent.request_.body.queryResult.parameters['weather'];
         // original parameter can only be accessed through the output Context - set Output Context in dialogflow
         const dateOriginal = agent.request_.body.queryResult.outputContexts[0].parameters['date.original'];
@@ -101,7 +105,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             agent.add(responses.general.error_message);
         }
 
-    }
+    }*/
 
 
     function incorrectTopicLastTime(agent) {
@@ -116,7 +120,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     let intentMap = new Map();
     intentMap.set(strings.intents.last_time_incorrect, incorrectTopicLastTime);
     intentMap.set(strings.intents.welcome, welcome);
-    intentMap.set(strings.intents.weather, weather);
+    intentMap.set(strings.intents.weather, weather_function);
     agent.handleRequest(intentMap);
 })
 ;
