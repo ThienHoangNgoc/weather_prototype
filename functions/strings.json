@@ -38,5 +38,34 @@
       "outlook": "Wetterprognose",
       "forecast": "Wettervorhersage"
     }
+  },
+  "basic_card_label": {
+    "maxValue": "Höchstwerte:",
+    "minValue": "Tiefstwerte:",
+    "rainProb": "Regenwahrscheinlichkeit:",
+    "sunHours": "Sonnenstunden:"
+  },
+  "button_text": {
+    "more_info" : "Mehr Informationen"
+  },
+  "hover_text": {
+    "image": "Das ist ein Bild."
+  },
+  "emoji": {
+    "weather_state": [
+      "☀️sonnig",
+      "☁ bedeckt",
+      "⛅ stark bewölkt",
+      "\uD83C\uDF29️Gewitter",
+      "\uD83C\uDF27️Regen",
+      "⛈ Starkes Gewitter",
+      "\uD83C\uDF24️leicht bewölkt",
+      "\uD83C\uDF26️Regenschauer"
+    ],
+    "maxValue": "\uD83D\uDD25 ",
+    "minValue": "❄ ",
+    "rainProb": "\uD83D\uDCA7 ",
+    "sunHours": "☀ "
   }
 }
+

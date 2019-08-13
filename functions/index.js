@@ -4,7 +4,7 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const strings = require('./strings');
 const responses = require("./response_strings");
 const utils = require('./Utils');
-const weather_response_builder = require('./weather_response_builder');
+const weather_text_builder = require('./weather_text_builder');
 const urls = require('./urls');
 
 const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse, BasicCard, Button} = require('actions-on-google');
@@ -34,8 +34,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
         //check if request parameters are strings
         if (utils.isStringArray([weather, dateOriginal, location])) {
-            weather_text = weather_response_builder.getTypeOfWeather(weather);
-            date_original_text = weather_response_builder.getDateText(dateOriginal);
+            weather_text = weather_text_builder.getTypeOfWeather(weather);
+            date_original_text = weather_text_builder.getDateText(dateOriginal);
 
             //If the User does not input a location take default city
             if (utils.isEmpty(location)) {
@@ -47,15 +47,15 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             switch (weather_text) {
                 case strings.weather_type.response.weather:
                     //response when weather_text equals "weather"
-                    responseList = weather_response_builder.getWeatherResponse(weather_text, date_original_text, location_text);
+                    responseList = weather_text_builder.getWeatherResponse(weather_text, date_original_text, location_text);
                     break;
                 case strings.weather_type.response.forecast || strings.weather_type.response.outlook:
                     //response when weather_text equals "weather outlook" and "weather forecast"
-                    responseList = weather_response_builder.getWeatherForecastAndOutlookResponse(weather_text, date_original_text, location_text);
+                    responseList = weather_text_builder.getWeatherForecastAndOutlookResponse(weather_text, date_original_text, location_text);
                     break;
                 case strings.weather_type.response.report:
                     //response when weather_text equals "weather report"
-                    responseList = weather_response_builder.getWeatherReportResponse(weather_text, date_original_text, location_text);
+                    responseList = weather_text_builder.getWeatherReportResponse(weather_text, date_original_text, location_text);
                     break;
                 default:
                     responseList = responses.general.error_message;
@@ -68,16 +68,17 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 conv.ask(responseList[utils.getRandomInt(responseList.length)]);
                 conv.ask(responses.weather_responses.more_info);
                 conv.ask(new BasicCard({
-                    text: strings.default.value,
-                    subtitle:"subtitle",
-                    title:"title",
+                    text: weather_text_builder.weather_card_text_builder(),
+                    //later: separate emoji and weatherStateText in to sections
+                    subtitle: strings.emoji.weather_state[utils.getRandomInt(strings.emoji.weather_state.length)],
+                    title: date_text,
                     buttons: new Button({
-                        title: "Button",
+                        title: strings.button_text.more_info,
                         url: urls.website.filler
                     }),
-                    image : new Image({
+                    image: new Image({
                         url: urls.image.filler,
-                        alt: "something"
+                        alt: strings.hover_text.image
                     })
 
                 }));
@@ -100,50 +101,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             agent.add(responses.general.error_message);
         }
 
-
     }
 
-
-    function weatherForecastDatePeriod(agent) {
-        /* const testStartDate = agent.request_.body.queryResult.parameters['date-period'][0]['startDate'];
-         const timePeriod = agent.request_.body.queryResult.outputContexts[0].parameters['date-period.original'];
-         const locationCity = agent.request_.body.queryResult.outputContexts[0].parameters['geo-city.original'];*/
-        const weather = agent.request_.body.queryResult.parameters['wetter.original'];
-        const locationCity = agent.request_.body.queryResult.parameters['geo-city.original'];
-        const timePeriod = agent.request_.body.queryResult.parameters['date-period'];
-        const timePeriodOriginal = agent.request_.body.queryResult.parameters['date-period.original'];
-        let conv = agent.conv();
-        conv.ask('Suche ein Item aus');
-        conv.ask(new BrowseCarousel({
-            items: [
-                new BrowseCarouselItem({
-                    title: 'item #1',
-                    url: 'https://www.reddit.com/r/OnePiece/',
-                    description: 'item 1 description',
-                    image: {
-                        url: "https://i.imgur.com/SUtypB2.png",
-                        accessibilityText: "test"
-                    },
-                    footer: 'item 1 footer'
-                }),
-                new BrowseCarouselItem({
-                    title: 'item #2',
-                    url: 'https://www.reddit.com/r/OnePiece/',
-                    description: 'item 2 description',
-                    image: new Image({
-                        url: 'https://i.imgur.com/SUtypB2.png',
-                        alt: ''
-                    }),
-                    footer: 'item 2 footer'
-                }),
-
-
-            ]
-        }));
-        conv.ask(new Suggestions(strings.topic_suggestions));
-        agent.add(conv);
-
-    }
 
     function incorrectTopicLastTime(agent) {
         let conv = agent.conv();

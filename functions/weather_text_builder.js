@@ -71,7 +71,7 @@ const replaceString = (string, oldString, newString) => {
 };
 
 const setRandomDegreeValues = (string) => {
-    let dayMAX = utils.getRandomIntInRange(23, 40);
+    let dayMAX = utils.getRandomIntInRange(28, 40);
     let dayMIN = dayMAX - 5;
     let nightMAX = utils.getRandomIntInRange(18, 20);
     let nightMIN = nightMAX - 3;
@@ -82,6 +82,35 @@ const setRandomDegreeValues = (string) => {
         string = replaceString(string, "nightMIN", nightMIN)
     }
     return string;
+};
+
+
+const weather_card_text_builder = () => {
+    const lineBreaks = "  \n";
+    let maxValue = utils.getRandomIntInRange(28, 40) + "°";
+    let minValue = utils.getRandomIntInRange(18, 20) + "°";
+    let rainProbability = utils.getRandomIntInRange(0, 40) + " %";
+    let sunHours = utils.getRandomIntInRange(4, 9);
+    return strings.emoji.maxValue + stringBold(strings.basic_card_label.maxValue) + maxValue + lineBreaks +
+        strings.emoji.minValue + stringBold(strings.basic_card_label.minValue) + minValue + lineBreaks +
+        strings.emoji.rainProb + stringBold(strings.basic_card_label.rainProb) + rainProbability + lineBreaks +
+        strings.emoji.sunHours + stringBold(strings.basic_card_label.sunHours) + sunHours;
+};
+
+const stringBold = (string) => {
+    return "__" + string + "__ ";
+};
+
+const stringEmphasis = (string) => {
+    return "*" + string + "* ";
+};
+
+const stringStrong = (string) => {
+    return "**" + string + "** ";
+};
+
+const stringStrongEmphasis = (string) => {
+    return "___" + string + "___ "
 };
 
 const genericWeatherResponseBuilder = (day, night, general, rain) => {
@@ -138,5 +167,6 @@ module.exports = {
     getWeatherReportResponse,
     getTypeOfWeather,
     getDateText,
-    getGenericWeatherResponseByType
+    getGenericWeatherResponseByType,
+    weather_card_text_builder
 };
