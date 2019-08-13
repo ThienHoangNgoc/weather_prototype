@@ -1,126 +1,24 @@
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-const {Carousel, BrowseCarousel, BrowseCarouselItem, Image, Suggestions, Confirmation, SimpleResponse, BasicCard, Button} = require('actions-on-google');
-const {Card, Suggestion} = require('dialogflow-fulfillment');
-
 const strings = require('./jsons/strings');
-const responses = require("./jsons/response_strings");
-const utils = require('./utils/Utils');
-const weather_text_builder = require('./intents/weather/weather_text_builder');
-const urls = require('./jsons/urls');
 
 //intent functions
 const weather_function = require('./intents/weather/weather_intent');
+const welcome_function = require('./intents/welcome');
+const incorrect_topic_last_time_function = require('./intents/incorrectTopicLastTime');
 
-process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
-
+// enables lib debugging statements
+process.env.DEBUG = 'dialogflow:debug';
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
+
     const agent = new WebhookClient({request, response});
-
-    function welcome(agent) {
-        agent.add(responses.welcome.welcome);
-    }
-
-
-    /*function weather(agent) {
-        const weather = agent.request_.body.queryResult.parameters['weather'];
-        // original parameter can only be accessed through the output Context - set Output Context in dialogflow
-        const dateOriginal = agent.request_.body.queryResult.outputContexts[0].parameters['date.original'];
-        const date = agent.request_.body.queryResult.parameters['date'];
-        const location = agent.request_.body.queryResult.parameters['geo-city'];
-        let weather_text;
-        let date_original_text;
-        let location_text;
-        let responseList;
-        let date_text = utils.getDateFormatted(date, '(ddd) dd.mm');
-
-        //check if request parameters are strings
-        if (utils.isStringArray([weather, dateOriginal, location])) {
-            weather_text = weather_text_builder.getTypeOfWeather(weather);
-            date_original_text = weather_text_builder.getDateText(dateOriginal);
-
-            //If the User does not input a location take default city
-            if (utils.isEmpty(location)) {
-                location_text = strings.default.city_names.Berlin;
-            } else {
-                location_text = location;
-            }
-
-            switch (weather_text) {
-                case strings.weather_type.response.weather:
-                    //response when weather_text equals "weather"
-                    responseList = weather_text_builder.getWeatherResponse(weather_text, date_original_text, location_text);
-                    break;
-                case strings.weather_type.response.forecast || strings.weather_type.response.outlook:
-                    //response when weather_text equals "weather outlook" and "weather forecast"
-                    responseList = weather_text_builder.getWeatherForecastAndOutlookResponse(weather_text, date_original_text, location_text);
-                    break;
-                case strings.weather_type.response.report:
-                    //response when weather_text equals "weather report"
-                    responseList = weather_text_builder.getWeatherReportResponse(weather_text, date_original_text, location_text);
-                    break;
-                default:
-                    responseList = responses.general.error_message;
-                    break;
-            }
-
-            //check if device has Google Assistant
-            if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {
-                let conv = agent.conv();
-                conv.ask(responseList[utils.getRandomInt(responseList.length)]);
-                conv.ask(responses.weather_responses.more_info);
-                conv.ask(new BasicCard({
-                    text: weather_text_builder.weather_card_text_builder(),
-                    //later: separate emoji and weatherStateText in to sections
-                    subtitle: strings.emoji.weather_state[utils.getRandomInt(strings.emoji.weather_state.length)],
-                    title: date_text,
-                    buttons: new Button({
-                        title: strings.button_text.more_info,
-                        url: urls.website.filler
-                    }),
-                    image: new Image({
-                        url: urls.image.filler,
-                        alt: strings.hover_text.image
-                    })
-
-                }));
-                conv.ask(new Suggestions(strings.topic_suggestions));
-                agent.add(conv);
-            } else {
-                //get random message from list
-                agent.add(responseList[utils.getRandomInt(responseList.length)]);
-                agent.add(responses.weather_responses.more_info);
-                agent.add(new Card({
-                    title: date_text,
-                    imageUrl: urls.image.filler,
-                    text: strings.default.value,
-                    buttonText: 'mehr Info',
-                    buttonUrl: urls.website.filler
-                }))
-            }
-
-        } else {
-            agent.add(responses.general.error_message);
-        }
-
-    }*/
-
-
-    function incorrectTopicLastTime(agent) {
-        let conv = agent.conv();
-        conv.ask(responses.last_fallback.responses[utils.getRandomInt(responses.last_fallback.responses.length)]);
-        conv.ask(responses.last_fallback.hint_for_available_topics);
-        conv.ask(new Suggestions(strings.topic_suggestions));
-        agent.add(conv);
-    }
-
-
     let intentMap = new Map();
-    intentMap.set(strings.intents.last_time_incorrect, incorrectTopicLastTime);
-    intentMap.set(strings.intents.welcome, welcome);
+    intentMap.set(strings.intents.last_time_incorrect, incorrect_topic_last_time_function);
+    intentMap.set(strings.intents.welcome, welcome_function);
     intentMap.set(strings.intents.weather, weather_function);
     agent.handleRequest(intentMap);
+
 })
 ;
