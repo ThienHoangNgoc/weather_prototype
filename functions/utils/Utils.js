@@ -46,7 +46,6 @@ const isStringArray = (stringList) => {
 
 const stringIsInArray = (string, stringList) => {
     for (let index = 0; index < stringList.length; ++index) {
-        console.log(" in list: " + stringList[index])
         if (equalsString(stringList[index], string)) {
             return true;
         }

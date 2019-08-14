@@ -2,7 +2,12 @@
   "intents": {
     "welcome": "Default Welcome Intent",
     "last_time_incorrect": "incorrect_topic_last_time_intent",
-    "weather": "weather_intent"
+    "weather": "weather_intent",
+    "additional_weather_yes": "additional_weather_yes_intent"
+  },
+  "contexts": {
+    "short_response": "short_response",
+    "yes_more_info": "yes_more_info"
   },
   "topic_suggestions": [
     "Wetter",

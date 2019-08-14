@@ -3,7 +3,7 @@
     "error_message": "Es ist etwas schief gelaufen. Versuche es später noch einmal"
   },
   "welcome": {
-    "welcome": "Willkommen zum Wetter Prototypen. Was willst du über das Wetter wissen?"
+    "welcome": "Willkommen zum Wetter Prototypen. Wie kann ich dir helfen?"
   },
   "weather_responses": {
     "more_info": "Für weitere Informationen klicke hier:"
@@ -17,16 +17,27 @@
     "hint_for_available_topics": "Versuche es mal mit einem dieser 3 Themen: "
   },
   "generic_weather_responses": {
-    "general": [
-      "Im Laufe des Tages wird es einen Mix aus Sonne und Wolken geben. ",
-      "Im Laufe des Tages ist mit viel Sonne und vereinzelnt mit Wolken zu rechnen. ",
-      "Es ist mit vielen Wolken zu rechnen. Ab und zu scheint auch die Sonne. "
-    ],
-    "rain": [
-      "Abends treten vereinzelnt kleine Regenschauer auf. ",
-      "Abends kann es vereinzelnt zu leichten Regenschauer kommen. ",
-      "Mit Regen ist heute nicht zu rechnen. "
-    ],
+    "general": {
+      "sun_positive": [
+        "Im Laufe des Tages wird es einen Mix aus Sonne und Wolken geben. Jedoch kann man mit mindestens sunV Sonnenstunden rechnen. ",
+        "Im Laufe des Tages ist mit viel Sonne und vereinzelnt mit Wolken zu rechnen. Man kann bis zu sunV Sonennstunden erwarten. ",
+        "Es ist mit viel Sonne zu rechnen. Man kann sich auf mindestens sunV Sonnenstunden freuen. "
+      ],
+      "sun_negative": [
+        "Es ist mit vielen Wolken zu rechnen. Ab und zu zeigt sich auch die Sonne. Man kann im Laufe des Tages nur mit sunV Sonnenstunden rechnen.  ",
+        "Im Laufe des Tages wird sich die Sonne kaum bis gar nicht zeigen. Es sind daher nur maximal sunV Sonnenstunden zu erwarten."
+      ],
+      "rain_positive": [
+        "Im Laufe des Tages ist mit einzelnen Regenschauern zu rechnen. Die Wahrscheinlichkeit dafür liegt bei rainV Prozent.",
+        "Es kann zu starken Regenschauern kommen. Die Regenwahrscheinlichkeit beträgt rainV Prozent. Auf einen Regenschirm sollte man nicht verzichten! ",
+        "Im Laufe des Tages kann es örtlich  ordentlich schütten. Die Wahrscheinlichkeit auf Regen liegt bei rainV. Falls du draußen unterwegs bist, solltest du deinen Regenschirm dabei haben.  "
+      ],
+      "rain_negative": [
+        "Abends kann es vereinzelnt zu leichten Regenschauer kommen. Die Regenwahrscheinlichkeit für den gesamten Tag liegt jedoch nur bei rainV Prozent.",
+        "Mit Regen ist nicht zu rechnen. Die Wahrscheinlichkeit, dass es regnen wird liegt bei rainV Prozent. ",
+        "Es bleibt überwiegend trocken. Die Wahrscheinlichkeit auf Regen beträgt rainV Prozent. "
+      ]
+    },
     "day_time": [
       "Es wird tagsüber nochmal sommerlich warm mit dayMIN bis dayMAX Grad. ",
       "Tagsüber muss man mit Temperaturen zwischen dayMIN und dayMAX Grad rechnen. ",

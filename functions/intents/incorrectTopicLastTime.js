@@ -3,6 +3,7 @@
 const responses = require('../jsons/response_strings');
 const strings = require('../jsons/strings');
 const utils = require('../utils/Utils');
+const {Suggestions} = require('actions-on-google');
 
 function incorrectTopicLastTime(agent) {
     let conv = agent.conv();
