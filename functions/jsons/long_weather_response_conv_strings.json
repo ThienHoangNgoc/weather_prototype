@@ -1,0 +1,9 @@
+{
+  "weather_responses": {
+    "initial": [
+      "$weather für $location sieht $date folgendermaßen aus: ",
+      "Für $location sieht $weather $date so aus: ",
+      "Hier $weather für $date: "
+    ]
+  }
+}

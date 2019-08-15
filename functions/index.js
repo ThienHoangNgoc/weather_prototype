@@ -4,10 +4,10 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const strings = require('./jsons/strings');
 
 //intent functions
-const weather_function = require('./intents/weather/weather_intent');
-const welcome_function = require('./intents/welcome');
-const incorrect_topic_last_time_function = require('./intents/incorrectTopicLastTime');
-const weather_follow_up_1 = require('./intents/weather/follow-up/follow_up_1_yes_intent');
+const weather_function = require('./normal_weather_response');
+const welcome_function = require('./welcome');
+const incorrect_topic_last_time_function = require('./incorrectTopicLastTime');
+const weather_follow_up_1 = require('./follow_up_1_yes_intent');
 
 // enables lib debugging statements
 process.env.DEBUG = 'dialogflow:debug';

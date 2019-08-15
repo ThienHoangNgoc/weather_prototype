@@ -1,8 +1,8 @@
 "use strict";
 
-const responses = require('../jsons/response_strings');
-const strings = require('../jsons/strings');
-const utils = require('../utils/Utils');
+const responses = require('./jsons/conv_strings');
+const strings = require('./jsons/strings');
+const utils = require('./utils/utils');
 const {Suggestions} = require('actions-on-google');
 
 function incorrectTopicLastTime(agent) {

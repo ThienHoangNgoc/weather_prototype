@@ -3,20 +3,19 @@
 const {Image, Suggestions, BasicCard, Button} = require('actions-on-google');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 
-const strings = require('../../jsons/strings');
-const responses = require("../../jsons/response_strings");
-const urls = require('../../jsons/urls');
+const strings = require('./jsons/strings');
+const responses = require("./jsons/conv_strings");
+const urls = require('./jsons/urls');
 
-const weather_text_builder = require('./weather_text_builder');
-const utils = require('../../utils/Utils');
+const weather_text_builder = require('./response_builder/weather_text_builder');
+const utils = require('./utils/utils');
 
-const Weather = require('../../model/Weather');
+const Weather = require('./model/Weather');
 
 
 const weather = (agent) => {
     const weather = agent.request_.body.queryResult.parameters['weather'];
-    // original parameter can only be accessed through the output Context - set Output Context in dialogflow
-    const dateOriginal = agent.request_.body.queryResult.outputContexts[0].parameters['date.original'];
+    const date_original = agent.request_.body.queryResult.outputContexts[0].parameters['date.original'];
     const date = agent.request_.body.queryResult.parameters['date'];
     const location = agent.request_.body.queryResult.parameters['geo-city'];
     let weather_text;
@@ -28,9 +27,9 @@ const weather = (agent) => {
     const weatherDummy = new Weather;
 
     //check if request parameters are strings
-    if (utils.isStringArray([weather, dateOriginal, location])) {
+    if (utils.isStringArray([weather, date_original, location])) {
         weather_text = weather_text_builder.getTypeOfWeather(weather);
-        date_original_text = weather_text_builder.getDateText(dateOriginal);
+        date_original_text = weather_text_builder.getDateText(date_original);
 
         //If the User does not input a location take default city
         if (utils.isEmpty(location)) {
@@ -85,7 +84,8 @@ const giveShortResponse = (responseList, date_original_text, agent, weatherDummy
             nightMAX: weatherDummy.nightMAX,
             nightMIN: weatherDummy.nightMIN,
             sunHours: weatherDummy.sunHours,
-            rain: weatherDummy.rain
+            rain: weatherDummy.rain,
+            isStormy: weatherDummy.tempest
         }
     });
 
@@ -125,7 +125,7 @@ const showInfoCard = (responseList, date_text, agent, weatherDummy) => {
             text: "",
             buttonText: strings.button_text.more_info,
             buttonUrl: urls.website.filler
-        }))
+        }));
         agent.add(new Suggestion(strings.topic_suggestions[0]));
         agent.add(new Suggestion(strings.topic_suggestions[1]));
         agent.add(new Suggestion(strings.topic_suggestions[2]));

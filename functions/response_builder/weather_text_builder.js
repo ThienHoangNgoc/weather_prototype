@@ -1,9 +1,8 @@
 "use strict";
 
-const strings = require('../../jsons/strings');
-const utils = require('../../utils/Utils');
-const response_strings = require('../../jsons/response_strings');
-const weatherObj = require('../../model/Weather');
+const strings = require('../jsons/strings');
+const utils = require('../utils/utils');
+const response_strings = require('../jsons/conv_strings');
 
 const getDateText = (text) => {
     let date_text;
@@ -65,18 +64,6 @@ const getWeatherReportResponse = (weather, date, location, weatherObj) => {
 };
 
 
-// replace weatherObj values in JSON strings
-const replaceWeatherValuesInJSON = (string, weatherObj) => {
-
-    string = string.replace("dayMAX", weatherObj.dayMAX);
-    string = string.replace("dayMIN", weatherObj.dayMIN);
-    string = string.replace("nightMAX", weatherObj.nightMAX);
-    string = string.replace("nightMIN", weatherObj.nightMIN);
-    string = string.replace("sunV", weatherObj.sunHours);
-    string = string.replace("rainV", weatherObj.rain);
-
-    return string;
-};
 
 const weather_card_text_builder = (weatherObj) => {
     const lineBreaks = "  \n";
@@ -107,73 +94,13 @@ const stringStrongEmphasis = (string) => {
     return "___" + string + "___ "
 };
 
-const genericWeatherResponseBuilder = (day, night, general, weatherObj) => {
-    let final_response = "";
-    if (day) {
-        final_response += getGenericWeatherResponseByType("day", weatherObj);
-    }
-    if (night) {
-        final_response += getGenericWeatherResponseByType("night", weatherObj);
-    }
-    if (general) {
-        final_response += getGenericGeneralResponse(weatherObj);
-    }
-    return final_response;
-};
 
-const getGenericGeneralResponse = (weatherObj) => {
-    if (weatherObj.isSunny) {
-        return getGenericWeatherResponseByType("sunP", weatherObj) + getGenericWeatherResponseByType("rainN", weatherObj);
-    } else {
-        return getGenericWeatherResponseByType("sunN", weatherObj) + getGenericWeatherResponseByType("rainP", weatherObj);
-    }
-};
 
-const getGenericWeatherResponseByType = (type, weatherObj) => {
-    let genericResponseList;
-    let response;
-    if (utils.isString(type)) {
-        switch (type) {
-            case "day":
-                genericResponseList = response_strings.generic_weather_responses.day_time;
-                response = replaceWeatherValuesInJSON(genericResponseList[utils.getRandomArrayEntry(genericResponseList)], weatherObj);
-                break;
-            case "night":
-                genericResponseList = response_strings.generic_weather_responses.night_time;
-                response = replaceWeatherValuesInJSON(genericResponseList[utils.getRandomArrayEntry(genericResponseList)], weatherObj);
-                break;
-            case "sunP":
-                genericResponseList = response_strings.generic_weather_responses.general.sun_positive;
-                response = replaceWeatherValuesInJSON(genericResponseList[utils.getRandomArrayEntry(genericResponseList)], weatherObj);
-                break;
-            case "sunN":
-                genericResponseList = response_strings.generic_weather_responses.general.sun_negative;
-                response = replaceWeatherValuesInJSON(genericResponseList[utils.getRandomArrayEntry(genericResponseList)], weatherObj);
-                break;
-            case "rainP":
-                genericResponseList = response_strings.generic_weather_responses.general.rain_positive;
-                response = replaceWeatherValuesInJSON(genericResponseList[utils.getRandomArrayEntry(genericResponseList)], weatherObj);
-                break;
-            case "rainN":
-                genericResponseList = response_strings.generic_weather_responses.general.rain_negative;
-                response = replaceWeatherValuesInJSON(genericResponseList[utils.getRandomArrayEntry(genericResponseList)], weatherObj);
-                break;
-            default:
-                response = "type not defined.";
-                break;
-        }
-    } else {
-        response = response_strings.debug_error.error_1 + "getGenericWeatherResponseByType - type is not a string."
-    }
-    return response;
-
-};
 module.exports = {
     getWeatherResponse,
     getWeatherForecastAndOutlookResponse,
     getWeatherReportResponse,
     getTypeOfWeather,
     getDateText,
-    getGenericWeatherResponseByType,
     weather_card_text_builder
 };

@@ -1,6 +1,6 @@
 "use strict";
 
-const utils = require('../utils/Utils');
+const utils = require('../utils/utils');
 
 const weather = class Weather {
 
@@ -17,6 +17,7 @@ const weather = class Weather {
         } else {
             this.sunHours = utils.getRandomIntInRange(2, 5);
             this.rain = utils.getRandomIntInRange(50, 90);
+            this.tempest = utils.getRandomInt(2) === 1;
         }
 
 

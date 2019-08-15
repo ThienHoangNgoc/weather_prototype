@@ -1,0 +1,35 @@
+{
+  "general": {
+    "error_message": "Es ist etwas schief gelaufen. Versuche es später noch einmal"
+  },
+  "welcome": {
+    "welcome": "Willkommen zum Wetter Prototypen. Wie kann ich dir helfen?"
+  },
+  "weather_responses": {
+    "more_info": "Für weitere Informationen klicke hier:"
+  },
+  "last_fallback": {
+    "responses": [
+      "Es kann sein, dass dein Anliegen zum Wetter noch nicht in der App implementiert wurde. ",
+      "Es tut mir leid. Wahrscheinlich wurde dein Anliegen noch nicht implementiert. ",
+      "Ich kann dein Anliegen leider nicht bearbeiten. "
+    ],
+    "hint_for_available_topics": "Versuche es mal mit einem dieser 3 Themen: "
+  },
+  "weather_follow_up": {
+    "more_info_suggestions": [
+      "Wie viele Sonnenstunden sind zu erwarten?",
+      "Wird es heute regnen?"
+    ],
+    "follow_up_1_yes": [
+      "Alles klar! Was willst du wissen?",
+      "Ok! Über was willst du mehr erfahren?"
+
+    ],
+    "follow_up_1_no": {
+    }
+  },
+  "debug_error": {
+    "error_1": "Something went wrong in: "
+  }
+}
