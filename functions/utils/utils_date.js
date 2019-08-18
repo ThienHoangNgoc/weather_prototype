@@ -1,7 +1,6 @@
 "use strict";
 const dateFormat = require('dateformat');
 
-
 /**
  * convert given date to custom date format
  * example dialogFow date: 2019-08-10T12:00:00+02:00
@@ -24,7 +23,7 @@ const getResponseFromDate = (date_string) => {
 };
 
 /**
- * calculae the diff between 2 dates and returns that value in the given interval
+ * calculate the diff between 2 dates and returns that value in the given interval
  * @param current_date
  * @param request_date
  * @param interval

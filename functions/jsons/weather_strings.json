@@ -1,0 +1,22 @@
+{
+  "weather_state": {
+    "sunny": "sonnig",
+    "clear": "klar",
+    "cloudy": "bedeckt",
+    "slightly_cloudy": "leicht bewölkt",
+    "mostly_cloudy": "stark bewölkt",
+    "rainy": "Regen",
+    "rainstorm": "Regenschauer",
+    "tempest": "Gewitter"
+  },
+  "weather_icons": {
+    "sunny": "☀",
+    "clear": "\uD83C\uDF19",
+    "cloudy": "☁",
+    "slightly_cloudy": "\uD83C\uDF24",
+    "mostly_cloudy": "⛅",
+    "rainy": "\uD83C\uDF27",
+    "rainstorm": "\uD83C\uDF26️",
+    "tempest": "\uD83C\uDF29"
+  }
+}

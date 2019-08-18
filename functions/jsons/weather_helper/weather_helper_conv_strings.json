@@ -1,0 +1,60 @@
+{
+  "weather_responses": {
+    "day_time": [
+      "Es wird tagsüber nochmal sommerlich warm mit $dayMIN bis $dayMAX Grad. ",
+      "Tagsüber muss man mit Temperaturen zwischen $dayMIN und $dayMAX Grad rechnen. ",
+      "Es werden während des Tages $dayMIN bis $dayMAX Grad erreicht. "
+    ],
+    "night_time": [
+      "Nachts kühlt es dann auf $nightMAX bis $nightMIN Grad ab. ",
+      "In der Nacht belaufen sich die Werte zwischen $nightMAX und $nightMIN Grad. ",
+      "Nachts gehen die Werte dann auf $nightMAX bis $nightMIN Grad zurück. "
+    ],
+    "sun_positive": [
+      "Im Laufe des Tages ist mit viel Sonne und vereinzelnt mit Wolken zu rechnen. ",
+      "Es ist mit viel Sonne zu rechnen. "
+    ],
+    "sun_negative": [
+      "Es ist mit vielen Wolken zu rechnen. Ab und zu zeigt sich auch die Sonne. ",
+      "Die Sonne wird sich kaum bis gar nicht zeigen. ",
+      "Es ist nur mit wenig Sonne zu rechnen. "
+    ],
+    "sun_add_info_positive": [
+      "Man kann bis zu $sunV Sonennstunden erwarten. ",
+      "Man kann sich auf mindestens $sunV Sonnenstunden freuen. "
+    ],
+    "sun_add_info_negative": [
+      "Daher kann man nur mit maxiaml $sunV Sonnenstunden rechnen.",
+      "Es sind daher nur maximal $sunV Sonnenstunden zu erwarten."
+    ],
+    "rain_positive": [
+      "Im Laufe des Tages ist mit einzelnen Regenschauern zu rechnen. ",
+      "Es kann zu starken Regenschauern kommen. ",
+      "Im Laufe des Tages kann es örtlich ordentlich schütten. "
+    ],
+    "rain_negative": [
+      "Abends kann es vereinzelnt zu leichten Regenschauer kommen. ",
+      "Regen ist nicht zu erwarten. ",
+      "Es bleibt überwiegend trocken.  "
+    ],
+    "rain_add_info": [
+      "Die Regenwahrscheinlichkeit beträgt $rainV Prozent.",
+      "Die Wahrscheinlichkeit, dass es regnen wird liegt bei $rainV Prozent. ",
+      "Die Wahrscheinlichkeit auf Regen beträgt $rainV Prozent. "
+    ]
+  },
+  "single_responses_or_as_text_display_tbd": {
+    "rain_pos": [
+      " Auf einen Regenschirm sollte man nicht verzichten! ",
+      "Falls du draußen unterwegs bist, solltest du deinen Regenschirm dabei haben."
+    ],
+    "rain_neg": [
+      "Einen Regenschirm wirst du wahrscheinlich nicht brauchen.",
+      " Deinen Regenschirm kannst du getrost zu hasue lassen."
+    ],
+    "sun_pos": [
+      "Wenn du den Strand willst solltest du deine Sonnencreme einpacken.",
+      "Vergiss deine Sonnencreme nicht!"
+    ]
+  }
+}

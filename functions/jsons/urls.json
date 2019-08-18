@@ -1,6 +1,13 @@
 {
   "image": {
-    "filler": "https://i.imgur.com/SUtypB2.png"
+    "filler": "https://i.imgur.com/SUtypB2.png",
+    "weather_state": {
+      "rainy": "https://i.imgur.com/Sl3WBwN.png",
+      "cloudy": "https://i.imgur.com/lprhSso.png",
+      "day": "https://i.imgur.com/98aITyy.png",
+      "night": "https://i.imgur.com/zO0xXZV.png",
+      "night2": "https://i.imgur.com/P2MBZGc.png"
+    }
   },
   "website": {
     "filler": "https://old.reddit.com/r/OnePieceTC/"

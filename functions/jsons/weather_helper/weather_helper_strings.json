@@ -1,0 +1,9 @@
+{
+  "date_utterance": {
+    "today": "heute"
+  },
+  "default_values": {
+    "location": "Berlin",
+    "date": "heute"
+  }
+}

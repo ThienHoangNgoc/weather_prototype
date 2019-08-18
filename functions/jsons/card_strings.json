@@ -1,0 +1,16 @@
+{
+  "weather_card_label": {
+    "max_value": "Höchstwerte:",
+    "min_value": "Tiefstwerte:",
+    "rain": "Regenwahrscheinlichkeit:",
+    "sun_hours": "Sonnenstunden:"
+  },
+  "weather_info_templates": {
+    "title": "Aktuell: $currentTemp ° - $weatherState",
+    "subtitle": "$date • $location"
+  },
+  "button_text": {
+    "button_title": "",
+    "card_image_hover_text": "Weatherstate"
+  }
+}

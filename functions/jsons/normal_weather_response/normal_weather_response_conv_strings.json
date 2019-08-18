@@ -1,0 +1,9 @@
+{
+  "weather_responses": {
+    "initial": [
+      "In $location wird es $date tagsüber nochmal sommerlich warm mit $dayMIN bis $dayMAX Grad. ",
+      "$date erreichen tagsüber in $location die maximalen Werte bis zu $dayMAX Grad. ",
+      "$date werden tagsüber in $location Werte zwischen $dayMIN und $dayMAX Grad erreicht. "
+    ]
+  }
+}

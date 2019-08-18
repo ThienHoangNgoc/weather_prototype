@@ -1,10 +1,11 @@
+/*
 "use strict";
 
 const strings = require('../jsons/strings');
 const utils = require('../utils/utils');
 const response_strings = require('../jsons/conv_strings');
 
-const getDateText = (text) => {
+/!*const getDateText = (text) => {
     let date_text;
     if (utils.stringIsInArray(text, strings.type_of_today)) {
         date_text = strings.date_type.today;
@@ -12,21 +13,23 @@ const getDateText = (text) => {
         date_text = text;
     }
     return date_text;
-};
+};*!/
 
+/!*
 const getTypeOfWeather = (weather) => {
     let weather_type;
     if (utils.equalsString(weather.toLowerCase(), strings.weather_type.short.weather) || utils.equalsString(weather.toLowerCase(), "")) {
         weather_type = strings.weather_type.response.weather;
     } else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.outlook)) {
         weather_type = strings.weather_type.response.outlook;
-    } else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.report)) {
-        weather_type = strings.weather_type.response.report;
-    } else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.forecast)) {
-        weather_type = strings.weather_type.response.forecast;
-    }
-    return weather_type;
+} else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.report)) {
+    weather_type = strings.weather_type.response.report;
+} else if (utils.containsString(weather.toLowerCase(), strings.weather_type.short.forecast)) {
+    weather_type = strings.weather_type.response.forecast;
+}
+return weather_type;
 };
+*!/
 
 //get final response for "weather"
 const getWeatherResponse = (weather, date, location, weatherObj) => {
@@ -103,4 +106,4 @@ module.exports = {
     getTypeOfWeather,
     getDateText,
     weather_card_text_builder
-};
+};*/
