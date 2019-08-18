@@ -5,5 +5,9 @@
   "default_values": {
     "location": "Berlin",
     "date": "heute"
+  },
+  "custom_date_period": {
+    "one": "kommende $date",
+    "more_than_one": "kommenden $number $date"
   }
 }

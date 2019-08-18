@@ -106,6 +106,8 @@ const getRightDateUtterance = (date_original, date) => {
 
 };
 
+
+
 /**
  * replace placeholder values in JSON with data form weather_data
  * @param response
