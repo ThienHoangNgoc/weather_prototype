@@ -10,7 +10,7 @@
     "subtitle": "$date • $location"
   },
   "button_text": {
-    "button_title": "",
+    "button_title": "Mehr Informationen",
     "card_image_hover_text": "Weatherstate"
   }
 }

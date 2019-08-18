@@ -1,5 +1,5 @@
 "use strict";
-const {Image, Suggestions, BasicCard, Button, SimpleResponse} = require('actions-on-google');
+const {Image, BasicCard, Button} = require('actions-on-google');
 
 const weather_helper = require('./weather_helper');
 const strings = require('../jsons/card_strings');
@@ -14,7 +14,7 @@ const rain_label = strings.weather_card_label.rain;
 const sun_hours_label = strings.weather_card_label.sun_hours;
 
 const image_url_day = urls.image.weather_state.day;
-const image_url_night = urls.image.weather_state.night2;
+const image_url_night = urls.image.weather_state.night;
 const button_title = strings.button_text.button_title;
 const button_url = urls.website.filler;
 const image_hover_text = strings.button_text.card_image_hover_text;
@@ -32,14 +32,15 @@ const buildDetailedWeatherCard = (date, location, weather_data) => {
         subtitle: weather_helper.insertParametersIntoResponse(info_card_subtitle, "",
             utils_date.getDateFormatted(weather_helper.setDefaultDateOriginal(date), custom_format), location),
         title: weather_helper.insertWeatherDataIntoString(info_card_title, weather_data),
-        button: new Button({
+        buttons: new Button({
             title: button_title,
             url: button_url
         }),
         image: new Image({
             url: image_url,
             alt: image_hover_text
-        })
+        }),
+        display: 'CROPPED'
     })
 };
 

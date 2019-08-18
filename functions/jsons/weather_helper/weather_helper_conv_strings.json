@@ -1,7 +1,7 @@
 {
   "weather_responses": {
     "day_time": [
-      "Es wird tagsüber nochmal sommerlich warm mit $dayMIN bis $dayMAX Grad. ",
+      "Es sind tagsüber mit Werten zwischen $dayMIN und $dayMAX Grad zu erwarten. ",
       "Tagsüber muss man mit Temperaturen zwischen $dayMIN und $dayMAX Grad rechnen. ",
       "Es werden während des Tages $dayMIN bis $dayMAX Grad erreicht. "
     ],
@@ -45,15 +45,15 @@
   },
   "single_responses_or_as_text_display_tbd": {
     "rain_pos": [
-      " Auf einen Regenschirm sollte man nicht verzichten! ",
+      "Auf einen Regenschirm sollte man nicht verzichten! ",
       "Falls du draußen unterwegs bist, solltest du deinen Regenschirm dabei haben."
     ],
     "rain_neg": [
       "Einen Regenschirm wirst du wahrscheinlich nicht brauchen.",
-      " Deinen Regenschirm kannst du getrost zu hasue lassen."
+      "Deinen Regenschirm kannst du getrost zu Hause lassen."
     ],
     "sun_pos": [
-      "Wenn du den Strand willst solltest du deine Sonnencreme einpacken.",
+      "Wenn du an den Strand willst, solltest du deine Sonnencreme einpacken.",
       "Vergiss deine Sonnencreme nicht!"
     ]
   }
