@@ -19,6 +19,16 @@ const getWeatherResponse = (request_data, weather_data) => {
         + weather_helper.getRainAndSunResponse(weather_data);
 };
 
+const checkxd = (request_data) => {
+    if(utils.isEmpty(request_data.date_period)){
+
+    }else if( utils.isEmpty(request_data.custom_date_period)){
+
+    }else {
+
+    }
+};
+
 
 const buildInitialWeatherResponse = (initial_response_list, request_data) => {
     let randomResponse = utils.getRandomArrayEntry(initial_response_list);

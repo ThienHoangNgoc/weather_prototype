@@ -1,11 +1,1 @@
-{
-  "weather_entity_entries": {
-    "report": "Wetterbericht",
-    "outlook": "Wetterprognose",
-    "forecast": "Wettervorhersage"
-  },
-  "gram_article": {
-    "report": "der ",
-    "forecast_and_outlook": "die "
-  }
-}
+{}

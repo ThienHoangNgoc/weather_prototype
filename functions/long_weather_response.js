@@ -16,8 +16,9 @@ const longWeatherResponse = (agent) => {
     let date_original = agent.request_.body.queryResult.outputContexts[0].parameters['date.original'];
     let date_period = agent.request_.body.queryResult.parameters['date-period'];
     let date_period_original = agent.request_.body.queryResult.outputContexts[0].parameters['date-period.original'];
-    let custom_date_period = agent.request_.body.queryResult.parameters['custom-date-period'];
+    let custom_date_period = agent.request_.body.queryResult.parameters['custom_date_period'];
     let location = agent.request_.body.queryResult.parameters['geo-city'];
+
 
     let request_data = new RequestData(weather, date, date_original, date_period, date_period_original, custom_date_period, location);
     let weather_dummy = new Weather();
