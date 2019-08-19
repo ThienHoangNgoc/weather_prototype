@@ -18,9 +18,9 @@ const image_url_night = urls.image.weather_state.night;
 const button_title = strings.button_text.button_title;
 const button_url = urls.website.filler;
 const image_hover_text = strings.button_text.card_image_hover_text;
-const custom_format = "dddd • dd.mm";
 
-const buildDetailedWeatherCard = (date, location, weather_data) => {
+
+const buildDetailedWeatherCard = (request_data, weather_data) => {
     let image_url;
     if (weather_data.isDay) {
         image_url = image_url_day;
@@ -29,9 +29,8 @@ const buildDetailedWeatherCard = (date, location, weather_data) => {
     }
     return new BasicCard({
         text: buildInfoCardText(weather_data),
-        subtitle: weather_helper.insertParametersIntoResponse(info_card_subtitle, "",
-            utils_date.getDateFormatted(weather_helper.setDefaultDateOriginal(date), custom_format), location),
-        title: weather_helper.insertWeatherDataIntoString(info_card_title, weather_data),
+        subtitle: request_data.insertRequestDataForSubtitle(info_card_subtitle),
+        title: weather_data.insertWeatherData(info_card_title),
         buttons: new Button({
             title: button_title,
             url: button_url

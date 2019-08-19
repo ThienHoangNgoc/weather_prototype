@@ -1,9 +1,8 @@
 "use strict";
 
 const response_builder = require('./builder/long_weather_response_builder');
-const utils = require('./utils/utils');
-const card_builder = require('./builder/info_card_builder');
 const weather_helper = require('./builder/weather_helper');
+const card_builder = require('./builder/info_card_builder');
 const {SimpleResponse} = require('actions-on-google');
 
 
@@ -24,19 +23,13 @@ const longWeatherResponse = (agent) => {
     let weather_dummy = new Weather();
 
 
-    // Set default values if not given - weather doesnt need a default value in long responses
-    date = weather_helper.setDefaultDate(date);
-    date_original = weather_helper.setDefaultDateOriginal(date_original);
-    location = weather_helper.setDefaultLocation(location);
-
-
     if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {
         let conv = agent.conv();
         conv.ask(new SimpleResponse({
-            speech: response_builder.getWeatherResponse(weather, date_original, date, location, weather_dummy),
-            text: "insert show text ( != mit gesprochenem)"
+            speech: response_builder.getWeatherResponse(request_data, weather_dummy),
+            text: weather_helper.getWeatherText(weather_dummy)
         }));
-        conv.ask(card_builder.buildDetailedWeatherCard(date, location, weather_dummy));
+        conv.ask(card_builder.buildDetailedWeatherCard(request_data, weather_dummy));
         agent.add(conv);
     } else {
         //Todo: implement for devices without Google Assistant

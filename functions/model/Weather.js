@@ -20,7 +20,6 @@ const weather = class Weather {
         this.isSunny = utils.getRandomBoolean();
         // Day 8 - 19 Uhr, Night 20 - 7 Uhr
         this.isDay = !(hours < 8 || hours > 19);
-
         if (this.isSunny) {
             this.tempest = false;
             this.sunHours = utils.getRandomIntInRange(8, 12);
@@ -48,14 +47,28 @@ const weather = class Weather {
                 this.weatherState = utils.getRandomArrayEntry(weather_states);
             }
         }
-
         if (this.isDay === true) {
             this.currentTemp = utils.getRandomIntInRange(this.dayMAX, this.dayMIN);
         } else {
             this.currentTemp = utils.getRandomIntInRange(this.nightMAX, this.nightMIN);
         }
+    }
 
-
+    /**
+     * replace placeholder values in string with data form weather_data
+     * @param response
+     * @param weather_data
+     * @returns {*}
+     */
+    insertWeatherData(string) {
+        return string.replace("$dayMAX", this.dayMAX)
+            .replace("$dayMIN", this.dayMIN)
+            .replace("$nightMAX", this.nightMAX)
+            .replace("$nightMIN", this.nightMIN)
+            .replace("$sunV", this.sunHours)
+            .replace("$rainV", this.rain)
+            .replace("$currentTemp", this.currentTemp)
+            .replace("$weatherState", this.weatherState);
     }
 
 };

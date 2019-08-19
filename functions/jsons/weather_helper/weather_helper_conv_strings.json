@@ -43,18 +43,16 @@
       "Die Wahrscheinlichkeit auf Regen beträgt $rainV Prozent. "
     ]
   },
-  "single_responses_or_as_text_display_tbd": {
-    "rain_pos": [
-      "Auf einen Regenschirm sollte man nicht verzichten! ",
-      "Falls du draußen unterwegs bist, solltest du deinen Regenschirm dabei haben."
+  "response_text": {
+    "rain": [
+      "Auf einen Regenschirm sollte man nicht verzichten "
     ],
-    "rain_neg": [
-      "Einen Regenschirm wirst du wahrscheinlich nicht brauchen.",
-      "Deinen Regenschirm kannst du getrost zu Hause lassen."
+    "sun": [
+      "Sieht gut aus!",
+      "Schaut nach gutem Wetter aus! "
     ],
-    "sun_pos": [
-      "Wenn du an den Strand willst, solltest du deine Sonnencreme einpacken.",
-      "Vergiss deine Sonnencreme nicht!"
+    "neutral": [
+      "Hier das Wetter"
     ]
   }
 }

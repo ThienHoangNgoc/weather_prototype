@@ -1,7 +1,7 @@
 {
   "weather_card_label": {
-    "max_value": "Höchstwerte:",
-    "min_value": "Tiefstwerte:",
+    "max_value": "Höchstwert:",
+    "min_value": "Tiefstwert:",
     "rain": "Regenwahrscheinlichkeit:",
     "sun_hours": "Sonnenstunden:"
   },
