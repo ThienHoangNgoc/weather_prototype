@@ -1,6 +1,6 @@
 {
   "image": {
-    "filler": "https://i.imgur.com/SUtypB2.png",
+    "placeholder": "https://i.imgur.com/d3GvRIH.jpg",
     "weather_state": {
       "rainy": "https://i.imgur.com/Sl3WBwN.png",
       "cloudy": "https://i.imgur.com/lprhSso.png",
@@ -9,6 +9,6 @@
     }
   },
   "website": {
-    "filler": "https://old.reddit.com/r/OnePieceTC/"
+    "placeholder": "https://old.reddit.com/r/OnePieceTC/"
   }
 }

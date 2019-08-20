@@ -3,7 +3,7 @@
     "error_message": "Es ist etwas schief gelaufen. Versuche es später noch einmal"
   },
   "welcome": {
-    "welcome": "Willkommen zum Wetter Prototypen. Wie kann ich dir helfen?"
+    "welcome": "Hey, wie kann ich dir helfen?"
   },
   "weather_responses": {
     "more_info": "Für weitere Informationen klicke hier:"
@@ -24,7 +24,6 @@
     "follow_up_1_yes": [
       "Alles klar! Was willst du wissen?",
       "Ok! Über was willst du mehr erfahren?"
-
     ],
     "follow_up_1_no": {
     }

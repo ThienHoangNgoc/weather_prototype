@@ -28,7 +28,7 @@
       "Es sind daher nur maximal $sunV Sonnenstunden zu erwarten."
     ],
     "rain_positive": [
-      "Im Laufe des Tages ist mit einzelnen Regenschauern zu rechnen. ",
+      "Im Laufe des Tages sind einzelne Regenschauer zu erwarten. ",
       "Es kann zu starken Regenschauern kommen. ",
       "Im Laufe des Tages kann es örtlich ordentlich schütten. "
     ],
@@ -61,7 +61,6 @@
       "Sieht gut aus!",
       "Schaut nach gutem Wetter aus! ",
       "Hier das Wetter"
-    ],
-    "more_info_text": "Für mehr Details klicke auf \"Mehr Informationen\". "
+    ]
   }
 }

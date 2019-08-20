@@ -80,19 +80,22 @@ const getNightTempResponse = (weather_data) => {
  * @param weather_data
  */
 const getWeatherTextForDate = (weather_data) => {
+    let random_sun_text = utils.getRandomArrayEntry(response_text_sun);
+    let random_rain_text = utils.getRandomArrayEntry(response_text_rain);
+    let random_neutral_text = utils.getRandomArrayEntry(response_text_neutral);
     switch (weather_data.weatherState) {
         case weather_strings.weather_state.sunny:
-            return response_text_sun;
+            return random_sun_text;
         case weather_strings.weather_state.clear:
-            return response_text_sun;
+            return random_sun_text;
         case weather_strings.weather_state.rainy:
-            return response_text_rain;
+            return random_rain_text;
         case weather_strings.weather_state.rainstorm:
-            return response_text_rain;
+            return random_rain_text;
         case weather_strings.weather_state.tempest:
-            return response_text_rain;
+            return random_rain_text;
         default:
-            return response_text_neutral;
+            return random_neutral_text;
     }
 };
 /**
@@ -106,7 +109,6 @@ const getWeatherTextForDatePeriod = () => {
 const getGenericResponseForDatePeriod = () => {
     return generic_weather_response_date_period;
 };
-
 
 
 /**

@@ -6,6 +6,9 @@ const strings = require('../jsons/card_strings');
 const urls = require('../jsons/urls');
 const utils_date = require('../utils/utils_date');
 
+const image_url_placeholder = urls.image.placeholder;
+const image_url_day = urls.image.weather_state.day;
+const image_url_night = urls.image.weather_state.night;
 const info_card_title = strings.weather_info_templates.title;
 const info_card_subtitle = strings.weather_info_templates.subtitle;
 const max_temp_label = strings.weather_card_label.max_value;
@@ -13,10 +16,9 @@ const min_temp_label = strings.weather_card_label.min_value;
 const rain_label = strings.weather_card_label.rain;
 const sun_hours_label = strings.weather_card_label.sun_hours;
 
-const image_url_day = urls.image.weather_state.day;
-const image_url_night = urls.image.weather_state.night;
+
 const button_title = strings.button_text.button_title;
-const button_url = urls.website.filler;
+const button_url = urls.website.placeholder;
 const image_hover_text = strings.button_text.card_image_hover_text;
 
 
@@ -53,8 +55,8 @@ const buildWeatherCardForDatePeriod = (request_data, weather_data) => {
             url: ""
         }),
         image: new Image({
-            url: "",
-            alt: ""
+            url: image_url_placeholder,
+            alt: image_hover_text
         }),
         display: 'CROPPED'
     })

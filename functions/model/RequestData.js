@@ -23,6 +23,9 @@ const custom_date_period_utterance_part = strings.custom_date_period_utterance_p
 const requestData = class RequestData {
 
     constructor(weather, date, date_utterance, date_period, date_period_utterance, custom_date_period, custom_date_period_utterance, location) {
+
+
+
         this.weather = this.setDefaultWeather(weather);
         this.weather = this.setWeatherWithArticle(this.weather);
 
@@ -57,7 +60,6 @@ const requestData = class RequestData {
         const current_date = utils_date.getDateWithoutTime(new Date());
         const request_date = utils_date.getDateWithoutTime(start_date);
         let day_diff = utils_date.calculateDiffFrom2Dates(current_date, request_date, "days");
-        console.log(day_diff);
         if (day_diff === 0) {
             return today_string;
         } else {
@@ -69,21 +71,21 @@ const requestData = class RequestData {
 
     setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance) {
         let currentDate = new Date();
-        let daysToAdd;
         let date_number = custom_date_period['number'];
         let additional_date_period = custom_date_period['additional_date_period'];
-        if (currentDate.getDay() === 0) {
-            daysToAdd = 1;
-        } else {
-            daysToAdd = currentDate.getDay() + 8 - (currentDate.getDay() * 2);
-        }
-
-        let start_date = utils_date.addDays(currentDate, daysToAdd);
-        this.start_date = start_date;
-
+        let start_date;
+        let daysToAdd;
         if (utils.equalsString(additional_date_period, "Woche")) {
+            if (currentDate.getDay() === 0) {
+                daysToAdd = 1;
+            } else {
+                daysToAdd = currentDate.getDay() + 8 - (currentDate.getDay() * 2);
+            }
+            start_date = utils_date.addDays(currentDate, daysToAdd);
+            this.start_date = start_date;
             this.end_date = utils_date.addDays(start_date, date_number * 7);
         } else if (utils.equalsString(additional_date_period, "Tag")) {
+            start_date = utils_date.addDays(currentDate, 1)
             this.end_date = utils_date.addDays(start_date, date_number);
         } else {
             //TODO: fallback for month and year : no data for that (here or somewhere else) ?

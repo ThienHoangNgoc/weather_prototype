@@ -108,7 +108,7 @@ const showInfoCard = (responseList, date_text, agent, weatherDummy) => {
                 url: urls.website.filler
             }),
             image: new Image({
-                url: urls.image.filler,
+                url: urls.image.placeholder,
                 alt: strings.hover_text.image
             })
 
@@ -121,7 +121,7 @@ const showInfoCard = (responseList, date_text, agent, weatherDummy) => {
         agent.add(responses.weather_responses.more_info);
         agent.add(new Card({
             title: date_text,
-            imageUrl: urls.image.filler,
+            imageUrl: urls.image.placeholder,
             text: "",
             buttonText: strings.button_text.more_info,
             buttonUrl: urls.website.filler
