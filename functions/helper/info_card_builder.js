@@ -75,8 +75,8 @@ const buildWeatherCardForDatePeriod = (request_data) => {
 };
 const buildDatePeriodCardText = () => {
     const line = "  \n";
-    const dummy_day = "35°";
-    const dummy_night = "20°";
+    const dummy_day = "29°";
+    const dummy_night = "21°";
     const dummy_rain = "12%";
     const dummy_sun = "8";
 
@@ -107,10 +107,6 @@ const buildDateCardText = (weather_data) => {
  */
 const stringBold = (string) => {
     return "__" + string + "__ ";
-};
-
-// ToDo: needed?
-const buildMoreInfoCard = (agent) => {
 };
 
 

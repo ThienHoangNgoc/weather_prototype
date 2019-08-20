@@ -42,7 +42,7 @@
       "Die Wahrscheinlichkeit, dass es regnen wird liegt bei $rainV Prozent. ",
       "Die Wahrscheinlichkeit auf Regen beträgt $rainV Prozent. "
     ],
-    "generic_date_period": "Es bleibt sommerlich warm mit einem durchschnitts Wert von bis zu 35 Grad tagsüber. Auch in den Nächten bleibt es angenehm bei durchschnittlich 20 Grad. Mit Regen ist nicht zu rechnen."
+    "generic_date_period": "Es bleibt sommerlich warm mit einem durchschnitts Wert von 29 Grad tagsüber. Auch in den Nächten bleibt es angenehm bei durchschnittlich 21 Grad. Mit Regen ist nur vereinzelt zu rechnen."
   },
   "response_text": {
     "date": {
