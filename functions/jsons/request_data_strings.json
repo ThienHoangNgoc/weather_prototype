@@ -7,10 +7,7 @@
     "location": "Berlin",
     "date": "heute"
   },
-  "custom_date_period": {
-    "one": "kommende $date",
-    "more_than_one": "kommenden $number $date"
-  },
+  "custom_date_period_utterance_part": "kommenden ",
   "weather_entity_entries": {
     "report": "Wetterbericht",
     "outlook": "Wetterprognose",

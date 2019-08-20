@@ -4,6 +4,7 @@ const utils = require('../utils/utils');
 const strings = require('../jsons/long_weather_response/long_weather_response_strings');
 const conv_strings = require('../jsons/long_weather_response/long_weather_response_conv_strings');
 const weather_helper = require('./weather_helper');
+const card_builder = require('../builder/info_card_builder');
 
 
 //strings
@@ -13,20 +14,19 @@ const weather_helper = require('./weather_helper');
 const initial_response_list = conv_strings.weather_responses.initial;
 
 const getWeatherResponse = (request_data, weather_data) => {
-    return buildInitialWeatherResponse(initial_response_list, request_data)
-        + weather_helper.getDayTempResponse(weather_data)
-        + weather_helper.getNightTempResponse(weather_data)
-        + weather_helper.getRainAndSunResponse(weather_data);
+    if (request_data.isDatePeriod) {
+        return buildInitialWeatherResponse(initial_response_list, request_data);
+    } else {
+        return buildInitialWeatherResponse(initial_response_list, request_data)
+            + weather_helper.getDayTempResponse(weather_data)
+            + weather_helper.getNightTempResponse(weather_data)
+            + weather_helper.getRainAndSunResponse(weather_data);
+    }
+
 };
 
-const checkxd = (request_data) => {
-    if(utils.isEmpty(request_data.date_period)){
-
-    }else if( utils.isEmpty(request_data.custom_date_period)){
-
-    }else {
-
-    }
+const getWeatherCard = (request_data, weather_data) => {
+    return card_builder.buildDetailedWeatherCard(request_data, weather_data);
 };
 
 
@@ -36,4 +36,4 @@ const buildInitialWeatherResponse = (initial_response_list, request_data) => {
 };
 
 
-module.exports = {getWeatherResponse};
+module.exports = {getWeatherResponse, getWeatherCard};

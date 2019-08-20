@@ -17,40 +17,85 @@ const default_weather = strings.default_values.weather;
 const today_string = strings.date_utterance.today;
 const custom_format = strings.custom_date_format;
 
+const custom_date_period_utterance_part = strings.custom_date_period_utterance_part;
+
 
 const requestData = class RequestData {
 
-    constructor(weather, date, date_original, date_period, date_period_original, custom_date_period, location) {
+    constructor(weather, date, date_utterance, date_period, date_period_utterance, custom_date_period, custom_date_period_utterance, location) {
         this.weather = this.setDefaultWeather(weather);
         this.weather = this.setWeatherWithArticle(this.weather);
-        this.date = this.setDefaultDate(date);
-        this.date_original = this.setDefaultDateOriginal(date_original);
-        this.date_original = this.getRightDateUtterance(this.date, this.date_original);
-        this.date_period = date_period;
-        this.date_period_original = date_period_original;
-        this.custom_date_period = custom_date_period;
+
+        //set date values
+        if (!utils.isEmpty(date_period)) {
+            this.start_date = date_period['startDate'];
+            this.end_date = date_period['endDate'];
+            this.date_utterance = date_period_utterance;
+            this.isDatePeriod = true;
+        } else if (!utils.isEmpty(custom_date_period)) {
+            //Todo: set values for custom
+            this.setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance);
+            this.isDatePeriod = true;
+        } else {
+            //for a single date requests, end_date = start_date
+            this.start_date = this.setDefaultDate(date);
+            this.end_date = this.start_date;
+            this.date_utterance = this.setDefaultDateUtterance(date_utterance);
+            this.date_utterance = this.getRightDateUtterance(this.start_date, this.date_utterance);
+            this.isDatePeriod = false;
+        }
+        console.log("request_data: startDate: " + this.start_date);
+        console.log("request_data: utterance: " + this.date_utterance);
+
         this.location = this.setDefaultLocation(location);
     }
 
     /**
      * change "heutige", "heutiges" and "heut" to "heute"
      * note:  diff for days are buggy, because dialog flow only gives the time for 0 o'clock and not the current time (negative with floor -> -1)
-     * @param date_original
-     * @param date
+     * @param date_utterance
+     * @param start_date
      * @returns {string}
      */
-    getRightDateUtterance(date, date_original) {
+    getRightDateUtterance(start_date, date_utterance) {
         //get date without time
-        const current_date = new Date((new Date() + "").substring(0, 10));
-        const request_date = new Date((new Date(date) + "").substring(0, 10));
+        const current_date = utils_date.getDateWithoutTime(new Date());
+        const request_date = utils_date.getDateWithoutTime(start_date);
         let day_diff = utils_date.calculateDiffFrom2Dates(current_date, request_date, "days");
         if (day_diff === 0) {
             return today_string;
         } else {
-            return date_original;
+            return date_utterance;
         }
 
     };
+
+
+    setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance) {
+        let currentDate = new Date();
+        let daysToAdd;
+        let date_number = custom_date_period['number'];
+        let additional_date_period = custom_date_period['additional_date_period'];
+        if (currentDate.getDay() === 0) {
+            daysToAdd = 1;
+        } else {
+            daysToAdd = currentDate.getDay() + 8 - (currentDate.getDay() * 2);
+        }
+
+        let start_date = utils_date.addDays(currentDate, daysToAdd);
+        this.start_date = start_date;
+
+        if (utils.equalsString(additional_date_period, "Woche")) {
+            this.end_date = utils_date.addDays(start_date, date_number * 7);
+        } else if (utils.equalsString(additional_date_period, "Tag")) {
+            this.end_date = utils_date.addDays(start_date, date_number);
+        } else {
+            //for error message
+            this.end_date = "";
+        }
+        this.date_utterance = custom_date_period_utterance_part + custom_date_period_utterance;
+    }
+
 
     /**
      * returns the weather utterance with the right grammatical article
@@ -78,7 +123,7 @@ const requestData = class RequestData {
      */
     insertRequestData(string) {
         return string.replace("$weather", this.weather)
-            .replace("$date", this.date_original)
+            .replace("$date", this.date_utterance)
             .replace("$location", this.location);
     }
 
@@ -89,7 +134,7 @@ const requestData = class RequestData {
      */
     insertRequestDataForSubtitle(string) {
         return string.replace("$weather", this.weather)
-            .replace("$date", utils_date.getDateFormatted(this.date, custom_format))
+            .replace("$date", utils_date.getDateFormatted(this.start_date, custom_format))
             .replace("$location", this.location);
 
     }
@@ -125,14 +170,14 @@ const requestData = class RequestData {
     /**
      * set date for today if date is empty, else return the given date
      *
-     * @param date_original
+     * @param date_utterance
      * @returns {string}
      */
-    setDefaultDateOriginal(date_original) {
-        if (utils.isEmpty(date_original)) {
+    setDefaultDateUtterance(date_utterance) {
+        if (utils.isEmpty(date_utterance)) {
             return default_date;
         }
-        return date_original;
+        return date_utterance;
     };
 
     /**

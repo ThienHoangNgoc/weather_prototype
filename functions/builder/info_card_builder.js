@@ -43,6 +43,23 @@ const buildDetailedWeatherCard = (request_data, weather_data) => {
     })
 };
 
+const buildWeatherCardForDatePeriod = (request_data, weather_data) => {
+    return new BasicCard({
+        text: "",
+        subtitle: "",
+        title: "",
+        buttons: new Button({
+            title: "",
+            url: ""
+        }),
+        image: new Image({
+            url: "",
+            alt: ""
+        }),
+        display: 'CROPPED'
+    })
+};
+
 const buildInfoCardText = (weather_data) => {
     const line = "  \n";
     const max = weather_data.dayMAX + "°";

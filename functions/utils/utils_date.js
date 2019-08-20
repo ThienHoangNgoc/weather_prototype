@@ -23,6 +23,18 @@ const getResponseFromDate = (date_string) => {
 };
 
 /**
+ * add days to given date, return the new Date
+ * @param date
+ * @param days
+ * @returns {Date}
+ */
+function addDays(date, days) {
+    let result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
+/**
  * calculate the diff between 2 dates and returns that value in the given interval
  * @param current_date
  * @param request_date
@@ -51,6 +63,10 @@ const calculateDiffFrom2Dates = (current_date, request_date, interval) => {
 
 };
 
+const getDateWithoutTime = (date) => {
+    return new Date(date.toString().substring(0, 10));
+}
+
 
 /*
  * Set values to specific language, here German values
@@ -69,4 +85,4 @@ dateFormat.i18n = {
     ]
 };
 
-module.exports = {getDateFormatted, calculateDiffFrom2Dates};
+module.exports = {getDateFormatted, calculateDiffFrom2Dates, addDays, getDateWithoutTime};
