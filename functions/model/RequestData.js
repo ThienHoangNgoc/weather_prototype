@@ -2,7 +2,7 @@
 
 const utils = require('../utils/utils');
 const utils_date = require('../utils/utils_date');
-const strings = require('../jsons/request_data_strings');
+const strings = require('./request_data_strings');
 
 
 //strings

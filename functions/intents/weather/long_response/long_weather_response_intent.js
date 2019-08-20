@@ -1,7 +1,7 @@
 "use strict";
 
 const response_builder = require('./long_weather_response_builder');
-const weather_helper = require('../../../helper/weather_helper');
+const weather_helper = require('../../../helper/weather/weather_helper');
 const utils = require('../../../utils/utils');
 const {SimpleResponse} = require('actions-on-google');
 

@@ -1,10 +1,9 @@
 "use strict";
 const {Image, BasicCard, Button} = require('actions-on-google');
 
-const weather_helper = require('./weather_helper');
-const strings = require('../jsons/card_strings');
-const urls = require('../jsons/urls');
-const utils_date = require('../utils/utils_date');
+const strings = require('./card_strings');
+const urls = require('../../jsons/urls');
+const utils_date = require('../../utils/utils_date');
 
 //Buttons and images
 const image_url_placeholder = urls.image.placeholder;
