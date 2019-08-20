@@ -11,13 +11,15 @@ const card_builder = require('../builder/info_card_builder');
 
 
 //conv_strings
-const initial_response_list = conv_strings.weather_responses.initial;
+const initial_response_list_date = conv_strings.weather_responses.date;
+const initial_response_list_date_period = conv_strings.weather_responses.date_period;
+
 
 const getWeatherResponse = (request_data, weather_data) => {
     if (request_data.isDatePeriod) {
-        return buildInitialWeatherResponse(initial_response_list, request_data);
+        return buildInitialWeatherResponse(initial_response_list_date_period, request_data);
     } else {
-        return buildInitialWeatherResponse(initial_response_list, request_data)
+        return buildInitialWeatherResponse(initial_response_list_date, request_data)
             + weather_helper.getDayTempResponse(weather_data)
             + weather_helper.getNightTempResponse(weather_data)
             + weather_helper.getRainAndSunResponse(weather_data);
@@ -26,7 +28,12 @@ const getWeatherResponse = (request_data, weather_data) => {
 };
 
 const getWeatherCard = (request_data, weather_data) => {
-    return card_builder.buildDetailedWeatherCard(request_data, weather_data);
+    if (request_data.isDatePeriod) {
+        return " ";
+    } else {
+        return card_builder.buildDetailedWeatherCard(request_data, weather_data);
+    }
+
 };
 
 

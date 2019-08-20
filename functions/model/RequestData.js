@@ -33,7 +33,6 @@ const requestData = class RequestData {
             this.date_utterance = date_period_utterance;
             this.isDatePeriod = true;
         } else if (!utils.isEmpty(custom_date_period)) {
-            //Todo: set values for custom
             this.setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance);
             this.isDatePeriod = true;
         } else {
@@ -44,9 +43,10 @@ const requestData = class RequestData {
             this.date_utterance = this.getRightDateUtterance(this.start_date, this.date_utterance);
             this.isDatePeriod = false;
         }
-        console.log("request_data: startDate: " + this.start_date);
-        console.log("request_data: utterance: " + this.date_utterance);
-
+        console.log("request_data weather: " + this.weather);
+        console.log("request_data startDate: " + this.start_date);
+        console.log("request_data endDate: " + this.end_date);
+        console.log("request_data utterance: " + this.date_utterance);
         this.location = this.setDefaultLocation(location);
     }
 
@@ -103,7 +103,7 @@ const requestData = class RequestData {
      * @returns {string}
      */
     setWeatherWithArticle(weather) {
-        switch (weather) {
+        switch (weather.toString()) {
             case weather_report:
                 return report_article + weather;
             case weather_forecast:
