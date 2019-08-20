@@ -73,6 +73,7 @@ const getDayTempResponse = (weather_data) => {
 const getNightTempResponse = (weather_data) => {
     return responseBuilder(night_list, weather_data);
 };
+
 /**
  * generate displayed text, depending on the weather state for a single date
  *
@@ -105,6 +106,8 @@ const getWeatherTextForDatePeriod = () => {
 const getGenericResponseForDatePeriod = () => {
     return generic_weather_response_date_period;
 };
+
+
 
 /**
  * for more clarity

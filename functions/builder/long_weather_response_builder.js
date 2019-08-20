@@ -5,6 +5,7 @@ const strings = require('../jsons/long_weather_response/long_weather_response_st
 const conv_strings = require('../jsons/long_weather_response/long_weather_response_conv_strings');
 const weather_helper = require('./weather_helper');
 const card_builder = require('../builder/info_card_builder');
+const {Suggestions} = require('actions-on-google');
 
 
 //strings
@@ -13,6 +14,7 @@ const card_builder = require('../builder/info_card_builder');
 //conv_strings
 const initial_response_list_date = conv_strings.weather_responses.date;
 const initial_response_list_date_period = conv_strings.weather_responses.date_period;
+const suggestion_list = strings.suggestion_list;
 
 
 const getWeatherResponse = (request_data, weather_data) => {
@@ -33,6 +35,7 @@ const getWeatherText = (request_data, weather_data) => {
     } else {
         return weather_helper.getWeatherTextForDate(weather_data);
     }
+
 };
 
 const getWeatherCard = (request_data, weather_data) => {
@@ -44,6 +47,10 @@ const getWeatherCard = (request_data, weather_data) => {
 
 };
 
+const getSuggestions = () => {
+    return new Suggestions(suggestion_list);
+};
+
 
 const buildInitialWeatherResponse = (initial_response_list, request_data) => {
     let randomResponse = utils.getRandomArrayEntry(initial_response_list);
@@ -51,4 +58,4 @@ const buildInitialWeatherResponse = (initial_response_list, request_data) => {
 };
 
 
-module.exports = {getWeatherResponse, getWeatherCard, getWeatherText};
+module.exports = {getWeatherResponse, getWeatherCard, getWeatherText, getSuggestions};

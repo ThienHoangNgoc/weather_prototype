@@ -60,6 +60,7 @@ const buildWeatherCardForDatePeriod = (request_data, weather_data) => {
     })
 };
 
+
 const buildInfoCardText = (weather_data) => {
     const line = "  \n";
     const max = weather_data.dayMAX + "°";
