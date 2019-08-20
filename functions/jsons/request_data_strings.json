@@ -1,0 +1,21 @@
+{
+  "date_utterance": {
+    "today": "heute"
+  },
+  "default_values": {
+    "weather": "Wetter",
+    "location": "Berlin",
+    "date": "heute"
+  },
+  "custom_date_period_utterance_part": "kommenden ",
+  "weather_entity_entries": {
+    "report": "Wetterbericht",
+    "outlook": "Wetterprognose",
+    "forecast": "Wettervorhersage"
+  },
+  "gram_article": {
+    "report": "der ",
+    "forecast_and_outlook": "die "
+  },
+  "custom_date_format": "dddd • dd.mm"
+}

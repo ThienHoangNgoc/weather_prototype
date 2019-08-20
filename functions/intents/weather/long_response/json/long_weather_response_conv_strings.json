@@ -1,0 +1,16 @@
+{
+  "weather_responses": {
+    "date": [
+      "$weather für $location sieht $date folgendermaßen aus. ",
+      "Für $location sieht $weather $date so aus. ",
+      "Hier $weather für $date. "
+    ],
+    "date_period": [
+      "$weather der $date sieht in $location folgendermaßen aus. ",
+      "Hier $weather der $date in $location. "
+    ],
+    "weekend": [
+      "Am Wochenende sieht $weather in $location folgendermaßen aus. "
+    ]
+  }
+}

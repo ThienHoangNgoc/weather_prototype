@@ -1,0 +1,66 @@
+{
+  "weather_responses": {
+    "day_time": [
+      "Es sind tagsüber mit Werten zwischen $dayMIN und $dayMAX Grad zu erwarten. ",
+      "Tagsüber muss man mit Temperaturen zwischen $dayMIN und $dayMAX Grad rechnen. ",
+      "Es werden während des Tages $dayMIN bis $dayMAX Grad erreicht. "
+    ],
+    "night_time": [
+      "Nachts kühlt es dann auf $nightMAX bis $nightMIN Grad ab. ",
+      "In der Nacht belaufen sich die Werte zwischen $nightMAX und $nightMIN Grad. ",
+      "Nachts gehen die Werte dann auf $nightMAX bis $nightMIN Grad zurück. "
+    ],
+    "sun_positive": [
+      "Im Laufe des Tages ist mit viel Sonne und vereinzelnt mit Wolken zu rechnen. ",
+      "Es ist mit viel Sonne zu rechnen. "
+    ],
+    "sun_negative": [
+      "Es ist mit vielen Wolken zu rechnen. Ab und zu zeigt sich auch die Sonne. ",
+      "Die Sonne wird sich kaum bis gar nicht zeigen. ",
+      "Es ist nur mit wenig Sonne zu rechnen. "
+    ],
+    "sun_add_info_positive": [
+      "Man kann bis zu $sunV Sonennstunden erwarten. ",
+      "Man kann sich auf mindestens $sunV Sonnenstunden freuen. "
+    ],
+    "sun_add_info_negative": [
+      "Daher kann man nur mit maxiaml $sunV Sonnenstunden rechnen.",
+      "Es sind daher nur maximal $sunV Sonnenstunden zu erwarten."
+    ],
+    "rain_positive": [
+      "Im Laufe des Tages sind einzelne Regenschauer zu erwarten. ",
+      "Es kann zu starken Regenschauern kommen. ",
+      "Im Laufe des Tages kann es örtlich ordentlich schütten. "
+    ],
+    "rain_negative": [
+      "Abends kann es vereinzelnt zu leichten Regenschauer kommen. ",
+      "Regen ist nicht zu erwarten. ",
+      "Es bleibt überwiegend trocken.  "
+    ],
+    "rain_add_info": [
+      "Die Regenwahrscheinlichkeit beträgt $rainV Prozent.",
+      "Die Wahrscheinlichkeit, dass es regnen wird liegt bei $rainV Prozent. ",
+      "Die Wahrscheinlichkeit auf Regen beträgt $rainV Prozent. "
+    ],
+    "generic_date_period": "Es bleibt sommerlich warm mit einem durchschnitts Wert von bis zu 35 Grad tagsüber. Auch in den Nächten bleibt es angenehm bei durchschnittlich 20 Grad. Mit Regen ist nicht zu rechnen."
+  },
+  "response_text": {
+    "date": {
+      "rain": [
+        "Auf einen Regenschirm sollte man nicht verzichten "
+      ],
+      "sun": [
+        "Sieht gut aus!",
+        "Schaut nach gutem Wetter aus! "
+      ],
+      "neutral": [
+        "Hier das Wetter"
+      ]
+    },
+    "date_period": [
+      "Sieht gut aus!",
+      "Schaut nach gutem Wetter aus! ",
+      "Hier das Wetter"
+    ]
+  }
+}

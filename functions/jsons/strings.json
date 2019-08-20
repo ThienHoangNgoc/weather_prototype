@@ -1,0 +1,76 @@
+{
+  "intents": {
+    "welcome": "Default Welcome Intent",
+    "last_time_incorrect": "incorrect_topic_last_time_intent",
+    "weather": "weather_intent",
+    "additional_weather_yes": "additional_weather_yes_intent"
+  },
+  "contexts": {
+    "short_response": "short_response",
+    "yes_more_info": "yes_more_info"
+  },
+  "topic_suggestions": [
+    "Wetter",
+    "Regen",
+    "Unwetter"
+  ],
+  "date_type": {
+    "today": "heute"
+  },
+  "default": {
+    "city_names": {
+      "Berlin": "Berlin",
+      "Hamburg": "Hamburg"
+    },
+    "value": "this is a default value."
+  },
+  "type_of_today": [
+    "heute",
+    "heut",
+    "heutige",
+    "heutiges"
+  ],
+  "weather_type": {
+    "short": {
+      "weather": "wetter",
+      "report": "bericht",
+      "outlook": "prognose",
+      "forecast": "vorhersage"
+    },
+    "response": {
+      "weather": "Wetter",
+      "report": "Wetterbericht",
+      "outlook": "Wetterprognose",
+      "forecast": "Wettervorhersage"
+    }
+  },
+  "basic_card_label": {
+    "maxValue": "Höchstwerte:",
+    "minValue": "Tiefstwerte:",
+    "rainProb": "Regenwahrscheinlichkeit:",
+    "sunHours": "Sonnenstunden:"
+  },
+  "button_text": {
+    "more_info": "Mehr Informationen"
+  },
+  "hover_text": {
+    "image": "Das ist ein Bild."
+  },
+  "emoji": {
+    "weather_state": [
+      "☀️sonnig",
+      "☁ bedeckt",
+      "\uD83C\uDF24️leicht bewölkt",
+      "⛅ stark bewölkt",
+      "\uD83C\uDF27️Regen",
+      "\uD83C\uDF26️Regenschauer",
+      "\uD83C\uDF29️Gewitter",
+      "⛈ Starkes Gewitter"
+    ],
+    "maxValue": "\uD83D\uDD25 ",
+    "minValue": "❄ ",
+    "rainProb": "\uD83D\uDCA7 ",
+    "sunHours": "☀ "
+  }
+}
+
