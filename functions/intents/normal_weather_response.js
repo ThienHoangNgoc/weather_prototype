@@ -2,9 +2,9 @@
 const {Image, Suggestions, BasicCard, Button, SimpleResponse} = require('actions-on-google');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 
-const response_builder = require('./builder/normal_weather_response_builder');
-const utils = require('./utils/utils');
-const Weather = require('./model/Weather');
+const response_builder = require('../helper/normal_weather_response_builder_old');
+const utils = require('../utils/utils');
+const Weather = require('../model/Weather');
 
 const normalWeatherResponse = (agent) => {
     const weather = agent.request_.body.queryResult.parameters['weather'];

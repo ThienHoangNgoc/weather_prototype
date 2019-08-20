@@ -1,10 +1,19 @@
 {
   "weather_card_label": {
-    "max_value": "Höchstwert:",
-    "min_value": "Tiefstwert:",
-    "rain": "Regenwahrscheinlichkeit:",
-    "sun_hours": "Sonnenstunden:"
+    "date": {
+      "max_value": "Höchstwert:",
+      "min_value": "Tiefstwert:",
+      "rain": "Regenwahrscheinlichkeit:",
+      "sun_hours": "Sonnenstunden:"
+    },
+    "date_period": {
+      "day": "Am Tag:",
+      "night": "Nachts:",
+      "rain": "Regenwahrscheinlichkeit:",
+      "sun_hours": "Sonnenstunden:"
+    }
   },
+  "date_period_card_subtitle": "Durchschnittswerte: ",
   "weather_info_templates": {
     "title": "Aktuell: $currentTemp ° - $weatherState",
     "subtitle": "$date • $location"

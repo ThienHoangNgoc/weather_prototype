@@ -74,7 +74,7 @@ const getDateWithoutTime = (date) => {
  */
 dateFormat.i18n = {
     dayNames: [
-        'SO', 'MO', 'DI', 'MI', 'DO', 'FRI', 'SA',
+        'SO', 'MO', 'DI', 'MI', 'DO', 'FR', 'SA',
         'Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'
     ],
     monthNames: [

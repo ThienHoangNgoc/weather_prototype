@@ -1,10 +1,10 @@
 "use strict";
 
-const utils = require('../utils/utils');
-const strings = require('../jsons/long_weather_response/long_weather_response_strings');
-const conv_strings = require('../jsons/long_weather_response/long_weather_response_conv_strings');
-const weather_helper = require('./weather_helper');
-const card_builder = require('../builder/info_card_builder');
+const utils = require('../../../utils/utils');
+const strings = require('./json/long_weather_response_strings');
+const conv_strings = require('./json/long_weather_response_conv_strings');
+const weather_helper = require('../../../helper/weather_helper');
+const card_builder = require('../../../helper/info_card_builder');
 const {Suggestions} = require('actions-on-google');
 
 
@@ -45,7 +45,7 @@ const getWeatherText = (request_data, weather_data) => {
 
 const getWeatherCard = (request_data, weather_data) => {
     if (request_data.isDatePeriod) {
-        return " ";
+        return card_builder.buildWeatherCardForDatePeriod(request_data);
     } else {
         return card_builder.buildDetailedWeatherCard(request_data, weather_data);
     }

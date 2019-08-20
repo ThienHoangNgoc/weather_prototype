@@ -1,13 +1,13 @@
 "use strict";
 
-const response_builder = require('./builder/long_weather_response_builder');
-const weather_helper = require('./builder/weather_helper');
-const utils = require('./utils/utils');
+const response_builder = require('./long_weather_response_builder');
+const weather_helper = require('../../../helper/weather_helper');
+const utils = require('../../../utils/utils');
 const {SimpleResponse} = require('actions-on-google');
 
 
-const Weather = require('./model/Weather');
-const RequestData = require('./model/RequestData');
+const Weather = require('../../../model/Weather');
+const RequestData = require('../../../model/RequestData');
 
 
 const longWeatherResponse = (agent) => {

@@ -7,7 +7,7 @@ const strings = require('./jsons/strings');
 const responses = require("./jsons/conv_strings");
 const urls = require('./jsons/urls');
 
-const weather_text_builder = require('./builder/weather_text_builder');
+const weather_text_builder = require('./helper/weather_text_builder');
 const utils = require('./utils/utils');
 
 const Weather = require('./model/Weather');
