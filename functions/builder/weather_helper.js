@@ -16,9 +16,11 @@ const sun_negative_add_list = conv_strings.weather_responses.sun_add_info_negati
 const rain_positive_list = conv_strings.weather_responses.rain_positive;
 const rain_negative_list = conv_strings.weather_responses.rain_negative;
 const rain_universal_add_list = conv_strings.weather_responses.rain_add_info;
-const response_text_neutral = conv_strings.response_text.neutral;
-const response_text_sun = conv_strings.response_text.sun;
-const response_text_rain = conv_strings.response_text.rain;
+const response_text_neutral = conv_strings.response_text.date.neutral;
+const response_text_sun = conv_strings.response_text.date.sun;
+const response_text_rain = conv_strings.response_text.date.rain;
+const response_date_period_text_list = conv_strings.response_text.date_period;
+const generic_weather_response_date_period = conv_strings.weather_responses.generic_date_period;
 
 
 const getSunHoursResponse = (weather_data, additional_info) => {
@@ -71,8 +73,12 @@ const getDayTempResponse = (weather_data) => {
 const getNightTempResponse = (weather_data) => {
     return responseBuilder(night_list, weather_data);
 };
-
-const getWeatherText = (weather_data) => {
+/**
+ * generate displayed text, depending on the weather state for a single date
+ *
+ * @param weather_data
+ */
+const getWeatherTextForDate = (weather_data) => {
     switch (weather_data.weatherState) {
         case weather_strings.weather_state.sunny:
             return response_text_sun;
@@ -87,8 +93,17 @@ const getWeatherText = (weather_data) => {
         default:
             return response_text_neutral;
     }
+};
+/**
+ * generate random displayed text for a date period
+ *
+ */
+const getWeatherTextForDatePeriod = () => {
+    return utils.getRandomArrayEntry(response_date_period_text_list);
+};
 
-
+const getGenericResponseForDatePeriod = () => {
+    return generic_weather_response_date_period;
 };
 
 /**
@@ -108,7 +123,9 @@ module.exports = {
     getSunHoursResponse,
     getRainResponse,
     getRainAndSunResponse,
-    getWeatherText
+    getWeatherTextForDate,
+    getWeatherTextForDatePeriod,
+    getGenericResponseForDatePeriod
 
 
 };

@@ -43,10 +43,6 @@ const requestData = class RequestData {
             this.date_utterance = this.getRightDateUtterance(this.start_date, this.date_utterance);
             this.isDatePeriod = false;
         }
-        console.log("request_data weather: " + this.weather);
-        console.log("request_data startDate: " + this.start_date);
-        console.log("request_data endDate: " + this.end_date);
-        console.log("request_data utterance: " + this.date_utterance);
         this.location = this.setDefaultLocation(location);
     }
 
@@ -58,10 +54,10 @@ const requestData = class RequestData {
      * @returns {string}
      */
     getRightDateUtterance(start_date, date_utterance) {
-        //get date without time
         const current_date = utils_date.getDateWithoutTime(new Date());
         const request_date = utils_date.getDateWithoutTime(start_date);
         let day_diff = utils_date.calculateDiffFrom2Dates(current_date, request_date, "days");
+        console.log(day_diff);
         if (day_diff === 0) {
             return today_string;
         } else {
@@ -90,8 +86,9 @@ const requestData = class RequestData {
         } else if (utils.equalsString(additional_date_period, "Tag")) {
             this.end_date = utils_date.addDays(start_date, date_number);
         } else {
-            //for error message
+            //TODO: fallback for month and year : no data for that (here or somewhere else) ?
             this.end_date = "";
+
         }
         this.date_utterance = custom_date_period_utterance_part + custom_date_period_utterance;
     }

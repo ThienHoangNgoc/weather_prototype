@@ -29,14 +29,13 @@ const longWeatherResponse = (agent) => {
     if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {
         let conv = agent.conv();
         conv.ask(new SimpleResponse({
-            speech: response_builder.getWeatherResponse(request_data, weather_dummy),
-            text: weather_helper.getWeatherText(weather_dummy)
+            speech: response_builder.getWeatherResponse(request_data, weather_dummy) + "",
+            text: response_builder.getWeatherText(request_data, weather_dummy)
         }));
         conv.ask(response_builder.getWeatherCard(request_data, weather_dummy));
         agent.add(conv);
     } else {
         //Todo: implement for devices without Google Assistant
-
     }
 
 

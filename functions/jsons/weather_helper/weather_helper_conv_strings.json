@@ -41,17 +41,25 @@
       "Die Regenwahrscheinlichkeit beträgt $rainV Prozent.",
       "Die Wahrscheinlichkeit, dass es regnen wird liegt bei $rainV Prozent. ",
       "Die Wahrscheinlichkeit auf Regen beträgt $rainV Prozent. "
-    ]
+    ],
+    "generic_date_period": "Es bleibt sommerlich warm mit einem durchschnitts Wert von bis zu 35 Grad tagsüber. Auch die Nächte bleiben angenehm mit durchschnittlich 20 Grad. Mit Regen ist nicht zu rechnen."
   },
   "response_text": {
-    "rain": [
-      "Auf einen Regenschirm sollte man nicht verzichten "
-    ],
-    "sun": [
+    "date": {
+      "rain": [
+        "Auf einen Regenschirm sollte man nicht verzichten "
+      ],
+      "sun": [
+        "Sieht gut aus!",
+        "Schaut nach gutem Wetter aus! "
+      ],
+      "neutral": [
+        "Hier das Wetter"
+      ]
+    },
+    "date_period": [
       "Sieht gut aus!",
-      "Schaut nach gutem Wetter aus! "
-    ],
-    "neutral": [
+      "Schaut nach gutem Wetter aus! ",
       "Hier das Wetter"
     ]
   }

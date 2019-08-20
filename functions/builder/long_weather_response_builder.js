@@ -17,7 +17,7 @@ const initial_response_list_date_period = conv_strings.weather_responses.date_pe
 
 const getWeatherResponse = (request_data, weather_data) => {
     if (request_data.isDatePeriod) {
-        return buildInitialWeatherResponse(initial_response_list_date_period, request_data);
+        return buildInitialWeatherResponse(initial_response_list_date_period, request_data) + weather_helper.getGenericResponseForDatePeriod();
     } else {
         return buildInitialWeatherResponse(initial_response_list_date, request_data)
             + weather_helper.getDayTempResponse(weather_data)
@@ -25,6 +25,14 @@ const getWeatherResponse = (request_data, weather_data) => {
             + weather_helper.getRainAndSunResponse(weather_data);
     }
 
+};
+
+const getWeatherText = (request_data, weather_data) => {
+    if (request_data.isDatePeriod) {
+        return weather_helper.getWeatherTextForDatePeriod();
+    } else {
+        return weather_helper.getWeatherTextForDate(weather_data);
+    }
 };
 
 const getWeatherCard = (request_data, weather_data) => {
@@ -43,4 +51,4 @@ const buildInitialWeatherResponse = (initial_response_list, request_data) => {
 };
 
 
-module.exports = {getWeatherResponse, getWeatherCard};
+module.exports = {getWeatherResponse, getWeatherCard, getWeatherText};

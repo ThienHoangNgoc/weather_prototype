@@ -64,7 +64,8 @@ const calculateDiffFrom2Dates = (current_date, request_date, interval) => {
 };
 
 const getDateWithoutTime = (date) => {
-    return new Date(date.toString().substring(0, 10));
+    let date_dummy = new Date(date);
+    return new Date(date_dummy.getFullYear() + "-" + date_dummy.getMonth() + "-" + date_dummy.getDate());
 }
 
 
