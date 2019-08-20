@@ -9,17 +9,22 @@ const {Suggestions} = require('actions-on-google');
 
 
 //strings
-
+const date_utterance_weekend = strings.date_utterance.weekend;
 
 //conv_strings
 const initial_response_list_date = conv_strings.weather_responses.date;
 const initial_response_list_date_period = conv_strings.weather_responses.date_period;
+const initial_response_list_weekend = conv_strings.weather_responses.weekend;
 const suggestion_list = strings.suggestion_list;
 
 
 const getWeatherResponse = (request_data, weather_data) => {
     if (request_data.isDatePeriod) {
-        return buildInitialWeatherResponse(initial_response_list_date_period, request_data) + weather_helper.getGenericResponseForDatePeriod();
+        if (utils.containsString(request_data.date_utterance, date_utterance_weekend)) {
+            return buildInitialWeatherResponse(initial_response_list_weekend, request_data) + weather_helper.getGenericResponseForDatePeriod();
+        } else {
+            return buildInitialWeatherResponse(initial_response_list_date_period, request_data) + weather_helper.getGenericResponseForDatePeriod();
+        }
     } else {
         return buildInitialWeatherResponse(initial_response_list_date, request_data)
             + weather_helper.getDayTempResponse(weather_data)

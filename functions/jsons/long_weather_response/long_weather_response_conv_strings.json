@@ -7,7 +7,10 @@
     ],
     "date_period": [
       "$weather der $date sieht in $location folgendermaßen aus. ",
-      "Hier $weather der $date. "
+      "Hier $weather der $date in $location. "
+    ],
+    "weekend": [
+      "Am Wochenende sieht $weather in $location folgendermaßen aus. "
     ]
   }
 }
