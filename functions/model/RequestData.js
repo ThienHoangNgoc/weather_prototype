@@ -25,7 +25,6 @@ const requestData = class RequestData {
     constructor(weather, date, date_utterance, date_period, date_period_utterance, custom_date_period, custom_date_period_utterance, location) {
 
 
-
         this.weather = this.setDefaultWeather(weather);
         this.weather = this.setWeatherWithArticle(this.weather);
 
@@ -39,6 +38,7 @@ const requestData = class RequestData {
             this.setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance);
             this.isDatePeriod = true;
         } else {
+            //else --> single date, and time-period (not date-period)
             //for a single date requests, end_date = start_date
             this.start_date = this.setDefaultDate(date);
             this.end_date = this.start_date;
@@ -46,6 +46,7 @@ const requestData = class RequestData {
             this.date_utterance = this.getRightDateUtterance(this.start_date, this.date_utterance);
             this.isDatePeriod = false;
         }
+        this.isToday = this.checkIfDateIsToday(this.start_date);
         this.location = this.setDefaultLocation(location);
     }
 
@@ -56,6 +57,7 @@ const requestData = class RequestData {
      * @param start_date
      * @returns {string}
      */
+
     getRightDateUtterance(start_date, date_utterance) {
         const current_date = utils_date.getDateWithoutTime(new Date());
         const request_date = utils_date.getDateWithoutTime(start_date);
@@ -67,6 +69,12 @@ const requestData = class RequestData {
         }
 
     };
+
+    checkIfDateIsToday(start_date) {
+        let currentDate = utils_date.getDateWithoutTime(new Date());
+        let startDate = utils_date.getDateWithoutTime(start_date);
+        return utils_date.calculateDiffFrom2Dates(currentDate, startDate, "days") === 0;
+    }
 
 
     setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance) {

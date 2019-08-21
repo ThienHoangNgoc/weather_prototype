@@ -13,10 +13,16 @@
       "sun_hours": "Sonnenstunden:"
     }
   },
-  "date_period_card_subtitle": "Durchschnittswerte: ",
-  "weather_info_templates": {
-    "title": "Aktuell: $currentTemp ° - $weatherState",
-    "subtitle": "$date • $location"
+  "weather_card_templates": {
+    "date": {
+      "title_today": "Aktuell: $currentTemp ° - $weatherState",
+      "title_not_today": "Durchschnittl.: $currentTemp ° - $weatherState",
+      "subtitle": "$date • $location"
+    },
+    "date_period": {
+      "title": "",
+      "subtitle": "Durchschnittswerte: "
+    }
   },
   "button_text": {
     "button_title": "Mehr Informationen",

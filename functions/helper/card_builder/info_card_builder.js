@@ -14,15 +14,16 @@ const button_url = urls.website.placeholder;
 const image_hover_text = strings.button_text.card_image_hover_text;
 
 //date info card
-const date_info_card_title = strings.weather_info_templates.title;
-const date_info_card_subtitle = strings.weather_info_templates.subtitle;
+const date_info_card_title_today = strings.weather_card_templates.date.title_today;
+const date_info_card_title_not_today = strings.weather_card_templates.date.title_not_today;
+const date_info_card_subtitle = strings.weather_card_templates.date.subtitle;
 const date_max_temp_label = strings.weather_card_label.date.max_value;
 const date_min_temp_label = strings.weather_card_label.date.min_value;
 const date_rain_label = strings.weather_card_label.date.rain;
 const date_sun_hours_label = strings.weather_card_label.date.sun_hours;
 
 //date_period info card
-const date_period_card_subtitle = strings.date_period_card_subtitle;
+const date_period_card_subtitle = strings.weather_card_templates.date_period.subtitle;
 const date_period_day_label = strings.weather_card_label.date_period.day;
 const date_period_night_label = strings.weather_card_label.date_period.night;
 const date_period_rain_label = strings.weather_card_label.date_period.rain;
@@ -33,15 +34,21 @@ const date_period_custom_date_format = "(ddd) dd.mm";
 
 const buildDetailedWeatherCard = (request_data, weather_data) => {
     let image_url;
+    let is_today_title;
     if (weather_data.isDay) {
         image_url = image_url_day;
     } else {
         image_url = image_url_night;
     }
+    if (request_data.isToday) {
+        is_today_title = weather_data.insertWeatherData(date_info_card_title_today);
+    } else {
+        is_today_title = weather_data.insertWeatherData(date_info_card_title_not_today);
+    }
     return new BasicCard({
         text: buildDateCardText(weather_data),
         subtitle: request_data.insertRequestDataForSubtitle(date_info_card_subtitle),
-        title: weather_data.insertWeatherData(date_info_card_title),
+        title: is_today_title,
         buttons: new Button({
             title: button_title,
             url: button_url
