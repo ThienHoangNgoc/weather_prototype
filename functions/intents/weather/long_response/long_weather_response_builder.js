@@ -1,8 +1,8 @@
 "use strict";
 
 const utils = require('../../../utils/utils');
-const strings = require('./json/long_weather_response_strings');
-const conv_strings = require('./json/long_weather_response_conv_strings');
+const strings = require('./strings/long_weather_response_strings');
+const conv_strings = require('./strings/long_weather_response_conv_strings');
 const weather_helper = require('../../../helper/weather/weather_helper');
 const card_builder = require('../../../helper/card_builder/info_card_builder');
 const {Suggestions} = require('actions-on-google');
@@ -21,15 +21,21 @@ const suggestion_list = strings.suggestion_list;
 const getWeatherResponse = (request_data, weather_data) => {
     if (request_data.isDatePeriod) {
         if (utils.containsString(request_data.date_utterance, date_utterance_weekend)) {
-            return buildInitialWeatherResponse(initial_response_list_weekend, request_data) + weather_helper.getGenericResponseForDatePeriod();
+            return buildInitialWeatherResponse(initial_response_list_weekend, request_data)
+                + weather_helper.getDatePeriodDayTempResponse()
+                + weather_helper.getDatePeriodNightTempResponse()
+                + weather_helper.getDatePeriodRestResponse();
         } else {
-            return buildInitialWeatherResponse(initial_response_list_date_period, request_data) + weather_helper.getGenericResponseForDatePeriod();
+            return buildInitialWeatherResponse(initial_response_list_date_period, request_data)
+                + weather_helper.getDatePeriodDayTempResponse()
+                + weather_helper.getDatePeriodNightTempResponse()
+                + weather_helper.getDatePeriodRestResponse();
         }
     } else {
         return buildInitialWeatherResponse(initial_response_list_date, request_data)
-            + weather_helper.getDayTempResponse(weather_data)
-            + weather_helper.getNightTempResponse(weather_data)
-            + weather_helper.getRainAndSunResponse(weather_data);
+            + weather_helper.getDateDayTempResponse(weather_data)
+            + weather_helper.getDateNightTempResponse(weather_data)
+            + weather_helper.getDateRainAndSunResponse(weather_data);
     }
 
 };

@@ -52,6 +52,9 @@ const weather = class Weather {
         } else {
             this.currentTemp = utils.getRandomIntInRange(this.nightMAX, this.nightMIN);
         }
+        this.averageDay = Math.floor((this.dayMAX + this.dayMIN) / 2);
+        this.averageNight = Math.floor((this.nightMAX + this.nightMIN) / 2);
+
     }
 
     /**
@@ -68,7 +71,9 @@ const weather = class Weather {
             .replace("$sunV", this.sunHours)
             .replace("$rainV", this.rain)
             .replace("$currentTemp", this.currentTemp)
-            .replace("$weatherState", this.weatherState);
+            .replace("$weatherState", this.weatherState)
+            .replace("$averageDay", this.averageDay)
+            .replace("$averageNight", this.averageNight)
     }
 
 };

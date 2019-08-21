@@ -15,8 +15,8 @@
   },
   "weather_card_templates": {
     "date": {
-      "title_today": "Aktuell: $currentTemp ° - $weatherState",
-      "title_not_today": "Durchschnittl.: $currentTemp ° - $weatherState",
+      "title_today": "Aktuell: $currentTemp ° \n$weatherState",
+      "title_not_today": "Durchschnittl. Temp.: $averageDay ° \n$weatherState",
       "subtitle": "$date • $location"
     },
     "date_period": {
