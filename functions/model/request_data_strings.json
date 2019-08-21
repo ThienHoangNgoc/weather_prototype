@@ -2,6 +2,19 @@
   "date_utterance": {
     "today": "heute"
   },
+  "date_period_utterance": {
+    "key_word": {
+      "version_1": "nächst",
+      "version_2": "kommend",
+      "version_3": "dies"
+    },
+    "standardized": {
+      "version_1": "nächsten",
+      "version_2": "kommenden",
+      "version_3": "dieser"
+    },
+    "grammatical_article": "der "
+  },
   "default_values": {
     "weather": "Wetter",
     "location": "Berlin",

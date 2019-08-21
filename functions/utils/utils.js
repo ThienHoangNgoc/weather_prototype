@@ -145,6 +145,30 @@ const containsString = (firstString, secondString) => {
 
 };
 
+/**
+ * check if key_word is in string and exchange it with the given standardized_string. Also set grammatical article
+ * @param string
+ * @param key_word
+ * @param standard_string
+ * @param gram_article
+ * @returns {string}
+ */
+const standardizeString = (string, key_word, standardized_string, gram_article) => {
+    string = string.toString();
+    let words = string.split(" ");
+    for (let index = 0; words.length > index; index++) {
+        if (containsString(words[index], key_word)) {
+            words.splice(index, 1, standardized_string);
+        }
+    }
+    let new_string = "";
+    for (let index = 0; words.length > index; index++) {
+        new_string += words[index] + " ";
+    }
+    return gram_article + new_string;
+
+};
+
 
 module.exports = {
     getRandomInt,
@@ -159,5 +183,6 @@ module.exports = {
     containsString,
     isStringArray,
     stringIsInArray,
-    firstLetterUpperCase
+    firstLetterUpperCase,
+    standardizeString
 };

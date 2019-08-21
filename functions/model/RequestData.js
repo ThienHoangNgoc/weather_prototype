@@ -17,6 +17,17 @@ const default_weather = strings.default_values.weather;
 const today_string = strings.date_utterance.today;
 const custom_format = strings.custom_date_format;
 
+const key_word_1 = strings.date_period_utterance.key_word.version_1;
+const key_word_2 = strings.date_period_utterance.key_word.version_2;
+const key_word_3 = strings.date_period_utterance.key_word.version_3;
+
+const standardized_1 = strings.date_period_utterance.standardized.version_1;
+const standardized_2 = strings.date_period_utterance.standardized.version_2;
+const standardized_3 = strings.date_period_utterance.standardized.version_3;
+
+const article = strings.date_period_utterance.grammatical_article;
+
+
 const custom_date_period_utterance_part = strings.custom_date_period_utterance_part;
 
 
@@ -32,7 +43,7 @@ const requestData = class RequestData {
         if (!utils.isEmpty(date_period)) {
             this.start_date = date_period['startDate'];
             this.end_date = date_period['endDate'];
-            this.date_utterance = date_period_utterance;
+            this.date_utterance = this.getRightDateUtteranceForDatePeriod(date_period_utterance);
             this.isDatePeriod = true;
         } else if (!utils.isEmpty(custom_date_period)) {
             this.setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance);
@@ -43,7 +54,7 @@ const requestData = class RequestData {
             this.start_date = this.setDefaultDate(date);
             this.end_date = this.start_date;
             this.date_utterance = this.setDefaultDateUtterance(date_utterance);
-            this.date_utterance = this.getRightDateUtterance(this.start_date, this.date_utterance);
+            this.date_utterance = this.getRightDateUtteranceForDate(this.start_date, this.date_utterance);
             this.isDatePeriod = false;
         }
         this.isToday = this.checkIfDateIsToday(this.start_date);
@@ -58,7 +69,7 @@ const requestData = class RequestData {
      * @returns {string}
      */
 
-    getRightDateUtterance(start_date, date_utterance) {
+    getRightDateUtteranceForDate(start_date, date_utterance) {
         const current_date = utils_date.getDateWithoutTime(new Date());
         const request_date = utils_date.getDateWithoutTime(start_date);
         let day_diff = utils_date.calculateDiffFrom2Dates(current_date, request_date, "days");
@@ -67,13 +78,28 @@ const requestData = class RequestData {
         } else {
             return date_utterance;
         }
-
     };
 
     checkIfDateIsToday(start_date) {
         let currentDate = utils_date.getDateWithoutTime(new Date());
         let startDate = utils_date.getDateWithoutTime(start_date);
         return utils_date.calculateDiffFrom2Dates(currentDate, startDate, "days") === 0;
+    }
+
+    /**
+     * standardize all date-period utterances for response
+     * context: change nächste Woche to nächsten Woche, otherwise the response is not correct grammatically (German)
+     * @param date_utterance
+     * @returns {string}
+     */
+    getRightDateUtteranceForDatePeriod(date_utterance) {
+        if (utils.containsString(date_utterance, key_word_1)) {
+            return utils.standardizeString(date_utterance, key_word_1, standardized_1, article);
+        } else if (utils.containsString(date_utterance, key_word_2)) {
+            return utils.standardizeString(date_utterance, key_word_2, standardized_2, article);
+        } else if (utils.containsString(date_utterance, key_word_3)) {
+            return utils.standardizeString(date_utterance, key_word_3, standardized_3, "");
+        }
     }
 
 
@@ -93,7 +119,7 @@ const requestData = class RequestData {
             this.start_date = start_date;
             this.end_date = utils_date.addDays(start_date, date_number * 7);
         } else if (utils.equalsString(additional_date_period, "Tag")) {
-            start_date = utils_date.addDays(currentDate, 1)
+            start_date = utils_date.addDays(currentDate, 1);
             this.end_date = utils_date.addDays(start_date, date_number);
         } else {
             //TODO: fallback for month and year : no data for that (here or somewhere else) ?

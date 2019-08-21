@@ -6,11 +6,11 @@
       "$date werden tagsüber in $location Werte zwischen $dayMIN und $dayMAX Grad erreicht. "
     ],
     "date_period": [
-      ""
+      "$date bleibt es in $location angenehm warm mit durchschnittlich 29 Gard tagsüber. "
     ],
     "weekend": [
-      "Am Wochenende werden tagsüber in $location durchschnittlich Werte zwischen $dayMIN und $dayMAX Grad erreicht. ",
-      "In $location wird es am Wochenende tagsüber nochmal sommerlich warm mit durchschnittlich $dayMIN bis $dayMAX Grad. "
+      "Am Wochenende werden tagsüber in $location durchschnittlich Werte zwischen 27 und 33 Grad erreicht. ",
+      "In $location wird es am Wochenende tagsüber nochmal sommerlich warm mit durchschnittlich 30 Grad. "
     ]
   }
 }
