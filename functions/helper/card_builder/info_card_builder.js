@@ -35,11 +35,16 @@ const date_period_custom_date_format = "(ddd) dd.mm";
 const buildDetailedWeatherCard = (request_data, weather_data) => {
     let image_url;
     let is_today_title;
-    if (weather_data.isDay) {
-        image_url = image_url_day;
+    if (request_data.isToday) {
+        if (weather_data.isDay) {
+            image_url = image_url_day;
+        } else {
+            image_url = image_url_night;
+        }
     } else {
-        image_url = image_url_night;
+        image_url = image_url_placeholder;
     }
+
     if (request_data.isToday) {
         is_today_title = weather_data.insertWeatherData(date_info_card_title_today);
     } else {
