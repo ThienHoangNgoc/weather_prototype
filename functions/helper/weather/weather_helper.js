@@ -1,8 +1,8 @@
 "use strict";
 
 const utils = require('../../utils/utils');
-const conv_strings = require('./weather_helper_conv_strings');
-const strings = require('./weather_helper_strings');
+const conv_strings = require('./strings/weather_helper_conv_strings');
+const strings = require('./strings/weather_helper_strings');
 const weather_strings = require('../../jsons/weather_strings');
 
 //conv_strings
