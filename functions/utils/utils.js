@@ -47,11 +47,6 @@ const getRandomBoolean = () => {
     return getRandomInt(2) === 1;
 };
 
-const getConsoleLog = (message, value, filename) => {
-    console.log(message + ": " + value + " - in file " + filename);
-
-}
-
 
 /*
 =========================================================================================================
@@ -175,7 +170,6 @@ module.exports = {
     getRandomIntInRange,
     getRandomArrayEntry,
     getRandomBoolean,
-    getConsoleLog,
     equalsString,
     isEmpty,
     isString,

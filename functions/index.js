@@ -4,7 +4,8 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 
 //intent functions
 const long_weather_handler = require('./intents/weather/long_response/long_weather_response_intent');
-const normal_weather_handler = require('./intents/weather/normal_response/normal_weather_response_intent')
+const normal_weather_handler = require('./intents/weather/normal_response/normal_weather_response_intent');
+const normal_weather_follow_up_handler = require('./intents/weather/normal_response/follow_ups/normal_weather_response_follow_up');
 const welcome_function = require('./intents/welcome/welcome');
 
 // enables lib debugging statements
@@ -15,8 +16,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     const agent = new WebhookClient({request, response});
     let intentMap = new Map();
     intentMap.set("welcome", welcome_function);
-    intentMap.set("long_weather_response", long_weather_handler);
     intentMap.set("normal_weather_response", normal_weather_handler);
+    intentMap.set("normal_weather_response_follow_up", normal_weather_follow_up_handler);
+    intentMap.set("long_weather_response", long_weather_handler);
     agent.handleRequest(intentMap);
 
 })

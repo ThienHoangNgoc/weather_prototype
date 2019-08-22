@@ -1,0 +1,13 @@
+{
+  "intents": {
+    "welcome": "welcome",
+    "long_weather_response": "long_weather_response",
+    "normal_weather_response": "normal_weather_response",
+    "normal_weather_follow_up": "normal_weather_follow_up"
+  },
+  "contexts": {
+    "normal_weather_response": "normal_weather_response",
+    "long_weather_response": "long_weather_response"
+  }
+}
+
