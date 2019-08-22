@@ -1,0 +1,9 @@
+{
+  "responses": [
+    "Es kann sein, dass dein Anliegen nocht nicht in der App ist.",
+    "Ich kann dein Anliegen leider nicht verarbeiten."
+  ],
+  "text": {
+    "hint": "Versuche es mal mit einem der Vorschläge. "
+  }
+}

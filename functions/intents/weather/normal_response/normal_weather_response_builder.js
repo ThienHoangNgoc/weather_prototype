@@ -4,6 +4,8 @@ const utils = require('../../../utils/utils');
 const strings = require('./strings/normal_weather_response_strings');
 const conv_strings = require('./strings/normal_weather_response_conv_strings');
 const weather_helper = require('../../../helper/weather/weather_helper');
+const response_helper = require('../../../helper/response_helper');
+
 const card_builder = require('../../../helper/card_builder/info_card_builder');
 const {Suggestions} = require('actions-on-google');
 
@@ -53,11 +55,11 @@ const getWeatherCard = (request_data, weather_data) => {
 };
 
 const getSuggestions = () => {
-    return new Suggestions(weather_helper.getRandomSuggestionsList(suggestion_list, suggestion_quit));
+    return new Suggestions(response_helper.getRandomSuggestionsList(suggestion_list, suggestion_quit));
 };
 
 const getFollowUpSuggestions = () => {
-    return new Suggestions(weather_helper.getRandomSuggestionsList(follow_up_suggestion_list, suggestion_quit));
+    return new Suggestions(response_helper.getRandomSuggestionsList(follow_up_suggestion_list, suggestion_quit));
 };
 
 
