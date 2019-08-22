@@ -1,6 +1,6 @@
 "use strict";
 
-const response_builder = require('./long_weather_response_builder');
+const response_builder = require('./normal_weather_response_builder');
 const {SimpleResponse} = require('actions-on-google');
 
 
@@ -9,7 +9,7 @@ const RequestData = require('../../../model/RequestData');
 
 
 const normalWeatherResponse = (agent) => {
-    let weather = agent.request_.body.queryResult.parameters['weather_long'];
+    let weather = agent.request_.body.queryResult.parameters['weather_normal'];
     let date = agent.request_.body.queryResult.parameters['date'];
     let date_utterance = agent.request_.body.queryResult.outputContexts[0].parameters['date.original'];
     let date_period = agent.request_.body.queryResult.parameters['date-period'];

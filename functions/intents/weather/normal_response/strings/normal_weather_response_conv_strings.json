@@ -6,7 +6,7 @@
       "$date werden tagsüber in $location Werte zwischen $dayMIN und $dayMAX Grad erreicht. "
     ],
     "date_period": [
-      "$date bleibt es in $location angenehm warm mit durchschnittlich 29 Gard tagsüber. "
+      "In $date bleibt es in $location angenehm warm mit durchschnittlich 29 Grad tagsüber. "
     ],
     "weekend": [
       "Am Wochenende werden tagsüber in $location durchschnittlich Werte zwischen 27 und 33 Grad erreicht. ",

@@ -7,3 +7,58 @@ const weather_helper = require('../../../helper/weather/weather_helper');
 const card_builder = require('../../../helper/card_builder/info_card_builder');
 const {Suggestions} = require('actions-on-google');
 
+//strings
+const date_utterance_weekend = strings.date_utterance.weekend;
+
+//conv_strings
+const initial_response_list_date = conv_strings.weather_responses.date;
+const initial_response_list_date_period = conv_strings.weather_responses.date_period;
+const initial_response_list_weekend = conv_strings.weather_responses.weekend;
+const suggestion_list = strings.suggestion_list;
+
+const getWeatherResponse = (request_data, weather_data) => {
+    if (request_data.isDatePeriod) {
+        if (utils.containsString(request_data.date_utterance, date_utterance_weekend)) {
+            return buildInitialWeatherResponse(initial_response_list_weekend, request_data)
+                + weather_helper.getDatePeriodNightTempResponse()
+        } else {
+            return buildInitialWeatherResponse(initial_response_list_date_period, request_data)
+                + weather_helper.getDatePeriodNightTempResponse()
+        }
+    } else {
+        return weather_data.insertWeatherData(buildInitialWeatherResponse(initial_response_list_date, request_data))
+            + weather_helper.getDateNightTempResponse(weather_data)
+    }
+
+};
+
+const getWeatherText = (request_data, weather_data) => {
+    if (request_data.isDatePeriod) {
+        return weather_helper.getWeatherTextForDatePeriod();
+    } else {
+        return weather_helper.getWeatherTextForDate(weather_data);
+    }
+
+};
+
+const getWeatherCard = (request_data, weather_data) => {
+    if (request_data.isDatePeriod) {
+        return card_builder.buildWeatherCardForDatePeriod(request_data);
+    } else {
+        return card_builder.buildDetailedWeatherCard(request_data, weather_data);
+    }
+
+};
+
+const getSuggestions = () => {
+    return new Suggestions(suggestion_list);
+};
+
+
+const buildInitialWeatherResponse = (initial_response_list, request_data) => {
+    let randomResponse = utils.getRandomArrayEntry(initial_response_list);
+    return utils.firstLetterUpperCase(request_data.insertRequestData(randomResponse));
+};
+
+
+module.exports = {getWeatherResponse, getWeatherCard, getWeatherText, getSuggestions};

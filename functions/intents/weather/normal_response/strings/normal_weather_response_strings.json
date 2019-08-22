@@ -1,5 +1,10 @@
 {
-  "weather_entity_entries": {
-    "weather": "Wetter"
+  "suggestion_list": [
+    "123",
+    "456",
+    "App verlassen"
+  ],
+  "date_utterance": {
+    "weekend": "Wochenend"
   }
 }

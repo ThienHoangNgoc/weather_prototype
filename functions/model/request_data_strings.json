@@ -3,6 +3,7 @@
     "today": "heute"
   },
   "date_period_utterance": {
+    "weekend": "Wochenende",
     "key_word": {
       "version_1": "nächst",
       "version_2": "kommend",
@@ -20,7 +21,7 @@
     "location": "Berlin",
     "date": "heute"
   },
-  "custom_date_period_utterance_part": "kommenden ",
+  "custom_date_period_utterance_part": "der nächsten ",
   "weather_entity_entries": {
     "report": "Wetterbericht",
     "outlook": "Wetterprognose",

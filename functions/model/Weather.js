@@ -1,6 +1,7 @@
 "use strict";
 
 const utils = require('../utils/utils');
+const utils_date = require('../utils/utils_date');
 const strings = require('../jsons/weather_strings');
 const weather_states = [strings.weather_state.cloudy,
     strings.weather_state.slightly_cloudy,
@@ -11,7 +12,7 @@ const sunny = strings.weather_state.sunny;
 const clear = strings.weather_state.clear;
 const tempest = strings.weather_state.tempest;
 
-const hours = new Date().getHours();
+const hours = utils_date.getGMTNewDate().getHours();
 
 const weather = class Weather {
 

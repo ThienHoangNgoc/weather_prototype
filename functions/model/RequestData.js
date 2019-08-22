@@ -38,7 +38,7 @@ const requestData = class RequestData {
 
         this.weather = this.setDefaultWeather(weather);
         this.weather = this.setWeatherWithArticle(this.weather);
-
+        console.log("given date: " + date);
         //set date values
         if (!utils.isEmpty(date_period)) {
             this.start_date = date_period['startDate'];
@@ -59,6 +59,8 @@ const requestData = class RequestData {
         }
         this.isToday = this.checkIfDateIsToday(this.start_date);
         this.location = this.setDefaultLocation(location);
+        console.log("isToday: " + this.isToday)
+
     }
 
     /**
@@ -70,7 +72,7 @@ const requestData = class RequestData {
      */
 
     getRightDateUtteranceForDate(start_date, date_utterance) {
-        const current_date = utils_date.getDateWithoutTime(new Date());
+        const current_date = utils_date.getDateWithoutTime(utils_date.getGMTNewDate());
         const request_date = utils_date.getDateWithoutTime(start_date);
         let day_diff = utils_date.calculateDiffFrom2Dates(current_date, request_date, "days");
         if (day_diff === 0) {
@@ -81,22 +83,38 @@ const requestData = class RequestData {
     };
 
     checkIfDateIsToday(start_date) {
-        let currentDate = utils_date.getDateWithoutTime(new Date());
+        let currentDate = utils_date.getDateWithoutTime(utils_date.getGMTNewDate());
         let startDate = utils_date.getDateWithoutTime(start_date);
+        console.log("currentDate: "+ currentDate);
+        console.log("startDate: "+ startDate);
         return utils_date.calculateDiffFrom2Dates(currentDate, startDate, "days") === 0;
     }
 
     /**
      * standardize all date-period utterances for response
      * context: change nächste Woche to nächsten Woche, otherwise the response is not correct grammatically (German)
+     * Todo: error case is missing
      * @param date_utterance
      * @returns {string}
      */
     getRightDateUtteranceForDatePeriod(date_utterance) {
+        if(utils.containsString(date_utterance, strings.date_period_utterance.weekend)){
+            return date_utterance;
+        }
         if (utils.containsString(date_utterance, key_word_1)) {
-            return utils.standardizeString(date_utterance, key_word_1, standardized_1, article);
+            if(utils.containsString(date_utterance,"Tag")){
+                let new_string = utils.standardizeString(date_utterance, key_word_1, standardized_1, "");
+                return utils.standardizeString(new_string,"Tag","Tagen","den ");
+            }else{
+                return utils.standardizeString(date_utterance, key_word_1, standardized_1, article);
+            }
         } else if (utils.containsString(date_utterance, key_word_2)) {
-            return utils.standardizeString(date_utterance, key_word_2, standardized_2, article);
+            if(utils.containsString(date_utterance,"Tag")){
+                let new_string = utils.standardizeString(date_utterance, key_word_2, standardized_2, "");
+                return utils.standardizeString(new_string,"Tag","Tagen","den ");
+            }else{
+                return utils.standardizeString(date_utterance, key_word_2, standardized_2, article);
+            }
         } else if (utils.containsString(date_utterance, key_word_3)) {
             return utils.standardizeString(date_utterance, key_word_3, standardized_3, "");
         }
@@ -104,7 +122,7 @@ const requestData = class RequestData {
 
 
     setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance) {
-        let currentDate = new Date();
+        let currentDate = utils_date.getGMTNewDate();
         let date_number = custom_date_period['number'];
         let additional_date_period = custom_date_period['additional_date_period'];
         let start_date;
@@ -194,7 +212,7 @@ const requestData = class RequestData {
      */
     setDefaultDate(date) {
         if (utils.isEmpty(date)) {
-            return new Date() + "";
+            return utils_date.getGMTNewDate() + "";
         }
         return date;
     };

@@ -2,7 +2,7 @@
 const dateFormat = require('dateformat');
 
 /**
- * convert given date to custom date format
+ * convert given date to custom date format returns string
  * example dialogFow date: 2019-08-10T12:00:00+02:00
  * @param dateString
  * @param customDateFormat
@@ -11,15 +11,6 @@ const getDateFormatted = (dateString, customDateFormat) => {
     let date = new Date(dateString);
     dateFormat.masks.ownDateformat = customDateFormat;
     return dateFormat(date, dateFormat.masks.ownDateformat);
-};
-
-const getResponseFromDate = (date_string) => {
-    const current_date = new Date();
-    const request_date = new Date(date_string);
-    let day_diff = calculateDiffFrom2Dates(current_date, request_date, "days");
-    let week_diff = calculateDiffFrom2Dates(current_date, request_date, "weeks");
-    let month_diff = calculateDiffFrom2Dates(current_date, request_date, "months");
-
 };
 
 /**
@@ -62,12 +53,27 @@ const calculateDiffFrom2Dates = (current_date, request_date, interval) => {
     }
 
 };
-
+/**
+ * returns date without time
+ * @param date
+ * @returns {Date}
+ */
 const getDateWithoutTime = (date) => {
-    let date_dummy = new Date(date);
-    return new Date(date_dummy.getFullYear() + "-" + date_dummy.getMonth() + "-" + date_dummy.getDate());
-}
-
+    return new Date(getDateFormatted(date, "yyyy-mm-dd"))
+};
+/**
+ * set gmt to +2
+ * local time is set to gmt +0 instead of gmt +2
+ * search for cause... (server timezone gmt +0?)
+ * band aid solution for the time being
+ *
+ * @returns {Date}
+ */
+const getGMTNewDate = () => {
+    let result = new Date();
+    result.setHours(result.getHours() + 2);
+    return result;
+};
 
 /*
  * Set values to specific language, here German values
@@ -86,4 +92,4 @@ dateFormat.i18n = {
     ]
 };
 
-module.exports = {getDateFormatted, calculateDiffFrom2Dates, addDays, getDateWithoutTime};
+module.exports = {getDateFormatted, calculateDiffFrom2Dates, addDays, getDateWithoutTime, getGMTNewDate};
