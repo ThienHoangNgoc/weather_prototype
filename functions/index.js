@@ -5,7 +5,7 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 //intent functions
 const long_weather_handler = require('./intents/weather/long_response/long_weather_response_intent');
 const normal_weather_handler = require('./intents/weather/normal_response/normal_weather_response_intent')
-const welcome_function = require('./intents/welcome');
+const welcome_function = require('./intents/welcome/welcome');
 
 // enables lib debugging statements
 process.env.DEBUG = 'dialogflow:debug';
