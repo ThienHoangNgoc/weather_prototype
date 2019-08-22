@@ -14,7 +14,9 @@ const date_utterance_weekend = strings.date_utterance.weekend;
 const initial_response_list_date = conv_strings.weather_responses.date;
 const initial_response_list_date_period = conv_strings.weather_responses.date_period;
 const initial_response_list_weekend = conv_strings.weather_responses.weekend;
-const suggestion_list = strings.suggestion_list;
+const suggestion_list = strings.suggestions.list;
+const follow_up_suggestion_list = strings.suggestions.follow_up_list;
+const suggestion_quit = strings.suggestions.quit;
 
 const getWeatherResponse = (request_data, weather_data) => {
     if (request_data.isDatePeriod) {
@@ -51,7 +53,11 @@ const getWeatherCard = (request_data, weather_data) => {
 };
 
 const getSuggestions = () => {
-    return new Suggestions(suggestion_list);
+    return new Suggestions(weather_helper.getRandomSuggestionsList(suggestion_list, suggestion_quit));
+};
+
+const getFollowUpSuggestions = () => {
+    return new Suggestions(weather_helper.getRandomSuggestionsList(follow_up_suggestion_list, suggestion_quit));
 };
 
 
@@ -61,4 +67,4 @@ const buildInitialWeatherResponse = (initial_response_list, request_data) => {
 };
 
 
-module.exports = {getWeatherResponse, getWeatherCard, getWeatherText, getSuggestions};
+module.exports = {getWeatherResponse, getWeatherCard, getWeatherText, getSuggestions, getFollowUpSuggestions};

@@ -1,9 +1,28 @@
 {
-  "suggestion_list": [
-    "123",
-    "456",
-    "App verlassen"
-  ],
+  "suggestions": {
+    "list": [
+      "Wetter für Montag?",
+      "Wetter für morgen?",
+      "Wetter am Wochenende?",
+      "Wie wird es am Freitag?",
+      "Wetter für nächste Woche",
+      "Wetter für diese Woche",
+      "Wetter in 3 Tagen",
+      "Wetter für übermorgen?"
+    ],
+    "follow_up_list": [
+      "Und morgen?",
+      "Am Dienstag?",
+      "In 4 Tagen?",
+      "Am Wochende?",
+      "Und nächste Woche?",
+      "Diese Woche?",
+      "Und in 3 Tagen?",
+      "Am Freitag?",
+      "Kommende Woche?"
+    ],
+    "quit": "App Verlassen"
+  },
   "date_utterance": {
     "weekend": "Wochenend"
   }

@@ -30,10 +30,9 @@ const normalWeatherResponse = (agent) => {
         conv.ask(response_builder.getWeatherCard(request_data, weather_dummy));
         conv.ask(response_builder.getSuggestions());
         agent.add(conv);
-        console.log(" request_data_date start date :" + request_data.start_date);
         agent.context.set({
             name: project_strings.contexts.normal_weather_response,
-            lifespan: 4,
+            lifespan: 99,
             parameters: {
                 context_start_date: request_data.start_date,
                 context_end_date: request_data.end_date,

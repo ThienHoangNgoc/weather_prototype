@@ -1,9 +1,16 @@
 {
-  "suggestion_list": [
-    "123",
-    "456",
-    "App verlassen"
-  ],
+  "suggestions": {
+    "list": [
+      "Vorhersage für morgen?",
+      "Prognose in 2 Wochen?",
+      "Prognose fürs Wochenende.",
+      "Bericht für Dienstag?",
+      "Vorhersage für heute?",
+      "Bericht für diese Woche",
+      "Vorhersage in 3 Tagen"
+    ],
+    "quit": "App Verlassen"
+  },
   "date_utterance": {
     "weekend": "Wochenend"
   }

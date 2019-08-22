@@ -70,9 +70,8 @@ const buildWeatherCardForDatePeriod = (request_data) => {
     return new BasicCard({
         text: buildDatePeriodCardText(),
         subtitle: date_period_card_subtitle,
-        title: request_data.location + " • " +
-            utils_date.getDateFormatted(request_data.start_date, date_period_custom_date_format) + " - " +
-            utils_date.getDateFormatted(request_data.end_date, date_period_custom_date_format),
+        title: utils_date.getDateFormatted(request_data.start_date, date_period_custom_date_format) + " - " +
+            utils_date.getDateFormatted(request_data.end_date, date_period_custom_date_format) + "\n" + request_data.location,
         buttons: new Button({
             title: button_title,
             url: button_url

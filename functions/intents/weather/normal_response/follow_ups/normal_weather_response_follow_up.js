@@ -36,17 +36,6 @@ const normalWeatherResponseFollowUp = (agent) => {
         }
     }
 
-    if (utils.isEmpty(date_period) && (utils.isEmpty(date))) {
-        date_period = {
-            startDate: normal_weather_context.parameters.context_start_date,
-            endDate: normal_weather_context.parameters.endDate
-        };
-        date_period_utterance = normal_weather_context.parameters.date_utterance;
-    } else if (utils.isEmpty(date)) {
-        date = normal_weather_context.parameters.context_start_date;
-        date_utterance = normal_weather_context.parameters.date_utterance;
-    }
-
     if (utils.isEmpty(location)) {
         location = normal_weather_context.parameters.location;
     }
@@ -59,7 +48,7 @@ const normalWeatherResponseFollowUp = (agent) => {
         text: response_builder.getWeatherText(request_data, weather_dummy)
     }));
     conv.ask(response_builder.getWeatherCard(request_data, weather_dummy));
-    conv.ask(response_builder.getSuggestions());
+    conv.ask(response_builder.getFollowUpSuggestions());
     agent.add(conv);
 
 
