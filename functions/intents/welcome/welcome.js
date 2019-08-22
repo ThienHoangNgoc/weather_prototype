@@ -8,10 +8,10 @@ function welcome(agent) {
     if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {
         let conv = agent.conv();
         conv.ask(new SimpleResponse({
-            text: utils.getRandomArrayEntry(strings.welcome_text),
-            speech: utils.getRandomArrayEntry(strings.welcome_response)
-        }))
-
+            speech: utils.getRandomArrayEntry(strings.welcome_response),
+            text: utils.getRandomArrayEntry(strings.welcome_text)
+        }));
+        agent.add(conv);
     } else {
         agent.add(utils.getRandomArrayEntry(strings.welcome_response));
     }
