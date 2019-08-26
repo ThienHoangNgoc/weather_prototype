@@ -2,7 +2,7 @@
 
 const project_strings = require('../../../../jsons/project_strings');
 const response_builder = require('../normal_weather_response_builder');
-const utils = require('../../../../utils/utils');
+const utils = require('../../../../helper/utils/utils');
 const {SimpleResponse} = require('actions-on-google');
 
 

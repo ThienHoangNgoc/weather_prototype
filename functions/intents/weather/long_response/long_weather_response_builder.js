@@ -1,6 +1,6 @@
 "use strict";
 
-const utils = require('../../../utils/utils');
+const utils = require('../../../helper/utils/utils');
 const strings = require('./strings/long_weather_response_strings');
 const conv_strings = require('./strings/long_weather_response_conv_strings');
 const weather_helper = require('../../../helper/weather/weather_helper');

@@ -1,7 +1,7 @@
 'use strict';
 
-const utils = require('../utils/utils');
-const utils_date = require('../utils/utils_date');
+const utils = require('../helper/utils/utils');
+const utils_date = require('../helper/utils/utils_date');
 const strings = require('./request_data_strings');
 
 

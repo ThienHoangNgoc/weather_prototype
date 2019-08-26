@@ -1,6 +1,6 @@
 'use strict';
 
-const utils = require('../utils/utils');
+const utils = require('./utils/utils');
 
 /**
  * return list with random Suggestions, where the last index is always the quit suggestion

@@ -2,7 +2,7 @@
 
 const strings = require('./welcome_conv_strings');
 const {SimpleResponse} = require('actions-on-google');
-const utils = require('../../utils/utils');
+const utils = require('../../helper/utils/utils');
 
 function welcome(agent) {
     if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {

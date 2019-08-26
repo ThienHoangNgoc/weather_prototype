@@ -2,7 +2,7 @@
 
 const conv_strings = require('./strings/fallback_conv_strings');
 const strings = require('./strings/fallback_strings');
-const utils = require('../../utils/utils');
+const utils = require('../../helper/utils/utils');
 const response_helper = require('../../helper/response_helper');
 const {Suggestions, SimpleResponse} = require('actions-on-google');
 
