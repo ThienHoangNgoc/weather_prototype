@@ -2,7 +2,7 @@
 
 const response_builder = require('./long_weather_response_builder');
 const {SimpleResponse} = require('actions-on-google');
-
+const project_strings = require('../../../jsons/project_strings');
 
 const Weather = require('../../../model/Weather');
 const RequestData = require('../../../model/RequestData');
@@ -22,19 +22,16 @@ const longWeatherResponse = (agent) => {
     let request_data = new RequestData(weather, date, date_utterance, date_period, date_period_utterance, custom_date_period, custom_date_period_utterance, location);
     let weather_dummy = new Weather();
 
-    console.log("request_data date: " + request_data.start_date);
-    console.log("request_data weather: " + request_data.weather);
-    console.log(" request_data date_utterance: " + request_data.date_utterance);
-    console.log(" request_data location: " + request_data.location);
-
 
     if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {
+        response_builder.resetGivenContext(project_strings.contexts.normal_weather_response, agent);
         let conv = agent.conv();
         conv.ask(new SimpleResponse({
             speech: response_builder.getWeatherResponse(request_data, weather_dummy),
             text: response_builder.getWeatherText(request_data, weather_dummy)
         }));
         conv.ask(response_builder.getWeatherCard(request_data, weather_dummy));
+        conv.ask(response_builder.getRandomMoreWeatherResponse());
         conv.ask(response_builder.getSuggestions());
         agent.add(conv);
     } else {

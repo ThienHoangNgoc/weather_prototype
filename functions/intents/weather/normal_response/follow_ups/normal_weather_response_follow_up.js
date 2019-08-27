@@ -48,6 +48,7 @@ const normalWeatherResponseFollowUp = (agent) => {
         text: response_builder.getWeatherText(request_data, weather_dummy)
     }));
     conv.ask(response_builder.getWeatherCard(request_data, weather_dummy));
+    conv.ask(response_builder.getRandomMoreWeatherResponse());
     conv.ask(response_builder.getFollowUpSuggestions());
     agent.add(conv);
 

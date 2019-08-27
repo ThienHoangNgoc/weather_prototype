@@ -29,6 +29,7 @@ const normalWeatherResponse = (agent) => {
         }));
         conv.ask(response_builder.getWeatherCard(request_data, weather_dummy));
         conv.ask(response_builder.getSuggestions());
+        conv.ask(response_builder.getRandomMoreWeatherResponse());
         agent.add(conv);
         agent.context.set({
             name: project_strings.contexts.normal_weather_response,

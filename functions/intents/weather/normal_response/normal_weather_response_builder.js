@@ -54,6 +54,10 @@ const getWeatherCard = (request_data, weather_data) => {
 
 };
 
+const getRandomMoreWeatherResponse = () => {
+    return weather_helper.getRandomMoreWeatherResponse();
+}
+
 const getSuggestions = () => {
     return new Suggestions(response_helper.getRandomSuggestionsList(suggestion_list, suggestion_quit));
 };
@@ -69,4 +73,11 @@ const buildInitialWeatherResponse = (initial_response_list, request_data) => {
 };
 
 
-module.exports = {getWeatherResponse, getWeatherCard, getWeatherText, getSuggestions, getFollowUpSuggestions};
+module.exports = {
+    getWeatherResponse,
+    getWeatherCard,
+    getWeatherText,
+    getSuggestions,
+    getFollowUpSuggestions,
+    getRandomMoreWeatherResponse
+};

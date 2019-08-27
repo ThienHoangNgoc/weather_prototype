@@ -26,6 +26,7 @@ const response_text_rain = conv_strings.response_text.date.rain;
 const date_period_day_list = conv_strings.weather_responses.date_period.day_time;
 const date_period_night_list = conv_strings.weather_responses.date_period.night_time;
 const date_period_rest_list = conv_strings.weather_responses.date_period.rest;
+const more_weather_list = conv_strings.more_weather_response;
 
 const response_date_period_text_list = conv_strings.response_text.date_period;
 
@@ -105,6 +106,7 @@ const getWeatherTextForDate = (weather_data) => {
     }
 };
 
+
 const getWeatherTextForDatePeriod = () => {
     return utils.getRandomArrayEntry(response_date_period_text_list);
 };
@@ -125,6 +127,9 @@ const getDatePeriodRestResponse = () => {
     return utils.getRandomArrayEntry(date_period_rest_list);
 };
 
+const getRandomMoreWeatherResponse = () => {
+    return utils.getRandomArrayEntry(more_weather_list);
+}
 
 /**
  * for more clarity
@@ -136,8 +141,9 @@ const responseBuilder = (list, weather_data) => {
     return weather_data.insertWeatherData(utils.getRandomArrayEntry(list));
 };
 
-
-
+const resetGivenContext = (context_name, agent) => {
+    agent.context.get(context_name).lifespan = 0;
+};
 
 
 module.exports = {
@@ -151,7 +157,8 @@ module.exports = {
     getDatePeriodDayTempResponse,
     getDatePeriodNightTempResponse,
     getDatePeriodRestResponse,
-
+    getRandomMoreWeatherResponse,
+    resetGivenContext
 
 
 };

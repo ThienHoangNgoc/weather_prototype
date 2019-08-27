@@ -2,12 +2,12 @@ const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 
 const strings = require('./jsons/project_strings');
+//intent handler
 const welcome_handler = require('./intents/welcome/welcome');
 const final_fallback_handler = require('./intents/fallback/incorrectTopicLastTime');
 const normal_weather_handler = require('./intents/weather/normal_response/normal_weather_response_intent');
 const normal_weather_follow_up_handler = require('./intents/weather/normal_response/follow_ups/normal_weather_response_follow_up');
 const long_weather_handler = require('./intents/weather/long_response/long_weather_response_intent');
-
 
 //intent names
 const welcome_intent = strings.intents.welcome;
@@ -30,5 +30,4 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     intentMap.set(long_weather_intent, long_weather_handler);
     agent.handleRequest(intentMap);
 
-})
-;
+});

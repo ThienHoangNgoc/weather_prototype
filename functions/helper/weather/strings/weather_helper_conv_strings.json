@@ -74,5 +74,10 @@
       "Schaut nach gutem Wetter aus! ",
       "Hier das Wetter"
     ]
-  }
+  },
+  "more_weather_response": [
+    "Möchtest du noch etwas wissen?",
+    "Was willst du noch erfahren?",
+    "Gibt es noch etwas, dass du wissen möchtest?"
+  ]
 }

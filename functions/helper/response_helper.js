@@ -25,4 +25,5 @@ const getRandomSuggestionsList = (list, quit_string) => {
 
 };
 
+
 module.exports = {getRandomSuggestionsList}
