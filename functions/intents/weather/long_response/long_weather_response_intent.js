@@ -7,6 +7,8 @@ const project_strings = require('../../../jsons/project_strings');
 const Weather = require('../../../model/Weather');
 const RequestData = require('../../../model/RequestData');
 
+const normalWeatherResponseContex = project_strings.contexts.normal_weather_response;
+
 
 const longWeatherResponse = (agent) => {
     let weather = agent.request_.body.queryResult.parameters['weather_long'];
@@ -24,7 +26,9 @@ const longWeatherResponse = (agent) => {
 
 
     if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {
-        response_builder.resetGivenContext(project_strings.contexts.normal_weather_response, agent);
+        if (agent.context.get(normalWeatherResponseContex) !== undefined) {
+            response_builder.resetGivenContext(normalWeatherResponseContex, agent);
+        }
         let conv = agent.conv();
         conv.ask(new SimpleResponse({
             speech: response_builder.getWeatherResponse(request_data, weather_dummy),
@@ -37,7 +41,6 @@ const longWeatherResponse = (agent) => {
     } else {
         //Todo: implement for devices without Google Assistant
     }
-
 
 };
 
