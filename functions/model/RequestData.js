@@ -44,7 +44,7 @@ const requestData = class RequestData {
             this.end_date = date_period['endDate'];
             this.date_utterance = this.getRightDateUtteranceForDatePeriod(date_period_utterance);
             this.isDatePeriod = true;
-        //if custom_date_period is not the selected parameter it still returns an empty array in the JSON file
+            //if custom_date_period is not the selected parameter it still returns an empty array in the JSON file
         } else if (custom_date_period.length !== 0) {
             this.setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance);
             this.isDatePeriod = true;
@@ -119,6 +119,10 @@ const requestData = class RequestData {
             }
         } else if (utils.containsString(date_utterance, key_word_3)) {
             return utils.standardizeString(date_utterance, key_word_3, standardized_3, "");
+        } else if (utils.containsString(date_utterance, "in")) {
+            return date_utterance.replace("in", "");
+        } else {
+            return date_utterance;
         }
     }
 

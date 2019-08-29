@@ -21,7 +21,7 @@
     "location": "Berlin",
     "date": "heute"
   },
-  "custom_date_period_utterance_part": "der nächsten ",
+  "custom_date_period_utterance_part": "den nächsten ",
   "weather_entity_entries": {
     "report": "Wetterbericht",
     "outlook": "Wetterprognose",
