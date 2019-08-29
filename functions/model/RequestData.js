@@ -44,13 +44,15 @@ const requestData = class RequestData {
             this.end_date = date_period['endDate'];
             this.date_utterance = this.getRightDateUtteranceForDatePeriod(date_period_utterance);
             this.isDatePeriod = true;
-        } else if (!utils.isEmpty(custom_date_period)) {
+        //if custom_date_period is not the selected parameter it still returns an empty array in the JSON file
+        } else if (custom_date_period.length !== 0) {
             this.setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance);
             this.isDatePeriod = true;
         } else {
             //else --> single date, and time-period (not date-period)
             //for a single date requests, end_date = start_date
             this.start_date = this.setDefaultDate(date);
+            console.log(this.start_date);
             this.end_date = this.start_date;
             this.date_utterance = this.setDefaultDateUtterance(date_utterance);
             this.date_utterance = this.getRightDateUtteranceForDate(this.start_date, this.date_utterance);
@@ -83,8 +85,6 @@ const requestData = class RequestData {
     checkIfDateIsToday(start_date) {
         let currentDate = utils_date.getDateWithoutTime(utils_date.getGMTNewDate());
         let startDate = utils_date.getDateWithoutTime(start_date);
-        console.log("currentDate: " + currentDate);
-        console.log("startDate: " + startDate);
         return utils_date.calculateDiffFrom2Dates(currentDate, startDate, "days") === 0;
     }
 
