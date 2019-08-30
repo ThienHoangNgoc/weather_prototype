@@ -30,16 +30,16 @@ const more_weather_list = conv_strings.more_weather_response;
 
 const response_date_period_text_list = conv_strings.response_text.date_period;
 
-const getDateSunHoursResponse = (weather_data, additional_info) => {
+const getDateSunHoursResponse = (weather_data, isDetailed) => {
     let response;
     if (weather_data.isSunny) {
         response = responseBuilder(date_sun_positive_list, weather_data);
-        if (additional_info) {
+        if (isDetailed) {
             response += responseBuilder(date_sun_positive_add_list, weather_data);
         }
     } else {
         response = responseBuilder(date_sun_negative_list, weather_data);
-        if (additional_info) {
+        if (isDetailed) {
             response += responseBuilder(date_sun_negative_add_list, weather_data);
         }
     }

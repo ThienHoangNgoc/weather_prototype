@@ -1,6 +1,18 @@
 'use strict';
 
+/**
+ * This class handles all logic for building responses
+ */
+
+
 const utils = require('./utils/utils');
+
+
+
+
+
+
+
 
 /**
  * return list with random Suggestions, where the last index is always the quit suggestion

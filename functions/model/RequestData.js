@@ -30,7 +30,10 @@ const article = strings.date_period_utterance.grammatical_article;
 
 const custom_date_period_utterance_part = strings.custom_date_period_utterance_part;
 
-
+/**
+ * weather_utterance, date_utterance, start_date, end_date, location, is_single_date
+ * @type {RequestData}
+ */
 const requestData = class RequestData {
 
     constructor(weather, date, date_utterance, date_period, date_period_utterance, custom_date_period, custom_date_period_utterance, location) {
@@ -43,11 +46,11 @@ const requestData = class RequestData {
             this.start_date = date_period['startDate'];
             this.end_date = date_period['endDate'];
             this.date_utterance = this.getRightDateUtteranceForDatePeriod(date_period_utterance);
-            this.isDatePeriod = true;
+            this.is_single_date = false;
             //if custom_date_period is not the selected parameter it still returns an empty array in the JSON file
         } else if (custom_date_period.length !== 0) {
             this.setDateForCustomDatePeriod(custom_date_period, custom_date_period_utterance);
-            this.isDatePeriod = true;
+            this.is_single_date = false;
         } else {
             //else --> single date, and time-period (not date-period)
             //for a single date requests, end_date = start_date
@@ -56,7 +59,7 @@ const requestData = class RequestData {
             this.end_date = this.start_date;
             this.date_utterance = this.setDefaultDateUtterance(date_utterance);
             this.date_utterance = this.getRightDateUtteranceForDate(this.start_date, this.date_utterance);
-            this.isDatePeriod = false;
+            this.is_single_date = true;
         }
         this.isToday = this.checkIfDateIsToday(this.start_date);
         this.location = this.setDefaultLocation(location);

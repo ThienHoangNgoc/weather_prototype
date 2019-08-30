@@ -1,12 +1,12 @@
 {
   "weather_responses": {
     "date": {
-      "day_time": [
+      "day_temp": [
         "Es sind tagsüber mit Werten zwischen $dayMIN und $dayMAX Grad zu erwarten. ",
         "Tagsüber muss man mit Temperaturen zwischen $dayMIN und $dayMAX Grad rechnen. ",
         "Es werden während des Tages $dayMIN bis $dayMAX Grad erreicht. "
       ],
-      "night_time": [
+      "night_temp": [
         "Nachts kühlt es dann auf $nightMAX bis $nightMIN Grad ab. ",
         "In der Nacht belaufen sich die Werte zwischen $nightMAX und $nightMIN Grad. ",
         "Nachts gehen die Werte dann auf $nightMAX bis $nightMIN Grad zurück. "
@@ -45,10 +45,10 @@
       ]
     },
     "date_period": {
-      "day_time": [
+      "day_temp": [
         "Es bleibt sommerlich warm mit einem Durchschnittswert von 29 Grad tagsüber."
       ],
-      "night_time": [
+      "night_temp": [
         " Auch in den Nächten bleibt es angenehm bei durchschnittlich 21 Grad."
       ],
       "rest": [

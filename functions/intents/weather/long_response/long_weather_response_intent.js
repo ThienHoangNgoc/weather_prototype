@@ -4,7 +4,7 @@ const response_builder = require('./long_weather_response_builder');
 const {SimpleResponse} = require('actions-on-google');
 const project_strings = require('../../../jsons/project_strings');
 
-const Weather = require('../../../model/Weather');
+const Weather = require('../../../model/WeatherData');
 const RequestData = require('../../../model/RequestData');
 
 const normalWeatherResponseContex = project_strings.contexts.normal_weather_response;

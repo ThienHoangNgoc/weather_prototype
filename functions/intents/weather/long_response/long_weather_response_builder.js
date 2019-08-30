@@ -21,7 +21,7 @@ const suggestion_quit = strings.suggestions.quit;
 
 
 const getWeatherResponse = (request_data, weather_data) => {
-    if (request_data.isDatePeriod) {
+    if (request_data.is_single_date) {
         if (utils.containsString(request_data.date_utterance, date_utterance_weekend)) {
             return buildInitialWeatherResponse(initial_response_list_weekend, request_data)
                 + weather_helper.getDatePeriodDayTempResponse()
@@ -43,7 +43,7 @@ const getWeatherResponse = (request_data, weather_data) => {
 };
 
 const getWeatherText = (request_data, weather_data) => {
-    if (request_data.isDatePeriod) {
+    if (request_data.is_single_date) {
         return weather_helper.getWeatherTextForDatePeriod();
     } else {
         return weather_helper.getWeatherTextForDate(weather_data);
@@ -52,7 +52,7 @@ const getWeatherText = (request_data, weather_data) => {
 };
 
 const getWeatherCard = (request_data, weather_data) => {
-    if (request_data.isDatePeriod) {
+    if (request_data.is_single_date) {
         return card_builder.buildWeatherCardForDatePeriod(request_data);
     } else {
         return card_builder.buildDetailedWeatherCard(request_data, weather_data);

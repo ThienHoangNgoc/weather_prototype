@@ -48,6 +48,29 @@ const getRandomBoolean = () => {
 };
 
 
+const getMostFrequentValueInArray = (array) => {
+    if (array.length === 0) {
+        return null;
+    }
+    let map = {};
+    let maxValue = array[0];
+    let maxCount = 1;
+    for (let index = 0; index < array.length; index++) {
+        let item = array[index];
+        if (map[item] === null) {
+            map[item] = 1;
+        } else {
+            map[item]++
+        }
+        if (map[item] > maxCount) {
+            maxValue = item;
+            maxCount = map[item]
+        }
+    }
+    return maxValue;
+
+};
+
 /*
 =========================================================================================================
 STRING UTILS
@@ -178,5 +201,6 @@ module.exports = {
     isStringArray,
     stringIsInArray,
     firstLetterUpperCase,
-    standardizeString
+    standardizeString,
+    getMostFrequentValueInArray
 };

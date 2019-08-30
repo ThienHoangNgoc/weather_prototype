@@ -7,7 +7,7 @@ const {SimpleResponse} = require('actions-on-google');
 
 
 const RequestData = require('../../../../model/RequestData');
-const Weather = require('../../../../model/Weather');
+const Weather = require('../../../../model/WeatherData');
 
 const normalWeatherResponseFollowUp = (agent) => {
 
@@ -21,7 +21,7 @@ const normalWeatherResponseFollowUp = (agent) => {
     let custom_date_period_utterance = agent.request_.body.queryResult.outputContexts[0].parameters['custom_date_period.original'];
     let location = agent.request_.body.queryResult.parameters['geo-city'];
 
-    let isDatePeriod = normal_weather_context.parameters.isDatePeriod;
+    let isDatePeriod = normal_weather_context.parameters.is_single_date;
 
     if (utils.isEmpty(date)) {
         if (utils.isEmpty(date_period) && isDatePeriod) {

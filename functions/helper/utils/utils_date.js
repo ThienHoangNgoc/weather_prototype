@@ -26,7 +26,7 @@ function addDays(date, days) {
 }
 
 /**
- * calculate the diff between 2 dates and returns that value in the given interval
+ * calculate the diff between 2 dates and returns that value in the given interval, gives the diff between the days 01.09 - 03.09 returns 2
  * @param current_date
  * @param request_date
  * @param interval
@@ -74,6 +74,13 @@ const getGMTNewDate = () => {
     result.setHours(result.getHours() + 2);
     return result;
 };
+
+
+const addDaysToDate = (date, days) => {
+    return new Date(date.setDate(date.getDate() + days));
+
+
+}
 
 /*
  * Set values to specific language, here German values
