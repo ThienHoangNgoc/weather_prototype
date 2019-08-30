@@ -3,7 +3,6 @@
 const utils = require('../helper/utils/utils');
 const utils_date = require('../helper/utils/utils_date');
 const SingleDateWeatherData = require('SingleDateWeatherData');
-const SingleDateWeatherDataDummy = require('SingleDateWeatherDataDummy');
 
 
 const datePeriodWeatherData = class DatePeriodWeatherData {
@@ -56,18 +55,9 @@ const getWeatherDataList = (start_date, day_diff) => {
 
     //day_diff = x, actual days = x + 1
     for (let index = 0; index <= day_diff; index++) {
-        list.push(getWeatherDataBasedOnDate(utils_date.addDays(start_date, index)));
+        list.push(new SingleDateWeatherData(utils_date.addDays(start_date, index)));
     }
     return list;
-};
-
-/**
- * TODO: gets a Weather.json based on given date and returns a SingleDateWeatherData
- * Generates a SingleDateWeatherDataDummy
- * @param date
- */
-const getWeatherDataBasedOnDate = (date) => {
-    return new SingleDateWeatherData(new SingleDateWeatherDataDummy());
 };
 
 

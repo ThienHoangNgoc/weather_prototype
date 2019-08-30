@@ -1,24 +1,45 @@
 "use strict";
 
+const SingleDateWeatherDataDummy = require('SingleDateWeatherDataDummy');
+
 const singleDateWeatherData = class SingleDateWeatherData {
     /**
      *
      * note: might add date as key
-     *
+     * TODO: gets a Weather.json based on given date and returns a SingleDateWeatherData
+
      * @param weather_data
      */
-    constructor(request_data) {
-        this.currentTemp = weather_data.currentTemp;
-        this.dayMAX = weather_data.dayMAX;
-        this.dayMIN = weather_data.dayMIN;
-        this.nightMAX = weather_data.nightMAX;
-        this.nightMIN = weather_data.nightMIN;
-        this.averageDayTemp = weather_data.averageDayTemp;
-        this.averageNightTemp = weather_data.averageNightTemp;
-        this.weatherCondition = weather_data.weatherCondition;
-        this.sunHours = weather_data.sunHours;
-        this.rain = weather_data.rain;
+    constructor(date) {
+        this.currentTemp = "";
+        this.dayMAX = "";
+        this.dayMIN = "";
+        this.nightMAX = "";
+        this.nightMIN = "";
+        this.averageDayTemp = "";
+        this.averageNightTemp = "";
+        this.weatherCondition = "";
+        this.sunHours = "";
+        this.rain = "";
+        this.setData(date);
     }
+
+    setData = (date) => {
+        //TODO: getWeatherDataBasedOnDate(date)
+        //instead generate a dummy for the time being
+        const weather_data_dummy = new SingleDateWeatherDataDummy();
+        this.currentTemp = weather_data_dummy.currentTemp;
+        this.dayMAX = weather_data_dummy.dayMAX;
+        this.dayMIN = weather_data_dummy.dayMIN;
+        this.nightMAX = weather_data_dummy.nightMAX;
+        this.nightMIN = weather_data_dummy.nightMIN;
+        this.averageDayTemp = weather_data_dummy.averageDayTemp;
+        this.averageNightTemp = weather_data_dummy.averageNightTemp;
+        this.weatherCondition = weather_data_dummy.weatherCondition;
+        this.sunHours = weather_data_dummy.sunHours;
+        this.rain = weather_data_dummy.rain;
+
+    };
 
 
     /**
@@ -39,12 +60,6 @@ const singleDateWeatherData = class SingleDateWeatherData {
             .replace("$averageDay", this.averageDayTemp)
             .replace("$averageNight", this.averageNightTemp)
     }
-
-};
-
-
-const getWeatherDataBasedOnDate = (date) => {
-
 
 };
 
